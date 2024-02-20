@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: 280,
-    marginTop: 10,
+    marginBottom: 20,
   },
   backgroundImage: {
     resizeMode: "cover",
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     fontFamily: "Nunito-Bold",
   },
 });
-const CardPopular = () => {
+const CardPopular = ({ navigation }) => {
   const screenWidth = Dimensions.get("window");
   const [liked, setlike] = React.useState(
     Array.from({ length: 4 }, () => false)
@@ -101,65 +101,62 @@ const CardPopular = () => {
     <View style={[styles.container]}>
       <View style={styles.boxword}>
         <Text style={styles.textbox}>Popular</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Viewall")}>
           <Text style={styles.textViewall}>View all</Text>
         </TouchableOpacity>
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {Array.from({ length: 4 }).map((value, index) => (
           <View key={index} style={[styles.cardContainBorder]}>
-            <View style={styles.cardContain}>
-              <Image
-                source={require("../../../../../assets/image/food.jpg")}
-                style={styles.backgroundImage}
-              />
-              {/* details of food */}
-            </View>
-            <View style={styles.containerForNameofFood}>
-              <Text style={styles.textNameFood}>Pasta & Pork</Text>
-              <Text style={styles.textRating}>Breakfast</Text>
-              <View style={{ flexDirection: "row" }}>
-                {/* calories */}
-                {/* <Text
-                  style={{
-                    width: "40%",
-                    fontFamily: "Nunito-Medium",
-                    padding: 5,
-                  }}
-                >
-                  <FontAwesome5 name={"fire"} size={16} color={"red"} /> 123
-                  calories
-                </Text> */}
-                {/* time cooking */}
-                <Text
-                  style={{
-                    width: "80%",
-                    fontFamily: "Nunito-Medium",
-                    padding: 5,
-                    opacity: 0.5,
-                  }}
-                >
-                  <FontAwesome5 name={"clock"} size={16} /> 15-20 mins
-                </Text>
-                <View
-                  style={{
-                    width: "20%",
-                    alignItems: "center",
-                    justifyContent: " center",
-                  }}
-                >
-                  <View style={styles.buttonlike}>
-                    <TouchableOpacity onPress={() => handlePress(index)}>
-                      {liked[index] ? (
-                        <Ionicons name={"heart"} size={25} color={"red"} />
-                      ) : (
-                        <Ionicons name={"heart-outline"} size={25} />
-                      )}
-                    </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.cardContain}
+              onPress={() => {
+                navigation.navigate("Cooking");
+              }}
+              activeOpacity={1}
+            >
+              <View style={styles.cardContain}>
+                <Image
+                  source={require("../../../../../assets/image/food.jpg")}
+                  style={styles.backgroundImage}
+                />
+                {/* details of food */}
+              </View>
+              <View style={styles.containerForNameofFood}>
+                <Text style={styles.textNameFood}>Pasta & Pork</Text>
+                <Text style={styles.textRating}>Breakfast</Text>
+                <View style={{ flexDirection: "row" }}>
+                  {/* time cooking */}
+                  <Text
+                    style={{
+                      width: "80%",
+                      fontFamily: "Nunito-Medium",
+                      padding: 5,
+                      opacity: 0.5,
+                    }}
+                  >
+                    <FontAwesome5 name={"clock"} size={16} /> 15-20 mins
+                  </Text>
+                  <View
+                    style={{
+                      width: "20%",
+                      alignItems: "center",
+                      justifyContent: " center",
+                    }}
+                  >
+                    <View style={styles.buttonlike}>
+                      <TouchableOpacity onPress={() => handlePress(index)}>
+                        {liked[index] ? (
+                          <Ionicons name={"heart"} size={25} color={"red"} />
+                        ) : (
+                          <Ionicons name={"heart-outline"} size={25} />
+                        )}
+                      </TouchableOpacity>
+                    </View>
                   </View>
                 </View>
               </View>
-            </View>
+            </TouchableOpacity>
           </View>
         ))}
       </ScrollView>

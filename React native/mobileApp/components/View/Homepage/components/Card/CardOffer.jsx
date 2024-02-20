@@ -14,8 +14,8 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: 250,
-    marginTop: 20,
+    height: 270,
+    marginBottom: 20,
   },
   backgroundImage: {
     resizeMode: "cover",
@@ -40,10 +40,8 @@ const styles = StyleSheet.create({
   cardContain: {
     width: 300,
     height: 200,
-    marginLeft: 10,
+    marginLeft: 5,
     marginRight: 10,
-
-    position: "relative",
   },
   textViewall: {
     fontSize: 13,
@@ -101,7 +99,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 });
-const CardOffer = () => {
+const CardOffer = ({ navigation }) => {
   const screenWidth = Dimensions.get("window");
   const [liked, setlike] = React.useState(
     Array.from({ length: 5 }, () => false)
@@ -115,58 +113,74 @@ const CardOffer = () => {
   }, []);
   return (
     <View style={styles.container}>
+      <Text
+        style={{
+          fontSize: 18,
+          fontFamily: "Nunito-semiBold",
+          marginLeft: 10,
+        }}
+      >
+        What do you want to cook?
+      </Text>
       <View style={styles.boxword}>
         <Text style={styles.textbox}>Recommended for you</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Viewall")}>
           <Text style={styles.textViewall}>View all</Text>
         </TouchableOpacity>
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {Array.from({ length: 5 }).map((value, index) => (
           <View key={index} style={styles.cardContain}>
-            <Image
-              source={require("../../../../../assets/image/food.jpg")}
-              style={styles.backgroundImage}
-            />
-            <View style={styles.overlay} />
-            {/* rating and like button */}
-
-            <View style={styles.containerForRatingandLike}>
-              {/* for rating star */}
-              <View style={{ width: "82%" }}>
-                <View>
-                  <Text style={styles.textRating}>
-                    4.5 {""}
-                    <AntDesign name={"star"} color={"orange"} size={11} />
-                    <Text style={{ fontSize: 11, color: "#535353" }}>
-                      (100+)
+            <TouchableOpacity
+              style={styles.cardContain}
+              onPress={() => {
+                navigation.navigate("Cooking");
+              }}
+              activeOpacity={1}
+            >
+              <Image
+                source={require("../../../../../assets/image/food.jpg")}
+                style={styles.backgroundImage}
+              />
+              <View style={styles.overlay} />
+              {/* rating and like button */}
+              <View style={styles.containerForRatingandLike}>
+                {/* for rating star */}
+                <View style={{ width: "82%" }}>
+                  <View>
+                    <Text style={styles.textRating}>
+                      4.5 {""}
+                      <AntDesign name={"star"} color={"orange"} size={11} />
+                      <Text style={{ fontSize: 11, color: "#535353" }}>
+                        (100+)
+                      </Text>
                     </Text>
-                  </Text>
+                  </View>
+                </View>
+                {/* for button like */}
+                <View
+                  style={{
+                    width: "20%",
+                    alignItems: "center",
+                    justifyContent: " center",
+                  }}
+                >
+                  <View style={styles.buttonlike}>
+                    <TouchableOpacity onPress={() => handlePress(index)}>
+                      {liked[index] ? (
+                        <Ionicons name={"heart"} size={20} color={"red"} />
+                      ) : (
+                        <Ionicons name={"heart-outline"} size={20} />
+                      )}
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
-              {/* for button like */}
-              <View
-                style={{
-                  width: "20%",
-                  alignItems: "center",
-                  justifyContent: " center",
-                }}
-              >
-                <View style={styles.buttonlike}>
-                  <TouchableOpacity onPress={() => handlePress(index)}>
-                    {liked[index] ? (
-                      <Ionicons name={"heart"} size={20} color={"red"} />
-                    ) : (
-                      <Ionicons name={"heart-outline"} size={20} />
-                    )}
-                  </TouchableOpacity>
-                </View>
+              {/* name of food */}
+              <View style={styles.containerForNameofFood}>
+                <Text style={styles.textNameFood}>Chicken curry</Text>
               </View>
-            </View>
-            {/* name of food */}
-            <View style={styles.containerForNameofFood}>
-              <Text style={styles.textNameFood}>Chicken curry</Text>
-            </View>
+            </TouchableOpacity>
           </View>
         ))}
       </ScrollView>

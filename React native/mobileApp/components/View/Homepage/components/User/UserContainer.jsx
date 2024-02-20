@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Image, Text, View } from "react-native";
+import { Image, Text, View, TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
-const UserContainer = () => {
+const UserContainer = ({ navigation }) => {
   const userinfo = useSelector((state) => state.userinfo);
   return (
     <View
@@ -11,14 +11,15 @@ const UserContainer = () => {
         width: "100%",
         flexDirection: "row",
         alignItems: "center",
+        marginTop: 10,
       }}
     >
-      <View style={{ width: "15%", marginLeft: 10 }}>
+      <View style={{ width: "16%", marginLeft: 10 }}>
         <Image
           style={{
             width: 50,
             height: 50,
-            borderRadius: 10,
+            borderRadius: 50,
             objectFit: "cover",
           }}
           source={{
@@ -27,7 +28,7 @@ const UserContainer = () => {
         />
       </View>
       {/* name user */}
-      <View style={{ width: "50%" }}>
+      <View style={{ width: "70%" }}>
         <Text style={{ fontSize: 16, color: "#535353" }}>
           Hello
           <Ionicons name={"hand-left-outline"} size={16} color={"orange"} />
@@ -41,6 +42,13 @@ const UserContainer = () => {
           {userinfo.name}
         </Text>
       </View>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("Settings");
+        }}
+      >
+        <Ionicons name={"menu"} size={32} color={"#000"} />
+      </TouchableOpacity>
     </View>
   );
 };

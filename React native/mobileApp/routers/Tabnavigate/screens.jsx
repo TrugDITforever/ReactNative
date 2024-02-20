@@ -1,7 +1,6 @@
 import "react-native-gesture-handler";
 import React from "react";
 import HomePage from "../../components/View/Homepage/HomePage";
-import SettingPage from "../../components/View/SettingPage/SettingPage";
 import Intropage from "../../components/View/IntroPage/Intropage";
 import AccountPage from "../../components/View/AccountPage/AccountPage";
 import UserProfile from "../../components/View/UserProfile/UserProfile";
@@ -19,7 +18,6 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { StyleSheet, Text, View } from "react-native";
 import SearchPage from "../../components/View/SearchingPage/SearchPage";
 // Start code navigation
-const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 // const Drawer = createDrawerNavigator();
 // export const Drawermenu = () => {

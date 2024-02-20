@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: 270,
-    marginTop: 10,
+    marginBottom: 20,
   },
   backgroundImage: {
     resizeMode: "cover",
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     fontFamily: "Nunito-Bold",
   },
 });
-const CardBox = () => {
+const CardBox = ({ navigation }) => {
   const screenWidth = Dimensions.get("window");
   const [liked, setlike] = React.useState(
     Array.from({ length: 4 }, () => false)
@@ -107,76 +107,84 @@ const CardBox = () => {
     <View style={[styles.container]}>
       <View style={styles.boxword}>
         <Text style={styles.textbox}>Collections</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Viewall")}>
           <Text style={styles.textViewall}>View all</Text>
         </TouchableOpacity>
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {Array.from({ length: 4 }).map((value, index) => (
           <View key={index} style={[styles.cardContainBorder]}>
-            <View style={styles.cardContain}>
-              <Image
-                source={require("../../../../../assets/image/salmon.jpg")}
-                style={styles.backgroundImage}
-              />
-              {/* rating and like button */}
+            <TouchableOpacity
+              style={styles.cardContain}
+              onPress={() => {
+                navigation.navigate("Cooking");
+              }}
+              activeOpacity={1}
+            >
+              <View style={styles.cardContain}>
+                <Image
+                  source={require("../../../../../assets/image/salmon.jpg")}
+                  style={styles.backgroundImage}
+                />
+                {/* rating and like button */}
 
-              <View style={styles.containerForRatingandLike}>
-                {/* for button like */}
-                <View
-                  style={{
-                    width: "20%",
-                    alignItems: "center",
-                    justifyContent: " center",
-                  }}
-                >
-                  <View style={styles.buttonlike}>
-                    <TouchableOpacity onPress={() => handlePress(index)}>
-                      {liked[index] ? (
-                        <Ionicons name={"heart"} size={20} color={"red"} />
-                      ) : (
-                        <Ionicons name={"heart-outline"} size={20} />
-                      )}
-                    </TouchableOpacity>
+                <View style={styles.containerForRatingandLike}>
+                  {/* for button like */}
+                  <View
+                    style={{
+                      width: "20%",
+                      alignItems: "center",
+                      justifyContent: " center",
+                    }}
+                  >
+                    <View style={styles.buttonlike}>
+                      <TouchableOpacity onPress={() => handlePress(index)}>
+                        {liked[index] ? (
+                          <Ionicons name={"heart"} size={20} color={"red"} />
+                        ) : (
+                          <Ionicons name={"heart-outline"} size={20} />
+                        )}
+                      </TouchableOpacity>
+                    </View>
                   </View>
                 </View>
+                {/* details of food */}
               </View>
-              {/* details of food */}
-            </View>
-            <View style={styles.containerForNameofFood}>
-              <Text style={styles.textNameFood}>
-                Veggie cheese extravaganza
-              </Text>
-              <Text style={styles.textRating}>
-                <AntDesign name={"star"} color={"orange"} size={11} />
-                <AntDesign name={"star"} color={"orange"} size={11} />
-                <AntDesign name={"star"} color={"orange"} size={11} />
-                <AntDesign name={"star"} color={"orange"} size={11} />
-                <AntDesign name={"star"} color={"orange"} size={11} />
-              </Text>
-              <View style={{ flexDirection: "row" }}>
-                {/* calories */}
-                <Text
-                  style={{
-                    width: "50%",
-                    fontFamily: "Nunito-Medium",
-                    padding: 5,
-                  }}
-                >
-                  <FontAwesome5 name={"fire"} size={16} color={"red"} /> 123
-                  calories
+              <View style={styles.containerForNameofFood}>
+                <Text style={styles.textNameFood}>
+                  Veggie cheese extravaganza
                 </Text>
-                {/* time cooking */}
-                <Text
-                  style={{
-                    fontFamily: "Nunito-Medium",
-                    padding: 5,
-                  }}
-                >
-                  <FontAwesome5 name={"clock"} size={16} /> 15-20 mins
+                <Text style={styles.textRating}>
+                  <AntDesign name={"star"} color={"orange"} size={11} />
+                  <AntDesign name={"star"} color={"orange"} size={11} />
+                  <AntDesign name={"star"} color={"orange"} size={11} />
+                  <AntDesign name={"star"} color={"orange"} size={11} />
+                  <AntDesign name={"star"} color={"orange"} size={11} />
                 </Text>
+                <View style={{ flexDirection: "row" }}>
+                  {/* calories */}
+                  <Text
+                    style={{
+                      width: "50%",
+                      fontFamily: "Nunito-Medium",
+                      padding: 5,
+                    }}
+                  >
+                    <FontAwesome5 name={"fire"} size={16} color={"red"} /> 123
+                    calories
+                  </Text>
+                  {/* time cooking */}
+                  <Text
+                    style={{
+                      fontFamily: "Nunito-Medium",
+                      padding: 5,
+                    }}
+                  >
+                    <FontAwesome5 name={"clock"} size={16} /> 15-20 mins
+                  </Text>
+                </View>
               </View>
-            </View>
+            </TouchableOpacity>
           </View>
         ))}
       </ScrollView>

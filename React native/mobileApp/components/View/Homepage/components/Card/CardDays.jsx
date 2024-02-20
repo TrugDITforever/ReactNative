@@ -7,15 +7,16 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
-  ImageBackground,
+  Platform,
 } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
-
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: 200,
+    height: 260,
     marginBottom: 20,
   },
   backgroundImage: {
@@ -39,11 +40,19 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   cardContain: {
-    width: 200,
+    width: "100%",
     height: 150,
-    marginLeft: 5,
-    marginRight: 10,
     position: "relative",
+  },
+  cardContainBorder: {
+    marginRight: 20,
+    width: 200,
+    // backgroundColor: "#fff",
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    marginLeft: 10,
+    marginRight: 10,
   },
   textViewall: {
     fontSize: 13,
@@ -61,36 +70,25 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: "auto",
   },
-  buttonlike: {
-    width: 32,
-    height: 32,
-    backgroundColor: "#fff",
-    borderRadius: 20,
-    right: 0,
-    justifyContent: "center",
-    alignItems: "center",
+  textRating: {
+    paddingLeft: 5,
+    opacity: 0.5,
+    fontFamily: "Nunito-Medium",
   },
   containerForNameofFood: {
-    position: "absolute",
     bottom: 0,
-    margin: 10,
   },
   textNameFood: {
+    padding: 5,
     borderRadius: 10,
-    color: "#fff",
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: "Nunito-Bold",
   },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(0,0,0,0.4)",
-    borderRadius: 10,
-  },
 });
-const CardRecipes = ({ navigation }) => {
+const CardDay = ({ Time, images, navigation }) => {
   const screenWidth = Dimensions.get("window");
   const [liked, setlike] = React.useState(
-    Array.from({ length: 3 }, () => false)
+    Array.from({ length: 4 }, () => false)
   );
   const handlePress = React.useCallback((index) => {
     setlike((prevLiked) => {
@@ -100,16 +98,16 @@ const CardRecipes = ({ navigation }) => {
     });
   }, []);
   return (
-    <View style={styles.container}>
+    <View style={[styles.container]}>
       <View style={styles.boxword}>
-        <Text style={styles.textbox}>Recipes for today</Text>
+        <Text style={styles.textbox}>{Time}</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Viewall")}>
           <Text style={styles.textViewall}>View all</Text>
         </TouchableOpacity>
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {Array.from({ length: 3 }).map((value, index) => (
-          <View key={index} style={styles.cardContain}>
+        {Array.from({ length: 4 }).map((value, index) => (
+          <View key={index} style={[styles.cardContainBorder]}>
             <TouchableOpacity
               style={styles.cardContain}
               onPress={() => {
@@ -117,33 +115,41 @@ const CardRecipes = ({ navigation }) => {
               }}
               activeOpacity={1}
             >
-              <Image
-                source={require("../../../../../assets/image/salad.jpg")}
-                style={styles.backgroundImage}
-              />
-              {/* make the image darken */}
-              <View style={styles.overlay} />
-              {/* rating and like button */}
-              <View style={styles.containerForRatingandLike}></View>
-              {/* detail*/}
+              <View style={styles.cardContain}>
+                <Image source={images} style={styles.backgroundImage} />
+                {/* details of food */}
+              </View>
               <View style={styles.containerForNameofFood}>
-                <Text style={{ letterSpacing: 3 }}>
-                  <AntDesign name={"star"} color={"orange"} size={11} />
-                  <AntDesign name={"star"} color={"orange"} size={11} />
-                  <AntDesign name={"star"} color={"orange"} size={11} />
-                  <AntDesign name={"star"} color={"orange"} size={11} />
-                  <AntDesign name={"staro"} color={"orange"} size={11} />
-                </Text>
-                <Text style={styles.textNameFood}>Salad Italian</Text>
-                <Text
-                  style={{
-                    color: "#fff",
-                    opacity: 0.8,
-                    fontFamily: "Nunito-Medium",
-                  }}
-                >
-                  Lunch
-                </Text>
+                <Text style={styles.textNameFood}>Pasta & Pork</Text>
+                <View style={{ flexDirection: "row" }}>
+                  <Text
+                    style={{
+                      width: "80%",
+                      fontFamily: "Nunito-Medium",
+                      padding: 5,
+                      opacity: 0.5,
+                    }}
+                  >
+                    <FontAwesome5 name={"clock"} size={16} /> 15-20 mins
+                  </Text>
+                  <View
+                    style={{
+                      width: "20%",
+                      alignItems: "center",
+                      justifyContent: " center",
+                    }}
+                  >
+                    <View style={styles.buttonlike}>
+                      <TouchableOpacity onPress={() => handlePress(index)}>
+                        {liked[index] ? (
+                          <Ionicons name={"heart"} size={25} color={"red"} />
+                        ) : (
+                          <Ionicons name={"heart-outline"} size={25} />
+                        )}
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
               </View>
             </TouchableOpacity>
           </View>
@@ -152,4 +158,4 @@ const CardRecipes = ({ navigation }) => {
     </View>
   );
 };
-export default CardRecipes;
+export default CardDay;

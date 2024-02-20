@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import * as React from "react";
 import {
   StyleSheet,
   Button,
@@ -8,46 +8,17 @@ import {
   Text,
   Alert,
   TextInput,
-  FlatList,
+  TouchableOpacity,
   ScrollView,
   ActivityIndicator,
   StatusBar,
-  TouchableOpacity,
 } from "react-native";
-import FavorList from "./components/FavorList";
+import Card from "./Card/Card";
 import Ionicons from "react-native-vector-icons/Ionicons";
-
-const Separator = () => <View style={styles.separator} />;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    textAlign: "center",
-    marginVertical: 8,
-  },
-  fixToText: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  separator: {
-    marginVertical: 8,
-    borderBottomColor: "#737373",
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  buttonmain: {
-    width: "20",
-    color: "rgba(255, 255, 255)",
-  },
-  logo: {
-    width: 150,
-    height: 180,
-    objectFit: "contain",
-  },
-  text: {
-    fontSize: 16,
+    backgroundColor: "#fff",
   },
   buttonBackandLike: {
     width: 40,
@@ -60,12 +31,13 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
   },
 });
-const FavoritePage = ({ navigation }) => {
-  const [onload, setonload] = useState(false);
+const PageViewall = ({ navigation }) => {
+  const [onload, setonload] = React.useState(false);
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle={"light-content"} />
       <View style={{ width: "100%", height: "100%" }}>
+        {/* button back and title of page */}
         <View style={{ flexDirection: "row", margin: 10 }}>
           <View style={{ width: "15%" }}>
             <TouchableOpacity
@@ -83,14 +55,16 @@ const FavoritePage = ({ navigation }) => {
             }}
           >
             <Text style={{ fontFamily: "Nunito-Bold", fontSize: 18 }}>
-              Favorite
+              Title of Page when click on
             </Text>
           </View>
         </View>
-        {/* List Favorite card */}
-        <FavorList navigation={navigation} />
+        <View style={{ width: "100%" }}>
+          {/* Card render */}
+          <Card navigation={navigation}></Card>
+        </View>
       </View>
     </SafeAreaView>
   );
 };
-export default FavoritePage;
+export default PageViewall;

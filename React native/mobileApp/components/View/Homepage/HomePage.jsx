@@ -20,11 +20,13 @@ import { LinearGradient } from "expo-linear-gradient";
 import CardCollections from "./components/Card/CardCollection";
 import CardRecipes from "./components/Card/CardRecipes";
 import CardPopular from "./components/Card/CardPopular";
+import CardDay from "./components/Card/CardDays";
 
 const Separator = () => <View style={styles.separator} />;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
   },
   scrollContainer: {
     flex: 1,
@@ -32,38 +34,54 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 });
-const HomePage = () => {
+const HomePage = ({ navigation }) => {
   const userinfo = useSelector((state) => state.userinfo);
+  const images = {
+    breakfast: require("../../../assets/image/food.jpg"),
+    lunch: require("../../../assets/image/lunch.jpg"),
+  };
   const [onload, setonload] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle={"light-content"} />
 
-      <View
-        style={{
-          marginTop: 15,
-        }}
-      >
-        <View style={{ width: "100%", height: "8%" }}>
-          {/* start container for profile */}
-          <UserContainer />
+      <View>
+        <View
+          style={{
+            width: "100%",
+            height: "8.2%",
+            backgroundColor: "#fff",
+            borderBottomLeftRadius: 10,
+            borderBottomRightRadius: 10,
+            elevation: 2,
+            shadowColor: "#000",
+          }}
+        >
+          {/*container for profile */}
+          <UserContainer navigation={navigation} />
         </View>
         {/* Place for cardBox */}
         <View style={{ width: "100%", height: "88.8%" }}>
-          <Text
-            style={{
-              fontSize: 18,
-              fontFamily: "Nunito-semiBold",
-              marginLeft: 10,
-            }}
-          >
-            What would you like today ?
-          </Text>
           <ScrollView showsVerticalScrollIndicator={false}>
-            <CardOffer />
-            <CardRecipes />
-            <CardPopular />
-            <CardCollections />
+            <CardOffer navigation={navigation} />
+            <CardRecipes navigation={navigation} />
+            <CardPopular navigation={navigation} />
+            <CardCollections navigation={navigation} />
+            <CardDay
+              Time={"Breakfast"}
+              images={images.breakfast}
+              navigation={navigation}
+            />
+            <CardDay
+              Time={"Lunch"}
+              images={images.lunch}
+              navigation={navigation}
+            />
+            <CardDay
+              Time={"Dinner"}
+              images={images.breakfast}
+              navigation={navigation}
+            />
           </ScrollView>
         </View>
       </View>
