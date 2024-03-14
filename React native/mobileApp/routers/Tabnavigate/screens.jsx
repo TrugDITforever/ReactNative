@@ -1,10 +1,10 @@
 import "react-native-gesture-handler";
 import React from "react";
-import HomePage from "../../components/View/Homepage/HomePage";
-import Intropage from "../../components/View/IntroPage/Intropage";
-import AccountPage from "../../components/View/AccountPage/AccountPage";
-import UserProfile from "../../components/View/UserProfile/UserProfile";
-import FavoritePage from "../../components/View/FavoritePage/Favorite";
+import HomePage from "../../components/pages/Homepage/HomePage";
+import Intropage from "../../components/pages/IntroPage/Intropage";
+import AccountPage from "../../components/pages/AccountPage/AccountPage";
+import UserProfile from "../../components/pages/UserProfile/UserProfile";
+import FavoritePage from "../../components/pages/FavoritePage/Collections";
 // import for navigationP
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -16,7 +16,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import Octicons from "react-native-vector-icons/Octicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { StyleSheet, Text, View } from "react-native";
-import SearchPage from "../../components/View/SearchingPage/SearchPage";
+import SearchPage from "../../components/pages/SearchingPage/SearchPage";
 // Start code navigation
 const Tab = createBottomTabNavigator();
 // const Drawer = createDrawerNavigator();
@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#EEEDEB",
     borderRadius: 10,
     padding: 5,
   },
@@ -61,7 +60,7 @@ export const TabScreen = () => {
         tabBarShowLabel: false,
         headerShown: false,
         tabBarStyle: {
-          position: "absolute",
+          position: "fixed",
           bottom: 0,
           right: 0,
           left: 0,
@@ -77,11 +76,7 @@ export const TabScreen = () => {
               <View style={styles.navContain}>
                 {focused ? (
                   <View style={styles.navbarShow}>
-                    <Octicons
-                      name={"home"}
-                      size={30}
-                      color={focused ? "#000" : "#9b9b9b"}
-                    />
+                    <Octicons name={"home"} size={30} />
                     <Text style={styles.textnav}>Home</Text>
                   </View>
                 ) : (
@@ -89,7 +84,7 @@ export const TabScreen = () => {
                     <Octicons
                       name={"home"}
                       size={30}
-                      color={focused ? "#000" : "#9b9b9b"}
+                      color={focused ? "#000" : "#ccc"}
                     />
                   </View>
                 )}
@@ -110,7 +105,7 @@ export const TabScreen = () => {
                     <Ionicons
                       name={"search"}
                       size={30}
-                      color={focused ? "#000" : "#9b9b9b"}
+                      color={focused ? "#000" : "#ccc"}
                     />
                     <Text style={styles.textnav}>Search</Text>
                   </View>
@@ -119,7 +114,7 @@ export const TabScreen = () => {
                     <Ionicons
                       name={"search"}
                       size={30}
-                      color={focused ? "#000" : "#9b9b9b"}
+                      color={focused ? "#000" : "#ccc"}
                     />
                   </View>
                 )}
@@ -129,7 +124,7 @@ export const TabScreen = () => {
         }}
       />
       <Tab.Screen
-        name="Favorite"
+        name="Collections"
         component={FavoritePage}
         options={{
           tabBarIcon: ({ focused }) => {
@@ -140,16 +135,16 @@ export const TabScreen = () => {
                     <MaterialCommunityIcons
                       name={"heart-multiple-outline"}
                       size={30}
-                      color={focused ? "#000" : "#9b9b9b"}
+                      color={focused ? "#000" : "#ccc"}
                     />
-                    <Text style={styles.textnav}>Favorite</Text>
+                    <Text style={styles.textnav}>Collections</Text>
                   </View>
                 ) : (
                   <View style={styles.navbarhide}>
                     <MaterialCommunityIcons
                       name={"heart-multiple-outline"}
                       size={30}
-                      color={focused ? "#000" : "#9b9b9b"}
+                      color={focused ? "#000" : "#ccc"}
                     />
                   </View>
                 )}
@@ -170,7 +165,7 @@ export const TabScreen = () => {
                     <Octicons
                       name={"person"}
                       size={30}
-                      color={focused ? "#000" : "#9b9b9b"}
+                      color={focused ? "#000" : "#ccc"}
                     />
                     <Text style={styles.textnav}>Profile</Text>
                   </View>
@@ -179,7 +174,7 @@ export const TabScreen = () => {
                     <Octicons
                       name={"person"}
                       size={30}
-                      color={focused ? "#000" : "#9b9b9b"}
+                      color={focused ? "#000" : "#ccc"}
                     />
                   </View>
                 )}

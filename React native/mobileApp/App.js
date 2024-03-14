@@ -5,7 +5,7 @@ import * as Font from "expo-font";
 import Stackscreens from "./routers/StackNavigate/screens";
 // Redux
 import { Provider } from "react-redux";
-import store from "./components/Redux-store/store";
+import store from "./components/Redux/Redux-store/store";
 // Start code navigation
 // loading custom font
 const loadCustomFonts = async () => {
@@ -22,7 +22,6 @@ const App = () => {
     loadCustomFonts()
       .then(() => setIsFontLoaded(true))
       .catch((error) => console.error("Error loading fonts:", error));
-
     return null;
   }
   return (

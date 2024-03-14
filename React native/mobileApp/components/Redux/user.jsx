@@ -2,9 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userinfo = createSlice({
   name: "userinfo",
   initialState: {
-    name: "Trung Do",
+    name: "Quang Trung",
     password: "123",
     email: "dotrung1512@gmail.com",
+    decription: "I love cooking with different recipes",
   },
   reducers: {
     updateUser: (state, action) => {
@@ -33,8 +34,19 @@ export const userinfo = createSlice({
         email: action.payload.email,
       };
     },
+    updateDecription: (state, action) => {
+      return {
+        ...state,
+        decription: action.payload.decription,
+      };
+    },
   },
 });
-export const { updateUser, updateName, updatePassword, updateEmail } =
-  userinfo.actions;
+export const {
+  updateUser,
+  updateName,
+  updatePassword,
+  updateEmail,
+  updateDecription,
+} = userinfo.actions;
 export default userinfo.reducer;
