@@ -18,20 +18,11 @@ import Description from "./components/Decription";
 import Ingredients from "./components/Ingredients";
 import Proceduce from "./components/Proceduce";
 import CardForMore from "./components/CardFormore";
+import HeadervsButtonBack from "../../components/Header/HeadervsButtonBack";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-  },
-  buttonBackandLike: {
-    width: 40,
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#FFFFFF",
-    borderRadius: 50,
-    elevation: 2,
-    shadowColor: "#000",
   },
 });
 const CookingPage = ({ navigation }) => {
@@ -46,30 +37,8 @@ const CookingPage = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle={"light-content"} />
       {/* goback button and like button*/}
-      <View
-        style={{
-          width: "100%",
-          height: "7%",
-          borderBottomLeftRadius: 10,
-          borderBottomRightRadius: 10,
-        }}
-      >
-        <View style={{ flexDirection: "row", margin: 10 }}>
-          <View style={{ width: "90%" }}>
-            <TouchableOpacity
-              style={styles.buttonBackandLike}
-              onPress={() => navigation.goBack()}
-            >
-              <Ionicons name="arrow-back" size={24} />
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity style={styles.buttonBackandLike}>
-            <Ionicons name={"heart-outline"} size={24} />
-          </TouchableOpacity>
-        </View>
-      </View>
+      <HeadervsButtonBack isShown={true} navigation={navigation} />
       {/* Details of food */}
-
       <View style={{ height: "93%" }}>
         {loading ? (
           <ScrollView

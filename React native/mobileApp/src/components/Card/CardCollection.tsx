@@ -7,6 +7,7 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
+  ViewStyle,
 } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: "100%",
-    borderRadius: 5,
+    borderRadius: 20,
   },
   boxword: {
     display: "flex",
@@ -46,10 +47,11 @@ const styles = StyleSheet.create({
   cardContainBorder: {
     width: 280,
     height: 230,
-    borderRadius: 10,
+    borderRadius: 20,
     marginLeft: 15,
+    marginRight: 5,
     marginBottom: 25,
-    backgroundColor: "#fff",
+    backgroundColor: "#F8F8F8",
     shadowColor: "#000",
   },
   marginLastIndex: {
@@ -96,12 +98,15 @@ const styles = StyleSheet.create({
     fontFamily: "Nunito-Bold",
   },
 });
-const CardCollections = ({ navigation }) => {
+interface Prop {
+  navigation: any;
+}
+const CardCollections: React.FC<Prop> = ({ navigation }) => {
   const screenWidth = Dimensions.get("window");
   const [liked, setlike] = React.useState(
     Array.from({ length: 8 }, () => false)
   );
-  const handlePress = React.useCallback((index) => {
+  const handlePress = React.useCallback((index: number) => {
     setlike((prevLiked) => {
       const newLikes = [...prevLiked];
       newLikes[index] = !newLikes[index];
@@ -117,12 +122,12 @@ const CardCollections = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {liked.map((value, index) => (
+        {liked.map((value: any, index: number) => (
           <View
             key={index}
             style={[
               styles.cardContainBorder,
-              [index === liked.length - 1 ? styles.marginLastIndex : ""],
+              [index === liked.length - 1 ? styles.marginLastIndex : {}],
             ]}
           >
             <TouchableOpacity
@@ -140,12 +145,7 @@ const CardCollections = ({ navigation }) => {
                 {/* rating and like button */}
                 <View style={styles.containerForRatingandLike}>
                   {/* for button like */}
-                  <View
-                    style={{
-                      alignItems: "center",
-                      justifyContent: " center",
-                    }}
-                  >
+                  <View>
                     <View style={styles.buttonlike}>
                       <TouchableOpacity onPress={() => handlePress(index)}>
                         {liked[index] ? (

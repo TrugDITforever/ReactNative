@@ -22,8 +22,6 @@ import CardCollections from "../../components/Card/CardCollection";
 import CardRecipes from "../../components/Card/CardRecipes";
 import CardPopular from "../../components/Card/CardPopular";
 import CardDay from "../../components/Card/CardDays";
-
-const Separator = () => <View style={styles.separator} />;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -36,8 +34,11 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 });
-const HomePage = ({ navigation }) => {
-  const userinfo = useSelector((state) => state.userinfo);
+interface CookingPageProps {
+  navigation: any;
+}
+const HomePage: React.FC<CookingPageProps> = ({ navigation }) => {
+  const userinfo = useSelector((state: any) => state.userinfo);
   const images = {
     breakfast: require("../../assets/image/food.jpg"),
     lunch: require("../../assets/image/lunch.jpg"),

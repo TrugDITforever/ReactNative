@@ -49,7 +49,7 @@ const SearchPage = ({ navigation }) => {
               alignItems: "center",
             }}
           >
-            <Text style={{ fontFamily: "Nunito-Bold", fontSize: 18 }}>
+            <Text style={{ fontFamily: "Nunito-Bold", fontSize: 24 }}>
               Search Food
             </Text>
           </View>

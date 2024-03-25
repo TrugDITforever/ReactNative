@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: "100%",
-    borderRadius: 10,
+    borderRadius: 20,
   },
   boxword: {
     display: "flex",
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     width: "48%",
     height: 220,
     borderRadius: 10,
-    backgroundColor: "#fff",
+    marginBottom: 10,
   },
   textViewall: {
     fontSize: 13,
@@ -127,15 +127,15 @@ const SearchResults = ({ navigation }) => {
                   {/* details of food */}
                 </View>
                 <View style={styles.containerForNameofFood}>
-                  {/* time cooking, level */}
+                  {/*rating number, level */}
                   <View
                     style={{
                       flexDirection: "row",
                       marginTop: 5,
-                      alignItems: "center",
-                      justifyContent: "space-between",
+                      alignItems: "left",
                     }}
                   >
+                    {/* Rating */}
                     <View
                       style={{
                         flexDirection: "row",
@@ -155,10 +155,11 @@ const SearchResults = ({ navigation }) => {
                         9,5K
                       </Text>
                     </View>
+                    {/* level icon and text */}
                     <View
                       style={{
                         flexDirection: "row",
-                        width: "50%",
+                        width: "45%",
                         opacity: 0.8,
                         alignItems: "center",
                       }}

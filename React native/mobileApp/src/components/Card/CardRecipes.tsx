@@ -21,12 +21,13 @@ export const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: "100%",
-    borderRadius: 10,
+    borderRadius: 20,
   },
   cardContain: {
     width: 280,
-    height: 400,
+    height: 200,
     marginLeft: 15,
+    marginRight: 5,
     position: "relative",
   },
   marginLastIndex: {
@@ -92,15 +93,18 @@ export const styles = StyleSheet.create({
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "rgba(0,0,0,0.2)",
-    borderRadius: 10,
+    borderRadius: 20,
   },
 });
-const CardRecommend = ({ navigation }) => {
+interface Prop {
+  navigation: any;
+}
+const CardRecipes: React.FC<Prop> = ({ navigation }) => {
   const screenWidth = Dimensions.get("window");
   const [liked, setlike] = React.useState(
     Array.from({ length: 5 }, () => false)
   );
-  const handlePress = React.useCallback((index) => {
+  const handlePress = React.useCallback((index: number) => {
     setlike((prevLiked) => {
       const newLikes = [...prevLiked];
       newLikes[index] = !newLikes[index];
@@ -121,7 +125,7 @@ const CardRecommend = ({ navigation }) => {
             <TouchableOpacity
               style={[
                 styles.cardContain,
-                [index === liked.length - 1 ? styles.marginLastIndex : ""],
+                [index === liked.length - 1 ? styles.marginLastIndex : {}],
               ]}
               onPress={() => {
                 navigation.navigate("Cooking");
@@ -197,4 +201,4 @@ const CardRecommend = ({ navigation }) => {
     </View>
   );
 };
-export default CardRecommend;
+export default CardRecipes;

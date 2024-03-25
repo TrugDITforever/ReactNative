@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "name": "Pizza",
+        "description": "Delicious Italian dish with toppings on a crust.",
+        "price": 10.99,
+        "calories": 800
+    },
+    {
+        "id": 2,
+        "name": "Burger",
+        "description": "Classic American fast food made with beef patty, lettuce, tomato, and cheese.",
+        "price": 8.49,
+        "calories": 600
+    },
+    {
+        "id": 3,
+        "name": "Sushi",
+        "description": "Japanese dish consisting of rice and raw fish.",
+        "price": 15.99,
+        "calories": 500
+    }
+]

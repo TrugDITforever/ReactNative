@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: "100%",
-    borderRadius: 10,
+    borderRadius: 20,
   },
   boxword: {
     display: "flex",
@@ -45,19 +45,16 @@ const styles = StyleSheet.create({
   },
   cardContainBorder: {
     width: 180,
-    height: 230,
-    borderRadius: 10,
-    padding: 5,
+    height: 220,
     marginLeft: 15,
+    marginRight: 5,
     backgroundColor: "#fff",
-    borderWidth: 1,
-    borderColor: "#ccc",
   },
   marginLastIndex: {
     marginRight: 15,
   },
   textViewall: {
-    fontSize: 14,
+    fontSize: 13,
     textAlign: "center",
     alignItems: "center",
     paddingRight: 10,
@@ -65,7 +62,7 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     paddingLeft: 10,
     borderRadius: 10,
-    fontFamily: "Nunito-Medium",
+    fontFamily: "Nunito-Regular",
   },
   containerForRatingandLike: {
     display: "flex",
@@ -86,26 +83,36 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "Nunito-Bold",
   },
+  buttonlike: {
+    width: 30,
+    height: 30,
+    backgroundColor: "#f1f1f1",
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
-const CardPopular = ({ navigation }) => {
+interface Prop {
+  Time: string;
+  images: any;
+  navigation: any;
+}
+const CardDay: React.FC<Prop> = ({ Time, images, navigation }) => {
   const screenWidth = Dimensions.get("window");
   const [liked, setlike] = React.useState(
     Array.from({ length: 8 }, () => false)
   );
-  const handlePress = React.useCallback(
-    (index) => {
-      setlike((prevLiked) => {
-        const newLikes = [...prevLiked];
-        newLikes[index] = !newLikes[index];
-        return newLikes;
-      });
-    },
-    [liked]
-  );
+  const handlePress = React.useCallback((index: number) => {
+    setlike((prevLiked) => {
+      const newLikes = [...prevLiked];
+      newLikes[index] = !newLikes[index];
+      return newLikes;
+    });
+  }, []);
   return (
     <View style={[styles.container]}>
       <View style={styles.boxword}>
-        <Text style={styles.textbox}>Popular</Text>
+        <Text style={styles.textbox}>{Time}</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Viewall")}>
           <Text style={styles.textViewall}>View All</Text>
         </TouchableOpacity>
@@ -116,24 +123,21 @@ const CardPopular = ({ navigation }) => {
             key={index}
             style={[
               styles.cardContainBorder,
-              [index === liked.length - 1 ? styles.marginLastIndex : ""],
+              index === liked.length - 1 ? styles.marginLastIndex : {},
             ]}
           >
             <TouchableOpacity
-              style={styles.cardContain}
               onPress={() => {
                 navigation.navigate("Cooking");
               }}
               activeOpacity={1}
             >
               <View style={styles.cardContain}>
-                <Image
-                  source={require("../../assets/image/food.jpg")}
-                  style={styles.backgroundImage}
-                />
+                <Image source={images} style={styles.backgroundImage} />
                 {/* details of food */}
               </View>
               <View style={styles.containerForNameofFood}>
+                {/* rating, level */}
                 <View
                   style={{
                     flexDirection: "row",
@@ -141,50 +145,16 @@ const CardPopular = ({ navigation }) => {
                     alignItems: "center",
                   }}
                 >
-                  <View
-                    style={{
-                      width: "80%",
-                    }}
-                  >
-                    <Text numberOfLines={1} style={styles.textNameFood}>
-                      Pasta & Pork
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      width: "20%",
-                      alignItems: "center",
-                      justifyContent: " center",
-                    }}
-                  >
-                    <View style={styles.buttonlike}>
-                      <TouchableOpacity onPress={() => handlePress(index)}>
-                        {liked[index] ? (
-                          <Ionicons name={"heart"} size={25} color={"red"} />
-                        ) : (
-                          <Ionicons name={"heart-outline"} size={25} />
-                        )}
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    marginTop: 5,
-                    alignItems: "center",
-                  }}
-                >
-                  {/* time cooking, level */}
+                  {/* Rating */}
                   <View
                     style={{
                       flexDirection: "row",
-                      width: "50%",
-                      opacity: 0.7,
+                      width: "35%",
+                      opacity: 0.8,
                       alignItems: "center",
                     }}
                   >
-                    <FontAwesome5 name={"clock"} size={16} />
+                    <AntDesign name={"hearto"} size={16} />
                     <Text
                       style={{
                         fontFamily: "Nunito-Medium",
@@ -192,14 +162,15 @@ const CardPopular = ({ navigation }) => {
                         paddingLeft: 5,
                       }}
                     >
-                      20 mins
+                      9,5K
                     </Text>
                   </View>
+                  {/* level icon and text */}
                   <View
                     style={{
                       flexDirection: "row",
-                      width: "50%",
-                      opacity: 0.7,
+                      width: "45%",
+                      opacity: 0.8,
                       alignItems: "center",
                     }}
                   >
@@ -207,13 +178,47 @@ const CardPopular = ({ navigation }) => {
                     <Text
                       style={{
                         fontFamily: "Nunito-Medium",
-
                         paddingLeft: 5,
                       }}
                     >
                       Easy
                     </Text>
                   </View>
+                  {/* button like */}
+                  <View style={styles.buttonlike}>
+                    <TouchableOpacity onPress={() => handlePress(index)}>
+                      {liked[index] ? (
+                        <AntDesign name={"heart"} size={16} color={"red"} />
+                      ) : (
+                        <AntDesign name={"hearto"} size={16} />
+                      )}
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                {/* name of food */}
+                <View
+                  style={{
+                    flexDirection: "row",
+                    marginTop: 5,
+                    alignItems: "center",
+                  }}
+                >
+                  <View
+                    style={{
+                      width: "100%",
+                    }}
+                  >
+                    <Text numberOfLines={2} style={styles.textNameFood}>
+                      Macaroni and Cheese
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      width: "20%",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  ></View>
                 </View>
               </View>
             </TouchableOpacity>
@@ -223,4 +228,4 @@ const CardPopular = ({ navigation }) => {
     </View>
   );
 };
-export default CardPopular;
+export default CardDay;

@@ -7,7 +7,6 @@ import UserProfile from "../../pages/UserProfile/UserProfile";
 import FavoritePage from "../../pages/FavoritePage/Collections";
 import SearchPage from "../../pages/SearchingPage/SearchPage";
 // import for navigationP
-
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Provider } from "react-redux";
@@ -34,12 +33,11 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   navbarShow: {
-    flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
-    padding: 5,
-    // backgroundColor: "#000",
+    borderRadius: 20,
+    backgroundColor: "#FE724C",
   },
   navbarhide: {
     flexDirection: "row",
@@ -49,168 +47,129 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   textnav: {
+    color: "#fff",
     marginLeft: 10,
     fontSize: 14,
     fontFamily: "Nunito-semiBold",
   },
+  iconcolor: {
+    color: "#fff",
+    size: 24,
+  },
+  containiconandText: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingBottom: 10,
+    paddingTop: 10,
+    paddingLeft: 15,
+    paddingRight: 15,
+  },
 });
 
 export const TabScreen = () => {
+  const listTapContent = [
+    {
+      name: "Home",
+      component: HomePage,
+      iconShow: (
+        <Foundation
+          name={"home"}
+          size={styles.iconcolor.size}
+          color={styles.iconcolor.color}
+        />
+      ),
+      tabText: "Home",
+      iconhide: (
+        <Octicons name={"home"} size={styles.iconcolor.size} color={"#ccc"} />
+      ),
+    },
+    {
+      name: "Search",
+      component: SearchPage,
+      iconShow: (
+        <Ionicons
+          name={"search"}
+          size={styles.iconcolor.size}
+          color={styles.iconcolor.color}
+        />
+      ),
+      tabText: "Search",
+      iconhide: (
+        <Ionicons name={"search"} size={styles.iconcolor.size} color={"#ccc"} />
+      ),
+    },
+    {
+      name: "Collections",
+      component: FavoritePage,
+      iconShow: (
+        <MaterialCommunityIcons
+          name={"heart-multiple"}
+          size={styles.iconcolor.size}
+          color={styles.iconcolor.color}
+        />
+      ),
+      tabText: "Collect",
+      iconhide: (
+        <MaterialCommunityIcons
+          name={"heart-multiple-outline"}
+          size={styles.iconcolor.size}
+          color={"#ccc"}
+        />
+      ),
+    },
+    {
+      name: "Profile",
+      component: UserProfile,
+      iconShow: (
+        <Octicons
+          name={"person-fill"}
+          size={styles.iconcolor.size}
+          color={styles.iconcolor.color}
+        />
+      ),
+      tabText: "Profile",
+      iconhide: (
+        <Octicons name={"person"} size={styles.iconcolor.size} color={"#ccc"} />
+      ),
+    },
+  ];
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarShowLabel: false,
         headerShown: false,
         tabBarStyle: {
-          position: "fixed",
-          bottom: 0,
-          right: 0,
-          left: 0,
+          borderTopWidth: 0,
+          elevation: 0,
         },
       }}
     >
-      <Tab.Screen
-        name="Home"
-        component={HomePage}
-        options={{
-          tabBarIcon: ({ focused }) => {
-            return (
-              <View style={styles.navContain}>
-                {focused ? (
-                  <View style={styles.navbarShow}>
-                    <Octicons name={"home"} size={30} />
-                    <Text style={styles.textnav}>Home</Text>
-                  </View>
-                ) : (
-                  <View style={styles.navbarhide}>
-                    <Octicons name={"home"} size={30} color={"#ccc"} />
-                  </View>
-                )}
-              </View>
-            );
-          },
-        }}
-      />
-      <Tab.Screen
-        name="Search"
-        component={SearchPage}
-        options={{
-          tabBarIcon: ({ focused }) => {
-            return (
-              <View style={styles.navContain}>
-                {focused ? (
-                  <View style={styles.navbarShow}>
-                    <Ionicons
-                      name={"search"}
-                      size={30}
-                      color={focused ? "#000" : "#ccc"}
-                    />
-                    <Text style={styles.textnav}>Search</Text>
-                  </View>
-                ) : (
-                  <View style={styles.navbarhide}>
-                    <Ionicons
-                      name={"search"}
-                      size={30}
-                      color={focused ? "#000" : "#ccc"}
-                    />
-                  </View>
-                )}
-              </View>
-            );
-          },
-        }}
-      />
-      <Tab.Screen
-        name="Collections"
-        component={FavoritePage}
-        options={{
-          tabBarIcon: ({ focused }) => {
-            return (
-              <View>
-                {focused ? (
-                  <View style={styles.navbarShow}>
-                    <MaterialCommunityIcons
-                      name={"heart-multiple"}
-                      size={30}
-                      color={focused ? "#000" : "#ccc"}
-                    />
-                    <Text style={styles.textnav}>Collections</Text>
-                  </View>
-                ) : (
-                  <View style={styles.navbarhide}>
-                    <MaterialCommunityIcons
-                      name={"heart-multiple-outline"}
-                      size={30}
-                      color={focused ? "#000" : "#ccc"}
-                    />
-                  </View>
-                )}
-              </View>
-            );
-          },
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={UserProfile}
-        options={{
-          tabBarIcon: ({ focused }) => {
-            return (
-              <View>
-                {focused ? (
-                  <View style={styles.navbarShow}>
-                    <Octicons
-                      name={"person-fill"}
-                      size={30}
-                      color={focused ? "#000" : "#ccc"}
-                    />
-                    <Text style={styles.textnav}>Profile</Text>
-                  </View>
-                ) : (
-                  <View style={styles.navbarhide}>
-                    <Octicons
-                      name={"person"}
-                      size={30}
-                      color={focused ? "#000" : "#ccc"}
-                    />
-                  </View>
-                )}
-              </View>
-            );
-          },
-        }}
-      />
-      {/* <Tab.Screen
-        name="Settings"
-        component={SettingPage}
-        options={{
-          tabBarIcon: ({ focused }) => {
-            return (
-              <View>
-                {focused ? (
-                  <View style={styles.navbarShow}>
-                    <Ionicons
-                      name={"settings-outline"}
-                      size={30}
-                      color={focused ? "#000" : "#9b9b9b"}
-                    />
-                    <Text style={styles.textnav}>Settings</Text>
-                  </View>
-                ) : (
-                  <View style={styles.navbarhide}>
-                    <Ionicons
-                      name={"settings-outline"}
-                      size={30}
-                      color={focused ? "#000" : "#9b9b9b"}
-                    />
-                  </View>
-                )}
-              </View>
-            );
-          },
-        }}
-      /> */}
+      {listTapContent.map((value, i) => (
+        <Tab.Screen
+          key={i}
+          name={value.name}
+          component={value.component}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              return (
+                <View style={styles.navContain}>
+                  {focused ? (
+                    <View style={styles.navbarShow}>
+                      <View style={styles.containiconandText}>
+                        {value.iconShow}
+                        <Text style={styles.textnav}>{value.tabText}</Text>
+                      </View>
+                    </View>
+                  ) : (
+                    <View style={styles.navbarhide}>{value.iconhide}</View>
+                  )}
+                </View>
+              );
+            },
+          }}
+        />
+      ))}
     </Tab.Navigator>
   );
 };

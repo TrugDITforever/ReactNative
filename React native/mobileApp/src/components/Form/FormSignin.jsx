@@ -66,7 +66,7 @@ const SinginForm = ({ navigation, navigateToSignup, dispatch }) => {
       setemailerr(!emailerr);
       setpasserr(!passerr);
     }
-  }, [email, password, navigation, emailerr, passerr]);
+  }, [email, password]);
   return (
     <View
       style={{
