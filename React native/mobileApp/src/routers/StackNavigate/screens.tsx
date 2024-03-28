@@ -14,7 +14,7 @@ import { TabScreen } from "../Tabnavigate/screens";
 // Start code navigation
 const Stack = createNativeStackNavigator();
 // loading custom font
-const Stacksreens = () => {
+const Stacksreens: React.FC = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>

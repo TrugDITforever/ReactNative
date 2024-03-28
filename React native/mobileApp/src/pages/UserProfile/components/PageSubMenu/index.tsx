@@ -11,7 +11,6 @@ import PageAbout from "./PageAbout";
 import PageFeedBack from "./PageFeedBack";
 import PageDetails from "./PersonalDetailsPage";
 import HeadervsButtonBack from "../../../../components/Header/HeadervsButtonBack";
-const Separator = () => <View style={styles.separator} />;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -28,7 +27,11 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
   },
 });
-const PageSubMenu = ({ navigation, route }) => {
+interface Prop {
+  navigation: any;
+  route: any;
+}
+const PageSubMenu: React.FC<Prop> = ({ navigation, route }) => {
   const [onload, setonload] = useState(false);
   const { index } = route.params;
   return (
@@ -46,10 +49,6 @@ const PageSubMenu = ({ navigation, route }) => {
         ) : (
           ""
         )}
-        {/* Page About : incude About, Terms of Use */}
-        {/* <PageAbout /> */}
-        {/* Form FeedBack */}
-        {/* <PageFeedBack route={route} /> */}
       </View>
     </SafeAreaView>
   );

@@ -20,18 +20,27 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
-const SinginForm = ({ navigation, navigateToSignup, dispatch }) => {
-  const [email, setemail] = useState();
-  const [password, setpassword] = useState();
-  const [show, setShow] = useState(true);
-  const [emailerr, setemailerr] = useState(false);
-  const [passerr, setpasserr] = useState(false);
-  const [accounterr, setaccerr] = useState(false);
+interface Prop {
+  navigation: any;
+  navigateToSignup: () => void;
+  dispatch: any;
+}
+const SinginForm: React.FC<Prop> = ({
+  navigation,
+  navigateToSignup,
+  dispatch,
+}) => {
+  const [email, setemail] = useState<string>();
+  const [password, setpassword] = useState<string>();
+  const [show, setShow] = useState<boolean>(true);
+  const [emailerr, setemailerr] = useState<boolean>(false);
+  const [passerr, setpasserr] = useState<boolean>(false);
+  const [accounterr, setaccerr] = useState<boolean>(false);
   //start function
-  const changeEmail = (text) => {
+  const changeEmail = (text: string) => {
     setemail(text);
   };
-  const chagePass = (passs) => {
+  const chagePass = (passs: string) => {
     setpassword(passs);
   };
   const SubmitSignin = useCallback(async () => {
@@ -59,7 +68,7 @@ const SinginForm = ({ navigation, navigateToSignup, dispatch }) => {
         } else {
           setaccerr(true);
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error("AxiosError:", error.message);
       }
     } else {
@@ -78,9 +87,7 @@ const SinginForm = ({ navigation, navigateToSignup, dispatch }) => {
     >
       {/* Gmail */}
       <View style={{ position: "relative" }}>
-        <Text style={{ fontSize: 20, fontWeight: 500, color: "red" }}>
-          Gmail:
-        </Text>
+        <Text style={{ fontSize: 20, color: "red" }}>Gmail:</Text>
         {emailerr && (
           <Text style={styles.errormesss}>* Email cannot be empty</Text>
         )}
@@ -103,9 +110,7 @@ const SinginForm = ({ navigation, navigateToSignup, dispatch }) => {
       </View>
       {/* Password */}
       <View style={{ position: "relative" }}>
-        <Text style={{ fontSize: 20, fontWeight: 500, color: "red" }}>
-          Password:
-        </Text>
+        <Text style={{ fontSize: 20, color: "red" }}>Password:</Text>
         {passerr && (
           <Text style={styles.errormesss}>* Password cannot be empty</Text>
         )}
@@ -144,7 +149,7 @@ const SinginForm = ({ navigation, navigateToSignup, dispatch }) => {
       <View
         style={{
           marginTop: 30,
-          position: " relative",
+          position: "relative",
           width: "100%",
           height: 20,
         }}
@@ -190,9 +195,7 @@ const SinginForm = ({ navigation, navigateToSignup, dispatch }) => {
               height: 60,
             }}
           >
-            <Text style={{ color: "#fff", fontSize: 30, fontWeight: 500 }}>
-              SIGN IN
-            </Text>
+            <Text style={{ color: "#fff", fontSize: 30 }}>SIGN IN</Text>
           </LinearGradient>
         </TouchableOpacity>
       </View>
@@ -221,7 +224,6 @@ const SinginForm = ({ navigation, navigateToSignup, dispatch }) => {
             position: "absolute",
             right: 0,
             bottom: 0,
-            fontWeight: 800,
           }}
           onPress={navigateToSignup}
         >

@@ -12,7 +12,7 @@ import {
 import Userinfo from "../Userinfo";
 
 const PageDetails = () => {
-  const user = useSelector((state) => state.userinfo);
+  const user = useSelector((state: any) => state.userinfo);
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

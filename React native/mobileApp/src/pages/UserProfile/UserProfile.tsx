@@ -1,21 +1,7 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Button,
-  View,
-  SafeAreaView,
-  Image,
-  Text,
-  Alert,
-  TextInput,
-  FlatList,
-  ScrollView,
-  ActivityIndicator,
-  StatusBar,
-} from "react-native";
+import { StyleSheet, View, SafeAreaView, StatusBar } from "react-native";
 import Userinfo from "./components/Userinfo";
 import ListMenu from "./components/ListMenu";
-const Separator = () => <View style={styles.separator} />;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -24,7 +10,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
 });
-const UserProfile = ({ navigation }) => {
+interface Prop {
+  navigation: any;
+}
+const UserProfile: React.FC<Prop> = ({ navigation }) => {
   const [onload, setonload] = useState(false);
   return (
     <SafeAreaView style={styles.container}>

@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
 });
 const Userinfo = () => {
-  const userinfo = useSelector((state) => state.userinfo);
+  const userinfo = useSelector((state: any) => state.userinfo);
   return (
     <View style={styles.container}>
       <View style={styles.userinfoContainer}>

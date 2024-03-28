@@ -21,11 +21,13 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 });
-
-const AccountPage = ({ navigation }) => {
-  const [user, getuser] = React.useState([]);
-  const [showSignin, setShowSignin] = React.useState(true);
-  const userinfo = useSelector((state) => state.userinfo);
+interface Props {
+  navigation: any;
+}
+const AccountPage: React.FC<Props> = ({ navigation }) => {
+  const [user, getuser] = React.useState<any>([]);
+  const [showSignin, setShowSignin] = React.useState<boolean>(true);
+  const userinfo = useSelector((state: any) => state.userinfo);
   const dispatch = useDispatch();
   const navigateToSignup = () => {
     setShowSignin(false);
@@ -59,7 +61,7 @@ const AccountPage = ({ navigation }) => {
               }}
             >
               <Text
-                style={{ fontSize: 36, fontWeight: 500, color: "#fff" }}
+                style={{ fontSize: 36, fontWeight: "500", color: "#fff" }}
                 onPress={() => navigation.navigate("Intro")}
               >
                 Hello Sign in!
@@ -76,7 +78,7 @@ const AccountPage = ({ navigation }) => {
               }}
             >
               <Text
-                style={{ fontSize: 36, fontWeight: 500, color: "#fff" }}
+                style={{ fontSize: 36, fontWeight: "500", color: "#fff" }}
                 onPress={() => navigation.navigate("Intro")}
               >
                 Create Your Account!
@@ -99,7 +101,7 @@ const AccountPage = ({ navigation }) => {
             <SigninForm
               navigation={navigation}
               navigateToSignup={navigateToSignup}
-              userinfo={userinfo}
+              // userinfo={userinfo}
               dispatch={dispatch}
             />
           ) : (

@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   buttonmain: {
-    width: "20",
+    width: 20,
     color: "rgba(255, 255, 255)",
   },
   logo: {
@@ -62,13 +62,17 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
   },
 });
-const FavoritePage = ({ navigation }) => {
+interface Prop {
+  navigation: any;
+}
+const FavoritePage: React.FC<Prop> = ({ navigation }) => {
   const [onload, setonload] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle={"light-content"} />
       <View style={{ width: "100%", height: "100%" }}>
         <View style={{ width: "100%", height: "auto", marginTop: 10 }}>
+          {/* for form search in collection */}
           <SearchInput />
           <View
             style={{

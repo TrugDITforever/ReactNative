@@ -1,13 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
+
+interface User{
+  name: string
+  username: string,
+  password: string,
+  email: string,
+  decription: string,
+}
+const initialState: User ={
+  name: "Quang Trung",
+  username: "TrungQ",
+  password: "123",
+  email: "dotrung1512@gmail.com",
+  decription: "I love cooking with different recipes",
+
+}
 export const userinfo = createSlice({
   name: "userinfo",
-  initialState: {
-    name: "Quang Trung",
-    username: "TrungQ",
-    password: "123",
-    email: "dotrung1512@gmail.com",
-    decription: "I love cooking with different recipes",
-  },
+  initialState,
   reducers: {
     updateUser: (state, action) => {
       return {

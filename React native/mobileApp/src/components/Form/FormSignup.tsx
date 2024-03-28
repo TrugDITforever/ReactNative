@@ -4,7 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons/faEyeSlash";
 import { LinearGradient } from "expo-linear-gradient";
-const SignupForm = ({ navigation, navigateToSignin }) => {
+
+interface Prop {
+  navigation: any;
+  navigateToSignin: any;
+}
+const SignupForm: React.FC<Prop> = ({ navigation, navigateToSignin }) => {
   const [show, setShow] = useState(true);
   return (
     <View
@@ -17,7 +22,7 @@ const SignupForm = ({ navigation, navigateToSignin }) => {
     >
       {/* FullName */}
       <View style={{ position: "relative" }}>
-        <Text style={{ fontSize: 20, fontWeight: 500, color: "red" }}>
+        <Text style={{ fontSize: 20, fontWeight: "500", color: "red" }}>
           Full Name:
         </Text>
         <TextInput
@@ -36,7 +41,7 @@ const SignupForm = ({ navigation, navigateToSignin }) => {
       </View>
       {/* Gmail */}
       <View style={{ position: "relative" }}>
-        <Text style={{ fontSize: 20, fontWeight: 500, color: "red" }}>
+        <Text style={{ fontSize: 20, fontWeight: "500", color: "red" }}>
           Gmail:
         </Text>
         <TextInput
@@ -55,7 +60,7 @@ const SignupForm = ({ navigation, navigateToSignin }) => {
       </View>
       {/* Password */}
       <View style={{ position: "relative" }}>
-        <Text style={{ fontSize: 20, fontWeight: 500, color: "red" }}>
+        <Text style={{ fontSize: 20, fontWeight: "500", color: "red" }}>
           Password:
         </Text>
         <TextInput
@@ -73,7 +78,7 @@ const SignupForm = ({ navigation, navigateToSignin }) => {
       </View>
       {/*Confirm Password */}
       <View style={{ position: "relative" }}>
-        <Text style={{ fontSize: 20, fontWeight: 500, color: "red" }}>
+        <Text style={{ fontSize: 20, fontWeight: "500", color: "red" }}>
           Confirm password:
         </Text>
         <TextInput
@@ -123,13 +128,12 @@ const SignupForm = ({ navigation, navigateToSignin }) => {
               width: "100%",
               height: 60,
             }}
-            onPress={() => navigation.navigate("Details")}
           >
             <Text
               style={{
                 color: "#fff",
                 fontSize: 30,
-                fontWeight: 500,
+                fontWeight: "500",
               }}
             >
               SIGN UP
@@ -162,7 +166,7 @@ const SignupForm = ({ navigation, navigateToSignin }) => {
               position: "absolute",
               right: 0,
               bottom: 0,
-              fontWeight: 800,
+              fontWeight: "800",
             }}
             onPress={navigateToSignin}
           >

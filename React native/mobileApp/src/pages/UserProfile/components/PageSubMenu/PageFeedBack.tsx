@@ -6,11 +6,17 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+import { updateName } from "../../../../Redux/user";
+import { useDispatch } from "react-redux";
 
-const PageFeedBack = ({ route }) => {
+interface Prop {
+  route: any;
+}
+const PageFeedBack: React.FC<Prop> = ({ route }) => {
+  const dispatch = useDispatch();
   const [text, setText] = React.useState("");
   const handleSubmit = () => {
-    console.log("Submitted:", text);
+    dispatch(updateName({ name: "quangtrungDo" }));
   };
   const { index } = route.params;
   return (

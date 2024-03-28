@@ -13,7 +13,11 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
   },
 });
-const HeadervsButtonBack = ({ isShown, navigation }) => {
+interface Prop {
+  isShown: boolean;
+  navigation: any;
+}
+const HeadervsButtonBack: React.FC<Prop> = ({ isShown, navigation }) => {
   return (
     <View
       style={{

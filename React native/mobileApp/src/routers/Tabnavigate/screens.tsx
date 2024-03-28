@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
   navbarShow: {
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 10,
     borderRadius: 20,
     backgroundColor: "#FE724C",
   },
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const TabScreen = () => {
+export const TabScreen: React.FC = () => {
   const listTapContent = [
     {
       name: "Home",
