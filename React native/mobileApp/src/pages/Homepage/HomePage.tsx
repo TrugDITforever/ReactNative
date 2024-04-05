@@ -22,10 +22,9 @@ import CardCollections from "../../components/Card/CardCollection";
 import CardRecipes from "../../components/Card/CardRecipes";
 import CardPopular from "../../components/Card/CardPopular";
 import CardDay from "../../components/Card/CardDays";
+import Statusbar from "../../components/Statusbar/Statusbar";
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    // backgroundColor: "#ECECEC",
     backgroundColor: "#ffff",
   },
   scrollContainer: {
@@ -34,10 +33,10 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 });
-interface CookingPageProps {
+interface Props {
   navigation: any;
 }
-const HomePage: React.FC<CookingPageProps> = ({ navigation }) => {
+const HomePage: React.FC<Props> = ({ navigation }) => {
   const userinfo = useSelector((state: any) => state.userinfo);
   const images = {
     breakfast: require("../../assets/image/food.jpg"),
@@ -45,13 +44,11 @@ const HomePage: React.FC<CookingPageProps> = ({ navigation }) => {
   };
   const [onload, setonload] = useState(false);
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle={"light-content"} />
+    <View style={styles.container}>
+      <Statusbar />
       <View>
         <View
           style={{
-            width: "100%",
-            height: "8.2%",
             backgroundColor: "#fff",
             elevation: 2,
             shadowColor: "#000",
@@ -100,7 +97,7 @@ const HomePage: React.FC<CookingPageProps> = ({ navigation }) => {
           </ScrollView>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 export default HomePage;

@@ -14,16 +14,16 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: "80%",
+    height: "100%",
+    marginTop: "10%",
   },
   listContainer: {
     width: "100%",
-    height: "100%",
     borderRadius: 10,
     alignItems: "center",
   },
   listTextContainer: {
-    width: "100%",
+    width: "95%",
   },
   textMenu: {
     fontFamily: "Nunito-semiBold",
@@ -31,25 +31,31 @@ const styles = StyleSheet.create({
   },
   subMenu: {
     width: "100%",
+    padding: 15,
     flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
-    borderRadius: 10,
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    elevation: 2,
-    marginBottom: 15,
+    justifyContent: "space-between",
+  },
+  colorOfIcon: {
+    color: "#888",
   },
 });
-const ListMenu = ({ navigation }) => {
+interface Prop {
+  navigation: any;
+}
+const ListMenu: React.FC<Prop> = ({ navigation }) => {
   const [list, setList] = React.useState([
     {
       text: "Personal Details",
       icon: "person",
     },
     {
-      text: "Privacy Settings",
-      icon: "alert",
+      text: "Privacy",
+      icon: "lock-closed",
+    },
+    {
+      text: "Security & permissions",
+      icon: "shield",
     },
     {
       text: "About Us",
@@ -65,15 +71,29 @@ const ListMenu = ({ navigation }) => {
       <View style={styles.listContainer}>
         <View style={styles.listTextContainer}>
           {/* start list of menu */}
-          {list.map((value, index) => (
-            <View key={index}>
+          <View
+            style={{
+              backgroundColor: "#fff",
+              borderRadius: 15,
+              elevation: 2,
+              shadowColor: "#000",
+            }}
+          >
+            {list.map((value, index) => (
               <TouchableOpacity
+                key={index}
                 style={styles.subMenu}
-                onPress={() => navigation.navigate("PageSubmenu", {index: index})}
+                onPress={() =>
+                  navigation.navigate("PageSubmenu", { index: index })
+                }
               >
                 {/* icon */}
-                <View style={{ width: "10%", margin: 10 }}>
-                  <Ionicons name={value.icon} size={30} />
+                <View>
+                  <Ionicons
+                    name={value.icon}
+                    size={24}
+                    color={styles.colorOfIcon.color}
+                  />
                 </View>
                 {/* Text */}
                 <View style={{ width: "70%" }}>
@@ -81,11 +101,15 @@ const ListMenu = ({ navigation }) => {
                 </View>
                 {/* icon arrow */}
                 <View>
-                  <AntDesign name="caretright" size={20} />
+                  <AntDesign
+                    name="right"
+                    size={20}
+                    color={styles.colorOfIcon.color}
+                  />
                 </View>
               </TouchableOpacity>
-            </View>
-          ))}
+            ))}
+          </View>
         </View>
       </View>
     </View>

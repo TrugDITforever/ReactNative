@@ -13,8 +13,9 @@ import {
   ActivityIndicator,
   StatusBar,
 } from "react-native";
-import Card from "./Card/Card";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import Card from "./Card/Card";
+import Statusbar from "../../../components/Statusbar/Statusbar";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -31,11 +32,15 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
   },
 });
-const PageViewall = ({ navigation }) => {
+interface Prop {
+  navigation: any;
+}
+
+const PageViewall: React.FC<Prop> = ({ navigation }) => {
   const [onload, setonload] = React.useState(false);
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle={"light-content"} />
+      <Statusbar />
       <View style={{ width: "100%", height: "100%" }}>
         {/* button back and title of page */}
         <View style={{ flexDirection: "row", margin: 10 }}>

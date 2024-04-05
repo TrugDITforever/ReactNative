@@ -89,12 +89,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-const SearchResults = ({ navigation }) => {
+interface Prop {
+  navigation: any;
+}
+const SearchResults: React.FC<Prop> = ({ navigation }) => {
   const screenWidth = Dimensions.get("window");
   const [liked, setlike] = React.useState(
     Array.from({ length: 10 }, () => false)
   );
-  const handlePress = React.useCallback((index) => {
+  const handlePress = React.useCallback((index: number) => {
     setlike((prevLiked) => {
       const newLikes = [...prevLiked];
       newLikes[index] = !newLikes[index];
@@ -132,7 +135,6 @@ const SearchResults = ({ navigation }) => {
                     style={{
                       flexDirection: "row",
                       marginTop: 5,
-                      alignItems: "left",
                     }}
                   >
                     {/* Rating */}
@@ -206,7 +208,7 @@ const SearchResults = ({ navigation }) => {
                       style={{
                         width: "20%",
                         alignItems: "center",
-                        justifyContent: " center",
+                        justifyContent: "center",
                       }}
                     ></View>
                   </View>

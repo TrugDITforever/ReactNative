@@ -3,8 +3,12 @@ import { Image, Text, View, TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
-const UserContainer = ({ navigation }) => {
-  const userinfo = useSelector((state) => state.userinfo);
+
+interface Prop {
+  navigation: any;
+}
+const UserContainer: React.FC<Prop> = ({ navigation }) => {
+  const userinfo = useSelector((state: any) => state.userinfo);
   return (
     <View
       style={{
@@ -12,15 +16,17 @@ const UserContainer = ({ navigation }) => {
         flexDirection: "row",
         alignItems: "center",
         marginTop: 10,
+        paddingLeft: 15,
+        paddingBottom: 10,
       }}
     >
-      <View style={{ width: "16%", marginLeft: 15 }}>
+      <View style={{ width: "16%" }}>
         <Image
           style={{
             width: 50,
             height: 50,
             borderRadius: 50,
-            objectFit: "cover",
+            objectFit: "contain",
           }}
           source={{
             uri: "https://images.fpt.shop/unsafe/filters:quality(5)/fptshop.com.vn/uploads/images/tin-tuc/157765/Originals/2(1).jpg",

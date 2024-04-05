@@ -17,6 +17,7 @@ import {
 import FavorList from "./components/FavorList";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SearchInput from "./components/SearchInput";
+import Statusbar from "../../components/Statusbar/Statusbar";
 
 const Separator = () => <View style={styles.separator} />;
 const styles = StyleSheet.create({
@@ -69,7 +70,7 @@ const FavoritePage: React.FC<Prop> = ({ navigation }) => {
   const [onload, setonload] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle={"light-content"} />
+      <Statusbar />
       <View style={{ width: "100%", height: "100%" }}>
         <View style={{ width: "100%", height: "auto", marginTop: 10 }}>
           {/* for form search in collection */}

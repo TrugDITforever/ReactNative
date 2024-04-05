@@ -12,6 +12,10 @@ const styles = StyleSheet.create({
     elevation: 2,
     shadowColor: "#000",
   },
+  containIconBack: {
+    position: "absolute",
+    right: 0,
+  },
 });
 interface Prop {
   isShown: boolean;
@@ -19,16 +23,9 @@ interface Prop {
 }
 const HeadervsButtonBack: React.FC<Prop> = ({ isShown, navigation }) => {
   return (
-    <View
-      style={{
-        width: "100%",
-        height: "7%",
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
-      }}
-    >
-      <View style={{ flexDirection: "row", margin: 10 }}>
-        <View style={{ width: "90%" }}>
+    <View>
+      <View style={{ flexDirection: "row", margin: 15 }}>
+        <View style={{}}>
           <TouchableOpacity
             style={styles.buttonBackandLike}
             onPress={() => navigation.goBack()}
@@ -37,9 +34,11 @@ const HeadervsButtonBack: React.FC<Prop> = ({ isShown, navigation }) => {
           </TouchableOpacity>
         </View>
         {isShown && (
-          <TouchableOpacity style={styles.buttonBackandLike}>
-            <Ionicons name={"heart-outline"} size={24} />
-          </TouchableOpacity>
+          <View style={styles.containIconBack}>
+            <TouchableOpacity style={styles.buttonBackandLike}>
+              <Ionicons name={"heart-outline"} size={24} />
+            </TouchableOpacity>
+          </View>
         )}
       </View>
     </View>

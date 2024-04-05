@@ -11,6 +11,7 @@ import PageAbout from "./PageAbout";
 import PageFeedBack from "./PageFeedBack";
 import PageDetails from "./PersonalDetailsPage";
 import HeadervsButtonBack from "../../../../components/Header/HeadervsButtonBack";
+import Statusbar from "../../../../components/Statusbar/Statusbar";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -36,13 +37,13 @@ const PageSubMenu: React.FC<Prop> = ({ navigation, route }) => {
   const { index } = route.params;
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle={"light-content"} />
+      <Statusbar />
       <View style={{ width: "100%", height: "100%" }}>
         {/* button back */}
         <HeadervsButtonBack isShown={false} navigation={navigation} />
-        {index === 2 ? (
+        {index === 3 ? (
           <PageAbout />
-        ) : index === 3 ? (
+        ) : index === 4 ? (
           <PageFeedBack route={route} />
         ) : index === 0 ? (
           <PageDetails />

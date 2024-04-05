@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet, View, SafeAreaView, StatusBar } from "react-native";
 import Userinfo from "./components/Userinfo";
-import ListMenu from "./components/ListMenu";
+import ListMenu from "../SettingPage/components/ListMenu";
+import Statusbar from "../../components/Statusbar/Statusbar";
+import { HamburgerNav } from "./components/HamburgreNav/HamburgerNav";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -14,18 +16,19 @@ interface Prop {
   navigation: any;
 }
 const UserProfile: React.FC<Prop> = ({ navigation }) => {
-  const [onload, setonload] = useState(false);
+  const [onload, setonload] = useState<boolean>(false);
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle={"light-content"} />
+      <Statusbar />
       <View style={{ width: "100%", height: "100%" }}>
         {/* User image. name and button edit profile */}
-        <View style={{ marginLeft: 15, marginRight: 15, marginTop: "20%" }}>
+        <View style={{ marginLeft: 15, marginRight: 15 }}>
+          <HamburgerNav navigation={navigation} />
           <Userinfo />
         </View>
-        {/* List of menu: Personal info, Privacy, Account, FeedBack & Support, About us */}
+        {/* Post of User will be showed here */}
         <View style={{ marginLeft: 15, marginRight: 15, marginTop: "30%" }}>
-          <ListMenu navigation={navigation} />
+    
         </View>
       </View>
     </SafeAreaView>

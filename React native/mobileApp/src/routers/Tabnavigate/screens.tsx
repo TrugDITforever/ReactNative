@@ -20,23 +20,24 @@ import { StyleSheet, Text, View } from "react-native";
 
 // Start code navigation
 const Tab = createBottomTabNavigator();
-// const Drawer = createDrawerNavigator();
-// export const Drawermenu = () => {
-//   return (
-//     <Drawer.Navigator initialRouteName="Menu">
-//       <Drawer.Screen name="Menu" component={TabScreen} />
-//     </Drawer.Navigator>
-//   );
-// };
+export const Drawer = createDrawerNavigator();
+export const Drawermenu = () => {
+  return (
+    <Drawer.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Drawer.Screen name="Menu" component={TabScreen} />
+    </Drawer.Navigator>
+  );
+};
 const styles = StyleSheet.create({
   navContain: {
     marginRight: 5,
   },
   navbarShow: {
-    alignItems: "center",
-    justifyContent: "center",
     borderRadius: 20,
-    backgroundColor: "#FE724C",
   },
   navbarhide: {
     flexDirection: "row",
@@ -46,17 +47,16 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   textnav: {
-    color: "#fff",
-    marginLeft: 10,
+    color: "#FE724C",
     fontSize: 14,
     fontFamily: "Nunito-semiBold",
   },
   iconcolor: {
-    color: "#fff",
+    color: "#FE724C",
     size: 24,
   },
   containiconandText: {
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
     paddingBottom: 10,

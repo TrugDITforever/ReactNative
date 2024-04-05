@@ -1,5 +1,11 @@
 import React, { useState, useRef } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons/faEyeSlash";
@@ -9,6 +15,43 @@ interface Prop {
   navigation: any;
   navigateToSignin: any;
 }
+const styles = StyleSheet.create({
+  errormesss: {
+    color: "red",
+  },
+  invalidacc: {
+    color: "red",
+    fontSize: 18,
+  },
+  input: {
+    height: 30,
+    borderBottomWidth: 1,
+    marginBottom: 20,
+    borderBottomColor: "#ccc",
+  },
+  label: {
+    fontSize: 20,
+    fontFamily: "Nunito-Medium",
+    color: "#F98A4F",
+  },
+  button: {
+    borderRadius: 50,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: 60,
+  },
+  linearbutton: {
+    backgroundColor: "#6807e3",
+    borderRadius: 50,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: 60,
+  },
+});
 const SignupForm: React.FC<Prop> = ({ navigation, navigateToSignin }) => {
   const [show, setShow] = useState(true);
   return (
@@ -22,16 +65,9 @@ const SignupForm: React.FC<Prop> = ({ navigation, navigateToSignin }) => {
     >
       {/* FullName */}
       <View style={{ position: "relative" }}>
-        <Text style={{ fontSize: 20, fontWeight: "500", color: "red" }}>
-          Full Name:
-        </Text>
+        <Text style={styles.label}>Full Name:</Text>
         <TextInput
-          style={{
-            height: 30,
-            borderBottomWidth: 1,
-            marginBottom: 20,
-            borderBottomColor: "#ccc",
-          }}
+          style={styles.input}
           autoCapitalize="none"
           keyboardType="email-address"
         />
@@ -41,9 +77,7 @@ const SignupForm: React.FC<Prop> = ({ navigation, navigateToSignin }) => {
       </View>
       {/* Gmail */}
       <View style={{ position: "relative" }}>
-        <Text style={{ fontSize: 20, fontWeight: "500", color: "red" }}>
-          Gmail:
-        </Text>
+        <Text style={styles.label}>Gmail:</Text>
         <TextInput
           style={{
             height: 30,
@@ -60,9 +94,7 @@ const SignupForm: React.FC<Prop> = ({ navigation, navigateToSignin }) => {
       </View>
       {/* Password */}
       <View style={{ position: "relative" }}>
-        <Text style={{ fontSize: 20, fontWeight: "500", color: "red" }}>
-          Password:
-        </Text>
+        <Text style={styles.label}>Password:</Text>
         <TextInput
           style={{
             height: 30,
@@ -78,9 +110,7 @@ const SignupForm: React.FC<Prop> = ({ navigation, navigateToSignin }) => {
       </View>
       {/*Confirm Password */}
       <View style={{ position: "relative" }}>
-        <Text style={{ fontSize: 20, fontWeight: "500", color: "red" }}>
-          Confirm password:
-        </Text>
+        <Text style={styles.label}>Confirm password:</Text>
         <TextInput
           style={{
             height: 30,
@@ -105,18 +135,11 @@ const SignupForm: React.FC<Prop> = ({ navigation, navigateToSignin }) => {
         }}
       >
         <TouchableOpacity
-          style={{
-            borderRadius: 50,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            height: 60,
-          }}
+          style={styles.button}
           onPress={() => navigation.navigate("Details")}
         >
           <LinearGradient
-            colors={["#D10030", "#4B1832"]}
+            colors={["#F98A4F", "#FCA64F"]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={{
@@ -130,11 +153,7 @@ const SignupForm: React.FC<Prop> = ({ navigation, navigateToSignin }) => {
             }}
           >
             <Text
-              style={{
-                color: "#fff",
-                fontSize: 30,
-                fontWeight: "500",
-              }}
+              style={{ color: "#fff", fontFamily: "Nunito-Bold", fontSize: 30 }}
             >
               SIGN UP
             </Text>
@@ -156,6 +175,7 @@ const SignupForm: React.FC<Prop> = ({ navigation, navigateToSignin }) => {
               right: 0,
               fontSize: 16,
               color: "#8F9090",
+              fontFamily: "Nunito-semiBold",
             }}
           >
             Already have account?
@@ -166,7 +186,7 @@ const SignupForm: React.FC<Prop> = ({ navigation, navigateToSignin }) => {
               position: "absolute",
               right: 0,
               bottom: 0,
-              fontWeight: "800",
+              fontFamily: "Nunito-Bold",
             }}
             onPress={navigateToSignin}
           >

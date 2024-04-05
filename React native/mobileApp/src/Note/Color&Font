@@ -2,3 +2,5 @@ bordercolor #ccc
 font for name of food : 18 or 20 for big card, size 16 for small card
 18- 20 for main text , size 16 for sub text
 for the header of Page : 24 
+boderRadius : 15 - 20
+main color : #F98A4F

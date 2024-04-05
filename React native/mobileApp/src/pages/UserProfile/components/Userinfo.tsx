@@ -1,7 +1,14 @@
 import * as React from "react";
-import { View, Text, Image, ImageBackground } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  TouchableOpacity,
+} from "react-native";
 import { useSelector } from "react-redux";
 import { StyleSheet } from "react-native";
+
 const styles = StyleSheet.create({
   container: {
     width: "100%",
@@ -10,17 +17,14 @@ const styles = StyleSheet.create({
   userinfoContainer: {
     width: "100%",
     height: "auto",
-    backgroundColor: "#f6f6f6",
-    elevation: 2,
     borderRadius: 10,
+    marginTop: "15%",
     alignItems: "center",
   },
-  imageContainer: {
-    marginTop: -50,
-  },
+  imageContainer: {},
   image: {
-    width: 120,
-    height: 120,
+    width: 110,
+    height: 110,
     borderWidth: 2,
     borderColor: "#ccc",
     borderRadius: 60,

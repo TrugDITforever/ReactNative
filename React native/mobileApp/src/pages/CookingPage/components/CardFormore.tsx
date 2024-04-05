@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     display: "flex",
     width: "100%",
     flexDirection: "row",
-    marginBottom: 10,
+    marginBottom: 5,
   },
   textbox: {
     fontFamily: "Nunito-Bold",
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     height: 220,
     borderRadius: 10,
     backgroundColor: "#fff",
+    marginBottom: 15,
   },
   textViewall: {
     fontSize: 13,
@@ -88,12 +89,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-const CardforMore = ({ navigation, setloadingwhenfetch }) => {
+
+interface Prop {
+  navigation: any;
+  setloadingwhenfetch: () => void;
+}
+const CardforMore: React.FC<Prop> = ({ navigation, setloadingwhenfetch }) => {
   const screenWidth = Dimensions.get("window");
   const [liked, setlike] = React.useState(
     Array.from({ length: 8 }, () => false)
   );
-  const handlePress = React.useCallback((index) => {
+  const handlePress = React.useCallback((index: number) => {
     setlike((prevLiked) => {
       const newLikes = [...prevLiked];
       newLikes[index] = !newLikes[index];
@@ -209,7 +215,7 @@ const CardforMore = ({ navigation, setloadingwhenfetch }) => {
                     style={{
                       width: "20%",
                       alignItems: "center",
-                      justifyContent: " center",
+                      justifyContent: "center",
                     }}
                   ></View>
                 </View>

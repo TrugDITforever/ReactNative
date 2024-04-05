@@ -10,7 +10,12 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
 import { updateUser } from "../../Redux/user";
-import axios from "axios";
+import { SubmitSignIn } from "../../utils/Login";
+interface PropsForLogin {
+  navigation: any;
+  dispatch: any;
+  navigateToSignup: () => void;
+}
 const styles = StyleSheet.create({
   errormesss: {
     color: "red",
@@ -19,19 +24,42 @@ const styles = StyleSheet.create({
     color: "red",
     fontSize: 18,
   },
+  input: {
+    height: 30,
+    borderBottomWidth: 1,
+    marginBottom: 20,
+    borderBottomColor: "#ccc",
+  },
+  label: {
+    fontSize: 20,
+    fontFamily: "Nunito-Medium",
+    color: "#F98A4F",
+  },
+  button: {
+    borderRadius: 50,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: 60,
+  },
+  linearbutton: {
+    backgroundColor: "#6807e3",
+    borderRadius: 50,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: 60,
+  },
 });
-interface Prop {
-  navigation: any;
-  navigateToSignup: () => void;
-  dispatch: any;
-}
-const SinginForm: React.FC<Prop> = ({
-  navigation,
+const SinginForm: React.FC<PropsForLogin> = ({
   navigateToSignup,
   dispatch,
+  navigation,
 }) => {
-  const [email, setemail] = useState<string>();
-  const [password, setpassword] = useState<string>();
+  const [email, setemail] = useState<string>("");
+  const [password, setpassword] = useState<string>("");
   const [show, setShow] = useState<boolean>(true);
   const [emailerr, setemailerr] = useState<boolean>(false);
   const [passerr, setpasserr] = useState<boolean>(false);
@@ -43,39 +71,18 @@ const SinginForm: React.FC<Prop> = ({
   const chagePass = (passs: string) => {
     setpassword(passs);
   };
-  const SubmitSignin = useCallback(async () => {
-    if (email && password) {
-      setemailerr(false);
-      setpasserr(false);
-      var value = {
-        email: email,
-        password: password,
-      };
-      try {
-        const res = await axios.post(
-          "http://192.168.200.197:8080/v1/checkuser",
-          value
-        );
-        if (res.data.success) {
-          navigation.navigate("Details");
-          const valueres = {
-            name: res.data.dataUser[0].username,
-            email: res.data.dataUser[0].email,
-            password: res.data.dataUser[0].password,
-          };
-          dispatch(updateUser(valueres));
-          setaccerr(false);
-        } else {
-          setaccerr(true);
-        }
-      } catch (error: any) {
-        console.error("AxiosError:", error.message);
-      }
-    } else {
-      setemailerr(!emailerr);
-      setpasserr(!passerr);
-    }
-  }, [email, password]);
+  /// function login
+  const handleSubmit = () => {
+    SubmitSignIn(
+      email,
+      password,
+      setemailerr,
+      setpasserr,
+      navigation,
+      dispatch,
+      setaccerr
+    );
+  };
   return (
     <View
       style={{
@@ -87,17 +94,12 @@ const SinginForm: React.FC<Prop> = ({
     >
       {/* Gmail */}
       <View style={{ position: "relative" }}>
-        <Text style={{ fontSize: 20, color: "red" }}>Gmail:</Text>
+        <Text style={styles.label}>E-mail:</Text>
         {emailerr && (
           <Text style={styles.errormesss}>* Email cannot be empty</Text>
         )}
         <TextInput
-          style={{
-            height: 30,
-            borderBottomWidth: 1,
-            marginBottom: 20,
-            borderBottomColor: "#ccc",
-          }}
+          style={styles.input}
           placeholder="Enter your gmail"
           onChangeText={changeEmail}
           value={email}
@@ -110,39 +112,25 @@ const SinginForm: React.FC<Prop> = ({
       </View>
       {/* Password */}
       <View style={{ position: "relative" }}>
-        <Text style={{ fontSize: 20, color: "red" }}>Password:</Text>
+        <Text style={styles.label}>Password:</Text>
         {passerr && (
           <Text style={styles.errormesss}>* Password cannot be empty</Text>
         )}
         <TextInput
-          style={{
-            height: 30,
-            borderBottomWidth: 1,
-            borderBottomColor: "#ccc",
-          }}
+          style={styles.input}
           placeholder="Enter your password"
           onChangeText={chagePass}
           value={password}
           secureTextEntry={show ? true : false}
         />
         <Text style={{ position: "absolute", right: 0, top: 30 }}>
-          {show ? (
-            <Ionicons
-              name={"eye-off"}
-              size={18}
-              onPress={() => {
-                setShow(!show);
-              }}
-            />
-          ) : (
-            <Ionicons
-              name={"eye"}
-              size={18}
-              onPress={() => {
-                setShow(!show);
-              }}
-            />
-          )}
+          <Ionicons
+            name={show ? "eye-off" : "eye"}
+            size={18}
+            onPress={() => {
+              setShow(!show);
+            }}
+          />
         </Text>
       </View>
       {/* Forgot pass */}
@@ -154,7 +142,14 @@ const SinginForm: React.FC<Prop> = ({
           height: 20,
         }}
       >
-        <Text style={{ fontSize: 18, position: "absolute", right: 0 }}>
+        <Text
+          style={{
+            fontSize: 18,
+            position: "absolute",
+            right: 0,
+            color: "#F98A4F",
+          }}
+        >
           Forgot password?
         </Text>
       </View>
@@ -162,40 +157,24 @@ const SinginForm: React.FC<Prop> = ({
       <View style={{ marginTop: 10 }}>
         {accounterr && (
           <Text style={styles.invalidacc}>
-            {" "}
-            <Ionicons name={"warning-outline"} color={"red"} size={18} />
-            Something went wrong. Please try again
+            *Wrong email or password. Please try again!
           </Text>
         )}
       </View>
       {/* Button submit */}
       <View style={{ display: "flex", alignItems: "center", marginTop: 80 }}>
-        <TouchableOpacity
-          style={{
-            borderRadius: 50,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            height: 60,
-          }}
-          onPress={() => SubmitSignin()}
-        >
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           <LinearGradient
-            colors={["#D10030", "#4B1832"]}
+            colors={["#F98A4F", "#FCA64F"]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
-            style={{
-              backgroundColor: "#6807e3",
-              borderRadius: 50,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "100%",
-              height: 60,
-            }}
+            style={styles.linearbutton}
           >
-            <Text style={{ color: "#fff", fontSize: 30 }}>SIGN IN</Text>
+            <Text
+              style={{ color: "#fff", fontFamily: "Nunito-Bold", fontSize: 30 }}
+            >
+              SIGN IN
+            </Text>
           </LinearGradient>
         </TouchableOpacity>
       </View>
@@ -214,6 +193,7 @@ const SinginForm: React.FC<Prop> = ({
             right: 0,
             fontSize: 16,
             color: "#8F9090",
+            fontFamily: "Nunito-semiBold",
           }}
         >
           Don't have account?
@@ -224,6 +204,7 @@ const SinginForm: React.FC<Prop> = ({
             position: "absolute",
             right: 0,
             bottom: 0,
+            fontFamily: "Nunito-Bold",
           }}
           onPress={navigateToSignup}
         >

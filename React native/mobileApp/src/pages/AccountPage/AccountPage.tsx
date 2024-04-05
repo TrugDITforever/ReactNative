@@ -20,6 +20,11 @@ const styles = StyleSheet.create({
     with: "100%",
     height: "100%",
   },
+  titleText: {
+    fontSize: 36,
+    fontFamily: "Nunito-Bold",
+    color: "#fff",
+  },
 });
 interface Props {
   navigation: any;
@@ -39,7 +44,7 @@ const AccountPage: React.FC<Props> = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        colors={["#D10030", "#4B1832"]}
+        colors={["#F98A4F", "#FCA64F"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         style={styles.container}
@@ -60,25 +65,20 @@ const AccountPage: React.FC<Props> = ({ navigation }) => {
                 marginLeft: 5,
               }}
             >
-              <Text
-                style={{ fontSize: 36, fontWeight: "500", color: "#fff" }}
-                onPress={() => navigation.navigate("Intro")}
-              >
-                Hello Sign in!
-              </Text>
+              <Text style={styles.titleText}>Hello Sign in!</Text>
             </View>
           ) : (
             <View
               style={{
                 height: "100%",
-                width: "47%",
+                width: "40%",
                 alignItems: "center",
                 justifyContent: "center",
-                marginLeft: 20,
+                marginLeft: 5,
               }}
             >
               <Text
-                style={{ fontSize: 36, fontWeight: "500", color: "#fff" }}
+                style={styles.titleText}
                 onPress={() => navigation.navigate("Intro")}
               >
                 Create Your Account!
@@ -101,7 +101,6 @@ const AccountPage: React.FC<Props> = ({ navigation }) => {
             <SigninForm
               navigation={navigation}
               navigateToSignup={navigateToSignup}
-              // userinfo={userinfo}
               dispatch={dispatch}
             />
           ) : (

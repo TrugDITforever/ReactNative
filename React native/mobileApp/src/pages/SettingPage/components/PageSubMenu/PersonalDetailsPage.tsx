@@ -9,7 +9,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import Userinfo from "../Userinfo";
+import Userinfo from "../../../UserProfile/components/Userinfo";
 
 const PageDetails = () => {
   const user = useSelector((state: any) => state.userinfo);
@@ -21,7 +21,7 @@ const PageDetails = () => {
   const [profilePicture, setProfilePicture] = useState(null);
   return (
     <View style={styles.container}>
-      <View style={{ marginLeft: 15, marginRight: 15, marginTop: "10%" }}>
+      <View style={{ marginLeft: 15, marginRight: 15 }}>
         <Userinfo />
       </View>
       <View style={styles.formcontainer}>

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, Image, ImageBackground, Video } from "react-native";
+import { View, Text, Image, } from "react-native";
 const FoodimgName = () => {
   return (
     <View>
@@ -26,7 +26,7 @@ const FoodimgName = () => {
         </View>
       </View>
       {/* Food's name */}
-      <View style={{ margin: 10 }}>
+      <View style={{ margin: 15 }}>
         <Text style={{ fontFamily: "Nunito-Bold", fontSize: 22 }}>
           Grilled Salmon with Lemon Herb Butter
         </Text>

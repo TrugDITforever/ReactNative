@@ -1,9 +1,16 @@
 import * as React from "react";
 import { Button, Text, View } from "react-native";
-export default function Details({ navigation }) {
+
+interface Prop {
+  navigation: any;
+}
+
+export default function Details(props: Prop) {
+  const { navigation } = props;
+
   return (
     <View style={{ flex: 1, alignItems: "center" }}>
-      <Button title="goback Home" onPress={() => navigation.goBack()} />
+      <Button title="Go back Home" onPress={() => navigation.goBack()} />
       <Text>lkdfhgjkdfh</Text>
     </View>
   );

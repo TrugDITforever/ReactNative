@@ -17,8 +17,8 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import SearchInput from "./components/SearchInput";
 import SearchedList from "./components/SearchedList";
 import SearchResults from "./components/SearchResults";
+import Statusbar from "../../components/Statusbar/Statusbar";
 
-const Separator = () => <View style={styles.separator} />;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -35,11 +35,14 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
   },
 });
-const SearchPage = ({ navigation }) => {
+interface Prop {
+  navigation: any;
+}
+const SearchPage: React.FC<Prop> = ({ navigation }) => {
   const [onload, setonload] = React.useState(false);
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle={"light-content"} />
+      <Statusbar />
       <View style={{ width: "100%", height: "100%" }}>
         <View style={{ flexDirection: "row", margin: 10 }}>
           <View

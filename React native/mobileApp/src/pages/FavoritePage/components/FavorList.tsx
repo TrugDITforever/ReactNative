@@ -67,12 +67,17 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
   },
 });
-const CollectionsCard = ({ navigation }) => {
+
+interface Prop {
+  navigation: any;
+}
+
+const CollectionsCard: React.FC<Prop> = ({ navigation }) => {
   const screenWidth = Dimensions.get("window");
   const [liked, setlike] = React.useState(
     Array.from({ length: 5 }, () => true)
   );
-  const handlePress = React.useCallback((index) => {
+  const handlePress = React.useCallback((index: number) => {
     setlike((prevLiked) => {
       const newLikes = [...prevLiked];
       newLikes[index] = !newLikes[index];

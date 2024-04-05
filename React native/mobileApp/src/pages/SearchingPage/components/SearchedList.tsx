@@ -1,9 +1,32 @@
 import * as React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ViewStyle,
+  TextStyle,
+} from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+
+interface ListSearchItem {
+  listtext: string;
+  isselected: boolean;
+}
+
+interface Styles {
+  listContainer: ViewStyle;
+  textcontain: ViewStyle;
+  text: TextStyle;
+  ischosse: {
+    backgroundColor: ViewStyle;
+    textcolor: TextStyle;
+  };
+}
+
 const styles = StyleSheet.create({
   listContainer: {
-    width: " 100%",
+    width: "100%",
     height: 35,
     flexDirection: "row",
     marginTop: 10,
@@ -22,19 +45,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingLeft: 5,
   },
-  ischosse: {
-    backGround: {
-      backgroundColor: "#000",
-    },
-    textcolor: {
-      color: "#fff",
-    },
+  ischossebackgroundColor: {
+    backgroundColor: "#FE724C",
+  },
+  ischossetextcolor: {
+    color: "#fff",
   },
 });
-const SearchedList = () => {
-  const [ischoose, setischoose] = React.useState(true);
 
-  const [listSearch, setlist] = React.useState([
+const SearchedList: React.FC = () => {
+  const [listSearch, setList] = React.useState<ListSearchItem[]>([
     {
       listtext: "Popular",
       isselected: true,
@@ -48,13 +68,15 @@ const SearchedList = () => {
       isselected: false,
     },
   ]);
-  const onclickselected = (index) => {
+
+  const onclickselected = (index: number) => {
     const newlist = listSearch.map((item, i) => ({
       ...item,
       isselected: i === index,
     }));
-    setlist(newlist);
+    setList(newlist);
   };
+
   return (
     <View style={{ height: "4%" }}>
       <View style={styles.listContainer}>
@@ -63,7 +85,7 @@ const SearchedList = () => {
             key={index}
             style={[
               styles.textcontain,
-              value.isselected ? styles.ischosse.backGround : "",
+              value.isselected ? styles.ischossebackgroundColor : {},
             ]}
           >
             <TouchableOpacity
@@ -74,7 +96,7 @@ const SearchedList = () => {
               <Text
                 style={[
                   styles.text,
-                  value.isselected ? styles.ischosse.textcolor : "",
+                  value.isselected ? styles.ischossetextcolor : {},
                 ]}
               >
                 {value.listtext}
@@ -86,4 +108,5 @@ const SearchedList = () => {
     </View>
   );
 };
+
 export default SearchedList;

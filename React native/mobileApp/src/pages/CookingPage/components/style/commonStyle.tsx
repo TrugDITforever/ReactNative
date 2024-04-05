@@ -4,7 +4,7 @@ export const commonStyles = StyleSheet.create({
   containerFordetails: {
     marginLeft: 15,
     marginTop: 15,
-    marginRight: 10,
+    marginRight: 15,
   },
   headerTextcontain: {
     backgroundColor: "#000",
@@ -17,7 +17,6 @@ export const commonStyles = StyleSheet.create({
     flexDirection: "row",
     alignSelf: "flex-start",
     paddingTop: 5,
-    paddingBottom: 5,
     paddingBottom: 5,
     paddingLeft: 15,
     paddingRight: 15,

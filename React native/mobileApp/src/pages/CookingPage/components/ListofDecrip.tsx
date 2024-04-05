@@ -1,6 +1,11 @@
 import { View, Text } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-const ListofDecrip = ({ nameIcon, text }) => {
+
+interface Prop {
+  nameIcon: string;
+  text?: string;
+}
+export const ListofDecrip: React.FC<Prop> = ({ nameIcon, text }) => {
   return (
     <View>
       <View
@@ -8,7 +13,7 @@ const ListofDecrip = ({ nameIcon, text }) => {
           width: " 100%",
           height: 35,
           flexDirection: "row",
-          marginLeft: 10,
+          marginRight: 10,
           marginTop: 10,
         }}
       >
@@ -43,4 +48,40 @@ const ListofDecrip = ({ nameIcon, text }) => {
     </View>
   );
 };
-export default ListofDecrip;
+export const ListofOwnerAndCountry: React.FC = () => {
+  return (
+    <View
+      style={{
+        width: " 100%",
+        height: 30,
+        flexDirection: "row",
+        margin: 15,
+      }}
+    >
+      <View
+        style={{
+          backgroundColor: "#f8f8f8",
+          borderRadius: 20,
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "row",
+          paddingLeft: 5,
+          paddingRight: 10,
+          elevation: 2,
+          shadowColor: "#000",
+        }}
+      >
+        <Ionicons name="earth" size={18} />
+        <Text
+          style={{
+            paddingLeft: 5,
+            fontFamily: "Nunito-Medium",
+            fontSize: 16,
+          }}
+        >
+          {""}Japan
+        </Text>
+      </View>
+    </View>
+  );
+};
