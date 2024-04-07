@@ -10,24 +10,29 @@ import {
 } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import commonStyle from "./commonstyles/style";
 
 export const styles = StyleSheet.create({
   container: {
     width: "100%",
-    marginBottom: 20,
+    height: "88%",
   },
   backgroundImage: {
     resizeMode: "cover",
     position: "absolute",
     width: "100%",
     height: "100%",
-    borderRadius: 10,
+  },
+  flexCard: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    display: "flex",
+    justifyContent: "space-between",
   },
   cardContain: {
-    width: 250,
-    height: 400,
-    marginLeft: 15,
-    position: "relative",
+    width: "33%",
+    height: 180,
+    marginBottom: 2,
   },
   marginLastIndex: {
     marginRight: 10,
@@ -46,106 +51,49 @@ export const styles = StyleSheet.create({
     color: "#fff",
     paddingLeft: 5,
   },
-  buttonlike: {
-    width: 35,
-    height: 35,
-    backgroundColor: "#fff",
-    borderRadius: 50,
-    justifyContent: "center",
-    alignItems: "center",
-  },
   containerForNameofFood: {
     position: "absolute",
     bottom: 0,
-    margin: 15,
-  },
-  textNameFood: {
-    borderRadius: 10,
-    fontSize: 20,
-    fontFamily: "Nunito-Bold",
-    color: "#fff",
-  },
-  boxword: {
-    display: "flex",
-    width: "100%",
-    flexDirection: "row",
-    marginBottom: 10,
-  },
-  textbox: {
-    fontFamily: "Nunito-Bold",
-    fontSize: 18,
-    fontWeight: "600",
-    width: "77%",
-    marginLeft: 15,
-  },
-  textViewall: {
-    fontSize: 14,
-    textAlign: "center",
-    alignItems: "center",
-    paddingRight: 10,
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingLeft: 10,
-    borderRadius: 10,
-    fontFamily: "Nunito-Medium",
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "rgba(0,0,0,0.2)",
-    borderRadius: 10,
   },
 });
-const CollectionsCard = ({ navigation }) => {
+interface Prop {
+  navigation: any;
+}
+const PostCard: React.FC<Prop> = ({ navigation }) => {
   const screenWidth = Dimensions.get("window");
   const [liked, setlike] = React.useState(
-    Array.from({ length: 5 }, () => false)
+    Array.from({ length: 18 }, () => false)
   );
-  const handlePress = React.useCallback((index) => {
-    setlike((prevLiked) => {
-      const newLikes = [...prevLiked];
-      newLikes[index] = !newLikes[index];
-      return newLikes;
-    });
-  }, []);
   return (
     <View style={styles.container}>
-      <View style={styles.boxword}>
-        <Text style={styles.textbox}>Recommended for you</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Viewall")}>
-          <Text style={styles.textViewall}>View All</Text>
-        </TouchableOpacity>
-      </View>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {Array.from({ length: 5 }).map((value, index) => (
-          <View key={index}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.flexCard}>
+          {liked.map((value, index) => (
             <TouchableOpacity
-              style={[
-                styles.cardContain,
-                [index === liked.length - 1 ? styles.marginLastIndex : ""],
-              ]}
+              key={index}
+              style={styles.cardContain}
               onPress={() => {
                 navigation.navigate("Cooking");
               }}
               activeOpacity={1}
             >
               <Image
-                source={require("../../../../../assets/image/food.jpg")}
+                source={require("../../../../assets/image/pasta.jpg")}
                 style={styles.backgroundImage}
               />
               <View style={styles.overlay} />
               {/* name of food */}
               <View style={styles.containerForNameofFood}>
-                <View style={{ width: "70%" }}>
-                  <Text numberOfLines={2} style={styles.textNameFood}>
-                    Sausage and cheese egg casserole
-                  </Text>
-                </View>
                 {/* container for star and like button */}
                 <View
                   style={{
                     flexDirection: "row",
                     alignItems: "center",
-                    justifyContent: "center",
+                    padding: 5,
                   }}
                 >
                   <View style={styles.containerForRatingandLike}>
@@ -176,25 +124,13 @@ const CollectionsCard = ({ navigation }) => {
                       </View>
                     </View>
                   </View>
-                  <View style={styles.buttonlike}>
-                    <TouchableOpacity
-                      style={styles.buttonlike}
-                      onPress={() => handlePress(index)}
-                    >
-                      {liked[index] ? (
-                        <Ionicons name={"heart"} size={25} color={"red"} />
-                      ) : (
-                        <Ionicons name={"heart-outline"} size={25} />
-                      )}
-                    </TouchableOpacity>
-                  </View>
                 </View>
               </View>
             </TouchableOpacity>
-          </View>
-        ))}
+          ))}
+        </View>
       </ScrollView>
     </View>
   );
 };
-export default CollectionsCard;
+export default PostCard;

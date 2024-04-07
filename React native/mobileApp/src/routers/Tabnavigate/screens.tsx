@@ -2,7 +2,7 @@ import "react-native-gesture-handler";
 import React from "react";
 import HomePage from "../../pages/Homepage/HomePage";
 import Intropage from "../../pages/IntroPage/Intropage";
-import AccountPage from "../../pages/AccountPage/AccountPage";
+import AccountPage from "../../pages/AccountPage";
 import UserProfile from "../../pages/UserProfile/UserProfile";
 import FavoritePage from "../../pages/FavoritePage/Collections";
 import SearchPage from "../../pages/SearchingPage/SearchPage";

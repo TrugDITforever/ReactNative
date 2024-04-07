@@ -2,7 +2,7 @@ import "react-native-gesture-handler";
 import React, { useState } from "react";
 import * as Font from "expo-font";
 import Intropage from "../../pages/IntroPage/Intropage";
-import AccountPage from "../../pages/AccountPage/AccountPage";
+import AccountPage from "../../pages/AccountPage/index";
 import SettingPage from "../../pages/SettingPage/SettingPage";
 import CookingPage from "../../pages/CookingPage/CookingPage";
 import PageViewall from "../../pages/PageViewall/components/PageViewall";

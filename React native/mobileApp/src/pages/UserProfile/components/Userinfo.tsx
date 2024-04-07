@@ -12,19 +12,21 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: "auto",
   },
   userinfoContainer: {
     width: "100%",
     height: "auto",
     borderRadius: 10,
-    marginTop: "15%",
+    marginTop: "10%",
     alignItems: "center",
   },
-  imageContainer: {},
-  image: {
+  imageContainer: {
     width: 110,
     height: 110,
+  },
+  image: {
+    width: "100%",
+    height: "100%",
     borderWidth: 2,
     borderColor: "#ccc",
     borderRadius: 60,
@@ -48,7 +50,7 @@ const Userinfo = () => {
         <View style={styles.imageContainer}>
           <Image
             style={styles.image}
-            source={require("../../../../assets/image/porkrice.jpg")}
+            source={require("../../../assets/image/default-image.jpg")}
           ></Image>
         </View>
         <View style={{ alignItems: "center" }}>

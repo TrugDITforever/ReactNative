@@ -1,0 +1,10 @@
+const express = require("express");
+const userController = require("../controller/userActionController/userLoginController");
+const adminController = require("../controller/adminActionController/getFoodDataController");
+const commonController = require("../controller/getFoodByIdController");
+const router = express.Router();
+router.use(express.json());
+router.post("/v1/checkuser", userController.userLogin);
+router.get("/v1/fetchFood", adminController.fetchfoodData);
+router.post("/v1/getFoodbyID", commonController.getFoodById);
+module.exports = router;

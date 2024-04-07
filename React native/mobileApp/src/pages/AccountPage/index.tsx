@@ -1,20 +1,9 @@
 import * as React from "react";
-import {
-  View,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  Button,
-  Image,
-  TouchableOpacity,
-  TouchableOpacityBase,
-  TextInput,
-} from "react-native";
+import { View, SafeAreaView, StyleSheet, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import SigninForm from "../../components/Form/FormSignin";
-import SignupForm from "../../components/Form/FormSignup";
+import SigninForm from "./FormSignin";
+import SignupForm from "./FormSignup";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 const styles = StyleSheet.create({
   container: {
     with: "100%",
@@ -24,6 +13,20 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontFamily: "Nunito-Bold",
     color: "#fff",
+  },
+  containForm: {
+    height: "80%",
+    width: "100%",
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    backgroundColor: "#fff",
+  },
+  textHeader: {
+    height: "100%",
+    width: "40%",
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 5,
   },
 });
 interface Props {
@@ -56,27 +59,11 @@ const AccountPage: React.FC<Props> = ({ navigation }) => {
           }}
         >
           {showSignin ? (
-            <View
-              style={{
-                height: "100%",
-                width: "40%",
-                alignItems: "center",
-                justifyContent: "center",
-                marginLeft: 5,
-              }}
-            >
+            <View style={styles.textHeader}>
               <Text style={styles.titleText}>Hello Sign in!</Text>
             </View>
           ) : (
-            <View
-              style={{
-                height: "100%",
-                width: "40%",
-                alignItems: "center",
-                justifyContent: "center",
-                marginLeft: 5,
-              }}
-            >
+            <View style={styles.textHeader}>
               <Text
                 style={styles.titleText}
                 onPress={() => navigation.navigate("Intro")}
@@ -87,15 +74,7 @@ const AccountPage: React.FC<Props> = ({ navigation }) => {
           )}
         </View>
         {/* View for Form Sign in and Sign up */}
-        <View
-          style={{
-            height: "80%",
-            width: "100%",
-            borderTopLeftRadius: 50,
-            borderTopRightRadius: 50,
-            backgroundColor: "#fff",
-          }}
-        >
+        <View style={styles.containForm}>
           {/* Form signup and login */}
           {showSignin ? (
             <SigninForm

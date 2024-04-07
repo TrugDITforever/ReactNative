@@ -1,16 +1,10 @@
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import React, { Component } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import AntDesign from "react-native-vector-icons/AntDesign";
 const styles = StyleSheet.create({
   buttonBackandLike: {
-    width: 40,
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#FFFFFF",
     borderRadius: 50,
-    elevation: 2,
-    shadowColor: "#000",
   },
   containIconBack: {
     position: "absolute",
@@ -24,19 +18,23 @@ interface Prop {
 const HeadervsButtonBack: React.FC<Prop> = ({ isShown, navigation }) => {
   return (
     <View>
-      <View style={{ flexDirection: "row", margin: 15 }}>
+      <View style={{ flexDirection: "row", margin: 15, alignItems: "center" }}>
         <View style={{}}>
           <TouchableOpacity
             style={styles.buttonBackandLike}
             onPress={() => navigation.goBack()}
           >
-            <Ionicons name="arrow-back" size={24} />
+            <View>
+              <AntDesign name="arrowleft" size={24} />
+            </View>
           </TouchableOpacity>
         </View>
         {isShown && (
           <View style={styles.containIconBack}>
             <TouchableOpacity style={styles.buttonBackandLike}>
-              <Ionicons name={"heart-outline"} size={24} />
+              <View style={{ padding: 10 }}>
+                <Ionicons name={"heart-outline"} size={24} />
+              </View>
             </TouchableOpacity>
           </View>
         )}

@@ -1,13 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 interface User {
-  name: string;
+  id: number;
+  name?: string;
+  userimage?: string;
   username: string;
   password: string;
   email: string;
-  decription: string;
+  decription?: string;
 }
 const initialState: User = {
+  id: 1,
   name: "Quang Trung",
+  userimage:"",
   username: "TrungQ",
   password: "123",
   email: "dotrung1512@gmail.com",
@@ -22,7 +26,6 @@ export const userinfo = createSlice({
         ...state,
         name: action.payload.name,
         email: action.payload.email,
-        password: action.payload.password,
       };
     },
     updateName: (state, action) => {

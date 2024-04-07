@@ -1,58 +1,19 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState } from "react";
 import {
   Text,
   TextInput,
   TouchableOpacity,
   View,
-  Modal,
   StyleSheet,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
-import { updateUser } from "../../Redux/user";
-import { SubmitSignIn } from "../../utils/Login";
+import { SubmitSignIn } from "../../features/authentication/submitSignin";
 interface PropsForLogin {
   navigation: any;
   dispatch: any;
   navigateToSignup: () => void;
 }
-const styles = StyleSheet.create({
-  errormesss: {
-    color: "red",
-  },
-  invalidacc: {
-    color: "red",
-    fontSize: 18,
-  },
-  input: {
-    height: 30,
-    borderBottomWidth: 1,
-    marginBottom: 20,
-    borderBottomColor: "#ccc",
-  },
-  label: {
-    fontSize: 20,
-    fontFamily: "Nunito-Medium",
-    color: "#F98A4F",
-  },
-  button: {
-    borderRadius: 50,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: 60,
-  },
-  linearbutton: {
-    backgroundColor: "#6807e3",
-    borderRadius: 50,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: 60,
-  },
-});
 const SinginForm: React.FC<PropsForLogin> = ({
   navigateToSignup,
   dispatch,
@@ -84,14 +45,7 @@ const SinginForm: React.FC<PropsForLogin> = ({
     );
   };
   return (
-    <View
-      style={{
-        height: "90%",
-        marginTop: 90,
-        marginLeft: 30,
-        marginRight: 30,
-      }}
-    >
+    <View style={styles.container}>
       {/* Gmail */}
       <View style={{ position: "relative" }}>
         <Text style={styles.label}>E-mail:</Text>
@@ -125,7 +79,7 @@ const SinginForm: React.FC<PropsForLogin> = ({
         />
         <Text style={{ position: "absolute", right: 0, top: 30 }}>
           <Ionicons
-            name={show ? "eye-off" : "eye"}
+            name={show ? "eye" : "eye-off"}
             size={18}
             onPress={() => {
               setShow(!show);
@@ -215,3 +169,46 @@ const SinginForm: React.FC<PropsForLogin> = ({
   );
 };
 export default SinginForm;
+const styles = StyleSheet.create({
+  container: {
+    height: "90%",
+    marginTop: 90,
+    marginLeft: 30,
+    marginRight: 30,
+  },
+  errormesss: {
+    color: "red",
+  },
+  invalidacc: {
+    color: "red",
+    fontSize: 18,
+  },
+  input: {
+    height: 30,
+    borderBottomWidth: 1,
+    marginBottom: 20,
+    borderBottomColor: "#ccc",
+  },
+  label: {
+    fontSize: 20,
+    fontFamily: "Nunito-Medium",
+    color: "#F98A4F",
+  },
+  button: {
+    borderRadius: 50,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: 60,
+  },
+  linearbutton: {
+    backgroundColor: "#6807e3",
+    borderRadius: 50,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: 60,
+  },
+});

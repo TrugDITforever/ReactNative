@@ -1,9 +1,9 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const routercheck = require("./router/routecheckSignin");
+const router = require("./router");
 app.use(cors());
-app.use(routercheck);
+app.use(router);
 app.listen("8080", () => {
   console.log("server is running");
 });

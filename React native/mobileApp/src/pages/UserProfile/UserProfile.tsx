@@ -4,6 +4,7 @@ import Userinfo from "./components/Userinfo";
 import ListMenu from "../SettingPage/components/ListMenu";
 import Statusbar from "../../components/Statusbar/Statusbar";
 import { HamburgerNav } from "./components/HamburgreNav/HamburgerNav";
+import PostCard from "./components/PostCard";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -27,8 +28,8 @@ const UserProfile: React.FC<Prop> = ({ navigation }) => {
           <Userinfo />
         </View>
         {/* Post of User will be showed here */}
-        <View style={{ marginLeft: 15, marginRight: 15, marginTop: "30%" }}>
-    
+        <View style={{ marginTop: "15%" }}>
+          <PostCard navigation={navigation} />
         </View>
       </View>
     </SafeAreaView>

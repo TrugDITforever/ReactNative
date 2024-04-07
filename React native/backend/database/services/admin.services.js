@@ -1,8 +1,8 @@
-const database = require("./database");
+const database = require("../database");
 
-/// get all user information
-const getUser = (callback) => {
-  const queryText = "SELECT * FROM useracc";
+//get all the food items
+const fetchFoodData = (callback) => {
+  const queryText = " SELECT * FROM food LIMIT 5";
   database.connection.query(queryText, function (err, result) {
     if (result.length > 0) {
       callback(null, result);
@@ -12,5 +12,5 @@ const getUser = (callback) => {
   });
 };
 module.exports = {
-  getUser,
+  fetchFoodData,
 };

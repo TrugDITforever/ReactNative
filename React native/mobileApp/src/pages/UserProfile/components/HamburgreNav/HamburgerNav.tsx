@@ -1,6 +1,6 @@
 import { Text, TouchableOpacity, View, StyleSheet } from "react-native";
 import React, { Component } from "react";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import Feather from "react-native-vector-icons/Feather";
 interface Prop {
   navigation: any;
 }
@@ -11,7 +11,7 @@ export const HamburgerNav: React.FC<Prop> = ({ navigation }) => {
         style={styles.button}
         onPress={() => navigation.navigate("Settings")}
       >
-        <Ionicons name="menu" size={30} />
+        <Feather name="menu" size={30} />
       </TouchableOpacity>
     </View>
   );

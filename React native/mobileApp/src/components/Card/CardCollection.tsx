@@ -1,18 +1,16 @@
 import * as React from "react";
 import {
   Image,
-  ScrollView,
   StyleSheet,
   Text,
   View,
   Dimensions,
   TouchableOpacity,
-  ViewStyle,
 } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { usefetchFoodByID } from "../../features/authentication/hooks/useFetchFoodById";
 const styles = StyleSheet.create({
   container: {
     width: "100%",
@@ -57,17 +55,6 @@ const styles = StyleSheet.create({
   marginLastIndex: {
     marginRight: 15,
   },
-  textViewall: {
-    fontSize: 13,
-    textAlign: "center",
-    alignItems: "center",
-    paddingRight: 10,
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingLeft: 10,
-    borderRadius: 10,
-    fontFamily: "Nunito-Regular",
-  },
   containerForRatingandLike: {
     display: "flex",
     flexDirection: "row",
@@ -99,9 +86,22 @@ const styles = StyleSheet.create({
   },
 });
 interface Prop {
-  navigation: any;
+  navigation?: any;
+  image?: string;
+  nameofFood?: string;
+  index: number;
+  foodId: number;
+  key?: number;
+  dispatch?: any;
 }
-const CardCollections: React.FC<Prop> = ({ navigation }) => {
+const CardCollections: React.FC<Prop> = ({
+  navigation,
+  image,
+  index,
+  foodId,
+  nameofFood,
+  dispatch,
+}) => {
   const screenWidth = Dimensions.get("window");
   const [liked, setlike] = React.useState(
     Array.from({ length: 8 }, () => false)
@@ -113,89 +113,77 @@ const CardCollections: React.FC<Prop> = ({ navigation }) => {
       return newLikes;
     });
   }, []);
+  const getFoodByID = (id: number) => {
+    usefetchFoodByID(id, navigation, dispatch);
+  };
   return (
-    <View style={[styles.container]}>
-      <View style={styles.boxword}>
-        <Text style={styles.textbox}>Healthy recipes</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Viewall")}>
-          <Text style={styles.textViewall}>View All</Text>
-        </TouchableOpacity>
-      </View>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {liked.map((value: any, index: number) => (
-          <View
-            key={index}
-            style={[
-              styles.cardContainBorder,
-              [index === liked.length - 1 ? styles.marginLastIndex : {}],
-            ]}
-          >
-            <TouchableOpacity
-              style={styles.cardContain}
-              onPress={() => {
-                navigation.navigate("Cooking");
-              }}
-              activeOpacity={1}
-            >
-              <View style={styles.cardContain}>
-                <Image
-                  source={require("../../assets/image/salmon.jpg")}
-                  style={styles.backgroundImage}
-                />
-                {/* rating and like button */}
-                <View style={styles.containerForRatingandLike}>
-                  {/* for button like */}
-                  <View>
-                    <View style={styles.buttonlike}>
-                      <TouchableOpacity onPress={() => handlePress(index)}>
-                        {liked[index] ? (
-                          <Ionicons name={"heart"} size={20} color={"red"} />
-                        ) : (
-                          <Ionicons name={"heart-outline"} size={20} />
-                        )}
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                </View>
-                {/* details of food */}
+    <View
+      style={[
+        styles.cardContainBorder,
+        [index === liked.length - 1 ? styles.marginLastIndex : {}],
+      ]}
+    >
+      <TouchableOpacity
+        style={styles.cardContain}
+        onPress={() => {
+          console.log(foodId);
+          usefetchFoodByID(foodId, navigation, dispatch);
+        }}
+        activeOpacity={1}
+      >
+        <View style={styles.cardContain}>
+          <Image source={{ uri: image }} style={styles.backgroundImage} />
+          {/* rating and like button */}
+          <View style={styles.containerForRatingandLike}>
+            {/* for button like */}
+            <View>
+              <View style={styles.buttonlike}>
+                <TouchableOpacity onPress={() => handlePress(index)}>
+                  {liked[index] ? (
+                    <Ionicons name={"heart"} size={20} color={"red"} />
+                  ) : (
+                    <Ionicons name={"heart-outline"} size={20} />
+                  )}
+                </TouchableOpacity>
               </View>
-              <View style={styles.containerForNameofFood}>
-                <Text numberOfLines={1} style={styles.textNameFood}>
-                  Veggie cheese extravaganza
-                </Text>
-                <Text style={styles.textRating}>
-                  <AntDesign name={"star"} color={"orange"} size={11} />
-                  <AntDesign name={"star"} color={"orange"} size={11} />
-                  <AntDesign name={"star"} color={"orange"} size={11} />
-                  <AntDesign name={"star"} color={"orange"} size={11} />
-                  <AntDesign name={"star"} color={"orange"} size={11} />
-                </Text>
-                <View style={{ flexDirection: "row", opacity: 0.8 }}>
-                  {/* calories */}
-                  <Text
-                    style={{
-                      width: "50%",
-                      fontFamily: "Nunito-Medium",
-                      padding: 5,
-                    }}
-                  >
-                    <FontAwesome5 name={"fire"} size={16} /> 123 calories
-                  </Text>
-                  {/* time cooking */}
-                  <Text
-                    style={{
-                      fontFamily: "Nunito-Medium",
-                      padding: 5,
-                    }}
-                  >
-                    <FontAwesome5 name={"clock"} size={16} /> 15-20 mins
-                  </Text>
-                </View>
-              </View>
-            </TouchableOpacity>
+            </View>
           </View>
-        ))}
-      </ScrollView>
+          {/* details of food */}
+        </View>
+        <View style={styles.containerForNameofFood}>
+          <Text numberOfLines={1} style={styles.textNameFood}>
+            {nameofFood} {foodId}
+          </Text>
+          <Text style={styles.textRating}>
+            <AntDesign name={"star"} color={"orange"} size={11} />
+            <AntDesign name={"star"} color={"orange"} size={11} />
+            <AntDesign name={"star"} color={"orange"} size={11} />
+            <AntDesign name={"star"} color={"orange"} size={11} />
+            <AntDesign name={"star"} color={"orange"} size={11} />
+          </Text>
+          <View style={{ flexDirection: "row", opacity: 0.8 }}>
+            {/* calories */}
+            <Text
+              style={{
+                width: "50%",
+                fontFamily: "Nunito-Medium",
+                padding: 5,
+              }}
+            >
+              <FontAwesome5 name={"fire"} size={16} /> 123 calories
+            </Text>
+            {/* time cooking */}
+            <Text
+              style={{
+                fontFamily: "Nunito-Medium",
+                padding: 5,
+              }}
+            >
+              <FontAwesome5 name={"clock"} size={16} /> 15-20 mins
+            </Text>
+          </View>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };

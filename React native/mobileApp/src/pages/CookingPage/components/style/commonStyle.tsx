@@ -7,7 +7,7 @@ export const commonStyles = StyleSheet.create({
     marginRight: 15,
   },
   headerTextcontain: {
-    backgroundColor: "#000",
+    backgroundColor: "#F98A4F",
     borderTopLeftRadius: 30,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 20,

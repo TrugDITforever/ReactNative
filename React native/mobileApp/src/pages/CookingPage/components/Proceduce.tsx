@@ -4,9 +4,9 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { commonStyles } from "./style/commonStyle";
 const Proceduce = () => {
-  const splitText = React.useCallback((text) => {
+  const splitText = React.useCallback((text: string): String[] => {
     return text.split(".");
-  });
+  },[1]);
   // Example usage:
   const text = `Peheat the grill to medium-high heat.Season the salmon fillets with salt and pepper.In a small bowl, mix together softened butter, minced herbs, and lemon juice.Grill the salmon fillets for about 4-5 minutes per side or until cooked through.During the last minute of grilling, spread the lemon herb butter over the salmon.Serve hot, garnished with additional fresh herbs if desired`;
   const resultSplitingredients = splitText(text);
