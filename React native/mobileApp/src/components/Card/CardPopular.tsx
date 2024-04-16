@@ -12,18 +12,7 @@ import {
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import commonStyle from "./commonstyles/style";
-
-interface Prop {
-  navigation?: any;
-  image?: string;
-  nameofFood?: string;
-  index: number;
-  foodId?: number;
-  key?: number;
-  dispatch?: any;
-}
+import { Prop } from "./commonProp";
 const CardPopular: React.FC<Prop> = ({
   navigation,
   image,
@@ -60,10 +49,7 @@ const CardPopular: React.FC<Prop> = ({
         activeOpacity={1}
       >
         <View style={styles.cardContain}>
-          <Image
-          source={{ uri: image }}
-            style={styles.backgroundImage}
-          />
+          <Image source={{ uri: image }} style={styles.backgroundImage} />
           {/* details of food */}
         </View>
         <View style={styles.containerForNameofFood}>
@@ -80,7 +66,7 @@ const CardPopular: React.FC<Prop> = ({
               }}
             >
               <Text numberOfLines={1} style={styles.textNameFood}>
-                Pasta & Pork
+                {nameofFood}
               </Text>
             </View>
             <View

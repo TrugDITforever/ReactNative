@@ -11,6 +11,101 @@ import {
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import commonStyle from "./commonstyles/style";
+import { usefetchFoodByID } from "../../features/authentication/hooks/useFetchFoodById";
+import { Prop } from "./commonProp";
+const CardRecipes: React.FC<Prop> = ({
+  navigation,
+  image,
+  index,
+  nameofFood,
+  foodId,
+  dispatch,
+}) => {
+  const screenWidth = Dimensions.get("window");
+  const [liked, setlike] = React.useState(
+    Array.from({ length: 5 }, () => false)
+  );
+  const handlePress = React.useCallback((index: number) => {
+    setlike((prevLiked) => {
+      const newLikes = [...prevLiked];
+      newLikes[index] = !newLikes[index];
+      return newLikes;
+    });
+  }, []);
+  return (
+    <View key={index}>
+      <TouchableOpacity
+        style={[
+          styles.cardContain,
+          [index === liked.length - 1 ? styles.marginLastIndex : {}],
+        ]}
+        onPress={() =>  usefetchFoodByID(foodId, navigation, dispatch)}
+        activeOpacity={1}
+      >
+        <Image source={{ uri: image }} style={styles.backgroundImage} />
+        <View style={styles.overlay} />
+        {/* name of food */}
+        <View style={styles.containerForNameofFood}>
+          <View style={{ width: "70%" }}>
+            <Text numberOfLines={2} style={styles.textNameFood}>
+              {nameofFood}
+            </Text>
+          </View>
+          {/* container for star and like button */}
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <View style={styles.containerForRatingandLike}>
+              {/* rating, level, love */}
+              <View style={styles.ratingContain}>
+                {/* for rating */}
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    paddingRight: 10,
+                  }}
+                >
+                  <AntDesign name={"star"} color={"#fff"} size={11} />
+                  <Text style={styles.textRating}>4.5</Text>
+                </View>
+                {/* for like */}
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <AntDesign name={"heart"} color={"#fff"} size={11} />
+                  <Text style={styles.textRating}>273k</Text>
+                </View>
+              </View>
+            </View>
+            <View style={styles.buttonlike}>
+              <TouchableOpacity
+                style={styles.buttonlike}
+                onPress={() => handlePress(index)}
+              >
+                {liked[index] ? (
+                  <Ionicons name={"heart"} size={25} color={"red"} />
+                ) : (
+                  <Ionicons name={"heart-outline"} size={25} />
+                )}
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
+};
+export default CardRecipes;
 
 export const styles = StyleSheet.create({
   container: {
@@ -97,105 +192,3 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
   },
 });
-interface Prop {
-  navigation?: any;
-  image?: string;
-  nameofFood?: string;
-  index: number;
-  foodId?: number;
-  key?: number;
-  dispatch?: any;
-}
-const CardRecipes: React.FC<Prop> = ({
-  navigation,
-  image,
-  index,
-  nameofFood,
-}) => {
-  const screenWidth = Dimensions.get("window");
-  const [liked, setlike] = React.useState(
-    Array.from({ length: 5 }, () => false)
-  );
-  const handlePress = React.useCallback((index: number) => {
-    setlike((prevLiked) => {
-      const newLikes = [...prevLiked];
-      newLikes[index] = !newLikes[index];
-      return newLikes;
-    });
-  }, []);
-  return (
-    <View key={index}>
-      <TouchableOpacity
-        style={[
-          styles.cardContain,
-          [index === liked.length - 1 ? styles.marginLastIndex : {}],
-        ]}
-        onPress={() => {
-          navigation.navigate("Cooking");
-        }}
-        activeOpacity={1}
-      >
-        <Image source={{ uri: image }} style={styles.backgroundImage} />
-        <View style={styles.overlay} />
-        {/* name of food */}
-        <View style={styles.containerForNameofFood}>
-          <View style={{ width: "70%" }}>
-            <Text numberOfLines={2} style={styles.textNameFood}>
-              Sausage and cheese egg casserole
-            </Text>
-          </View>
-          {/* container for star and like button */}
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <View style={styles.containerForRatingandLike}>
-              {/* rating, level, love */}
-              <View style={styles.ratingContain}>
-                {/* for rating */}
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    paddingRight: 10,
-                  }}
-                >
-                  <AntDesign name={"star"} color={"#fff"} size={11} />
-                  <Text style={styles.textRating}>4.5</Text>
-                </View>
-                {/* for like */}
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <AntDesign name={"heart"} color={"#fff"} size={11} />
-                  <Text style={styles.textRating}>273k</Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.buttonlike}>
-              <TouchableOpacity
-                style={styles.buttonlike}
-                onPress={() => handlePress(index)}
-              >
-                {liked[index] ? (
-                  <Ionicons name={"heart"} size={25} color={"red"} />
-                ) : (
-                  <Ionicons name={"heart-outline"} size={25} />
-                )}
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </TouchableOpacity>
-    </View>
-  );
-};
-export default CardRecipes;

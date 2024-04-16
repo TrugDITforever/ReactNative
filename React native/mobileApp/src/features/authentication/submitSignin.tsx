@@ -18,12 +18,15 @@ export const SubmitSignIn = async (
     };
     try {
       loginUser(value.email, value.password).then((res) => {
-        console.log(res);
-        if (res.success) {
+        if (res) {
           const newValue = {
-            name: res.dataUser.username,
+            id: res.dataUser._id,
+            userimage: res.dataUser.profileImage,
+            username: res.dataUser.username,
+            name : res.dataUser.name,
             email: res.dataUser.email,
-            password: res.dataUser.password,
+            description : res.dataUser.description,
+
           };
           dispatch(updateUser(newValue));
           navigation.navigate("Details");

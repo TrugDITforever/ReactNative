@@ -1,13 +1,13 @@
 import axios from "axios";
 import { BASE_URL } from "../fixIp/ip";
 interface UserDataLogin {
-  id: number;
+  _id: string;
   name: string;
-  usernames: string;
+  username: string;
   email: string;
   password: string;
-  success: string;
   dataUser: any;
+  success: string;
 }
 export async function loginUser(
   email: string,

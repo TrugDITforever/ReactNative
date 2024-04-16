@@ -115,6 +115,7 @@ const CardDay: React.FC<Prop> = ({ Time, navigation, foodData, dispatch }) => {
           <Card
             Time={Time}
             key={index}
+            foodId={value.foodId}
             index={index}
             navigation={navigation}
             image={value.foodImage}

@@ -1,4 +1,5 @@
 const adminService = require("../../database/services/admin.services");
+
 exports.fetchfoodData = (req, res) => {
   adminService.fetchFoodData((err, rows) => {
     if (rows && rows.length > 0) {
@@ -11,5 +12,12 @@ exports.fetchfoodData = (req, res) => {
         success: false,
       });
     }
+  });
+};
+exports.fetchDataUser = (req, res) => {
+  Usermodel.find().then((user) => {
+    res.status(200).json({
+      UserData: user,
+    });
   });
 };

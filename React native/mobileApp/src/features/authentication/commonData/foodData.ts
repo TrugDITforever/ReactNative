@@ -1,12 +1,13 @@
 export interface FoodData {
-  foodId: number;
+  _id: String;
   foodName: string;
+  mealType: string;
   foodImage: string;
   calories: number;
   level: string;
   serves: number;
   description: string;
-  ingredients: string;
+  ingredients: string[];
   instruction: string;
   foodData: any;
 }

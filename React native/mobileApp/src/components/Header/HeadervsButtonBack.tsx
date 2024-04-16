@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 });
 interface Prop {
   isShown: boolean;
-  navigation: any;
+  navigation?: any;
 }
 const HeadervsButtonBack: React.FC<Prop> = ({ isShown, navigation }) => {
   return (

@@ -50,12 +50,14 @@ const Userinfo = () => {
         <View style={styles.imageContainer}>
           <Image
             style={styles.image}
-            source={require("../../../assets/image/default-image.jpg")}
+            source={{
+              uri: userinfo.userimage,
+            }}
           ></Image>
         </View>
         <View style={{ alignItems: "center" }}>
-          <Text style={styles.textName}>{userinfo.name}</Text>
-          <Text style={styles.description}>{userinfo.decription}</Text>
+          <Text style={styles.textName}>{userinfo.username}</Text>
+          <Text style={styles.description}>{userinfo.description}</Text>
         </View>
       </View>
     </View>

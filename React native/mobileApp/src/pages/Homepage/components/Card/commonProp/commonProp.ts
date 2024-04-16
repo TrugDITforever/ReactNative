@@ -1,5 +1,6 @@
 export interface Prop {
-  navigation: any;
-  foodData: any;
-  dispatch: any;
+  navigation?: any;
+  foodData?: any;
+  dispatch?: any;
+  image?: any;
 }

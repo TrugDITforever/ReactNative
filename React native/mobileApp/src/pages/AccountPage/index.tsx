@@ -4,31 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import SigninForm from "./FormSignin";
 import SignupForm from "./FormSignup";
 import { useDispatch, useSelector } from "react-redux";
-const styles = StyleSheet.create({
-  container: {
-    with: "100%",
-    height: "100%",
-  },
-  titleText: {
-    fontSize: 36,
-    fontFamily: "Nunito-Bold",
-    color: "#fff",
-  },
-  containForm: {
-    height: "80%",
-    width: "100%",
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
-    backgroundColor: "#fff",
-  },
-  textHeader: {
-    height: "100%",
-    width: "40%",
-    alignItems: "center",
-    justifyContent: "center",
-    marginLeft: 5,
-  },
-});
+
 interface Props {
   navigation: any;
 }
@@ -94,3 +70,28 @@ const AccountPage: React.FC<Props> = ({ navigation }) => {
   );
 };
 export default AccountPage;
+const styles = StyleSheet.create({
+  container: {
+    with: "100%",
+    height: "100%",
+  },
+  titleText: {
+    fontSize: 36,
+    fontFamily: "Nunito-Bold",
+    color: "#fff",
+  },
+  containForm: {
+    height: "80%",
+    width: "100%",
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    backgroundColor: "#fff",
+  },
+  textHeader: {
+    height: "100%",
+    width: "40%",
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 5,
+  },
+});

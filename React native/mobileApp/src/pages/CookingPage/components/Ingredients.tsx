@@ -1,20 +1,18 @@
 import * as React from "react";
 import { View, Text, FlatList } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import Octicons from "react-native-vector-icons/Octicons";
 import { commonStyles } from "./style/commonStyle";
+import { useSelector } from "react-redux";
 
 const Ingredients = () => {
-  const listIngredient = [
-    "1/2 tablespoon. ",
-    "1/2 tablespoon of butter for each salmon fillet.",
-    "1/2 tablespoon of minced fresh herbs (such as parsley, dill, or thyme).",
-    "1/2 tablespoon of butter for each salmon fillet.",
-    "1/2 tablespoon of minced fresh herbs (such as parsley, dill, or thyme).",
-    "1/2 tablespoon of butter for each salmon fillet.",
-    "1/2 tablespoon of minced fresh herbs (such as parsley, dill, or thyme).",
-    "1/2 tablespoon of butter for each salmon fillet.",
-  ];
+  const foodInfo = useSelector((state: any) => state.foodinfo);
+  const splitText = React.useCallback(
+    (text: string): String[] => { 
+      return text.split(",");
+    },
+    [1]
+  );
+  // const newText = splitText(foodInfo.ingredients);
   return (
     <View style={{ width: "100%" }}>
       <View style={commonStyles.containerFordetails}>
@@ -23,7 +21,7 @@ const Ingredients = () => {
           <AntDesign name="book" size={20} color={"#fff"} />
           <Text style={commonStyles.headerText}>Ingredients</Text>
         </View>
-        {listIngredient.map((item, index) => (
+        {foodInfo.ingredients.map((item: any, index: number) => (
           <Text
             key={index}
             style={{

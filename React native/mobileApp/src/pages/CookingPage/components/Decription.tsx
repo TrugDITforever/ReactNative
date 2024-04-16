@@ -2,7 +2,9 @@ import * as React from "react";
 import { View, Text } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { commonStyles } from "./style/commonStyle";
+import { useSelector } from "react-redux";
 const Description = () => {
+  const foodinfo = useSelector((state: any) => state.foodinfo);
   return (
     <View style={{ width: "100%" }}>
       <View style={commonStyles.containerFordetails}>
@@ -11,11 +13,7 @@ const Description = () => {
           <AntDesign name="paperclip" size={20} color={"#fff"} />
           <Text style={commonStyles.headerText}> Description</Text>
         </View>
-        <Text style={commonStyles.textDetais}>
-          Tender salmon fillet grilled to perfection, topped with a generous
-          dollop of lemon herb butter that melts over the fish, releasing a
-          burst of citrusy and savory flavors with each bite.
-        </Text>
+        <Text style={commonStyles.textDetais}>{foodinfo.description}</Text>
       </View>
     </View>
   );

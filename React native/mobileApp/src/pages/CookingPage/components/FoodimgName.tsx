@@ -1,6 +1,8 @@
 import * as React from "react";
-import { View, Text, Image, } from "react-native";
+import { View, Text, Image } from "react-native";
+import { useSelector } from "react-redux";
 const FoodimgName = () => {
+  const foodinfo = useSelector((state: any) => state.foodinfo);
   return (
     <View>
       {/* Food image */}
@@ -14,7 +16,7 @@ const FoodimgName = () => {
       >
         <View style={{ width: "95%", height: 280, position: "relative" }}>
           <Image
-            source={require("../../../../assets/image/food.jpg")}
+            source={{ uri: foodinfo.foodImage }}
             style={{
               resizeMode: "cover",
               position: "absolute",
@@ -28,7 +30,7 @@ const FoodimgName = () => {
       {/* Food's name */}
       <View style={{ margin: 15 }}>
         <Text style={{ fontFamily: "Nunito-Bold", fontSize: 22 }}>
-          Grilled Salmon with Lemon Herb Butter
+          {foodinfo.foodName}
         </Text>
       </View>
     </View>

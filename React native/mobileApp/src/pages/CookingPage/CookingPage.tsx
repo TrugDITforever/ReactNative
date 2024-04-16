@@ -4,7 +4,6 @@ import {
   SafeAreaView,
   StatusBar,
   StyleSheet,
-  TouchableOpacity,
   ScrollView,
   RefreshControl,
   ActivityIndicator,
@@ -12,13 +11,13 @@ import {
 import FoodimgName from "./components/FoodimgName";
 import { ListofDecrip, ListofOwnerAndCountry } from "./components/ListofDecrip";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import Ionicons from "react-native-vector-icons/Ionicons";
 // import for component
 import Description from "./components/Decription";
 import Ingredients from "./components/Ingredients";
 import Proceduce from "./components/Proceduce";
 import CardForMore from "./components/CardFormore";
 import HeadervsButtonBack from "../../components/Header/HeadervsButtonBack";
+import { useSelector } from "react-redux";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -46,12 +45,12 @@ const CookingPage: React.FC<Prop> = ({ navigation }) => {
         {loading ? (
           <ScrollView
             showsVerticalScrollIndicator={false}
-            refreshControl={
-              <RefreshControl
-                refreshing={!loading}
-                onRefresh={setloadingwhenfetch}
-              />
-            }
+            // refreshControl={
+            //   <RefreshControl
+            //     refreshing={!loading}
+            //     onRefresh={setloadingwhenfetch}
+            //   />
+            // }
           >
             {/* some info here: country,.... */}
             <ListofOwnerAndCountry />

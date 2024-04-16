@@ -1,21 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 interface User {
-  id: number;
+  id: string;
   name?: string;
   userimage?: string;
   username: string;
   password: string;
   email: string;
-  decription?: string;
+  description?: string;
 }
 const initialState: User = {
-  id: 1,
+  id: "66146d7338795a648ebee701",
   name: "Quang Trung",
-  userimage:"",
   username: "TrungQ",
+  userimage:
+    "https://th.bing.com/th/id/R.672212381b4893096723bcecdb7f1c27?rik=YvWkjp4%2fJ3e0OQ&pid=ImgRaw&r=0",
   password: "123",
   email: "dotrung1512@gmail.com",
-  decription: "I love cooking with different recipes",
+  description: "I love cooking with different recipes",
 };
 export const userinfo = createSlice({
   name: "userinfo",
@@ -24,8 +25,12 @@ export const userinfo = createSlice({
     updateUser: (state, action) => {
       return {
         ...state,
+        id: action.payload.id,
+        userimage: action.payload.userimage,
+        username: action.payload.username,
         name: action.payload.name,
         email: action.payload.email,
+        description: action.payload.description,
       };
     },
     updateName: (state, action) => {

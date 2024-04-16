@@ -36,7 +36,7 @@ const CardCollections: React.FC<Prop> = ({
           foodData.map((value: any, index: number) => (
             <Card
               dispatch={dispatch}
-              foodId={value.foodId}
+              foodId={value._id}
               key={index}
               index={index}
               navigation={navigation}

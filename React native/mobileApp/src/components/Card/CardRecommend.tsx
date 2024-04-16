@@ -11,21 +11,15 @@ import {
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import commonStyle from "./commonstyles/style";
-
-interface Prop {
-  navigation?: any;
-  image?: string;
-  nameofFood?: string;
-  index: number;
-  foodId?: number;
-  key?: number;
-  dispatch?: any;
-}
+import { usefetchFoodByID } from "../../features/authentication/hooks/useFetchFoodById";
+import { Prop } from "./commonProp";
 const CardRecommend: React.FC<Prop> = ({
   navigation,
   image,
+  foodId,
   index,
   nameofFood,
+  dispatch,
 }) => {
   const screenWidth = Dimensions.get("window");
   const [liked, setlike] = React.useState(
@@ -45,9 +39,7 @@ const CardRecommend: React.FC<Prop> = ({
           styles.cardContain,
           [index === liked.length - 1 ? styles.marginLastIndex : {}],
         ]}
-        onPress={() => {
-          navigation.navigate("Cooking");
-        }}
+        onPress={() => usefetchFoodByID(foodId, navigation, dispatch)}
         activeOpacity={1}
       >
         <Image source={{ uri: image }} style={styles.backgroundImage} />

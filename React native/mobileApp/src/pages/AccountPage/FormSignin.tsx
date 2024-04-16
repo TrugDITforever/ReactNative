@@ -111,7 +111,7 @@ const SinginForm: React.FC<PropsForLogin> = ({
       <View style={{ marginTop: 10 }}>
         {accounterr && (
           <Text style={styles.invalidacc}>
-            *Wrong email or password. Please try again!
+            *Invalid email or password. Please try again!
           </Text>
         )}
       </View>

@@ -130,18 +130,29 @@ const CardRecipes: React.FC<Prop> = ({
         </TouchableOpacity>
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {foodData &&
-          foodData.map((value: any, index: number) => (
-            <Card
-              dispatch={dispatch}
-              // foodId={value.foodId}
-              key={index}
-              index={index}
-              navigation={navigation}
-              image={value.foodImage ? value.foodImage : image}
-              nameofFood={value.foodName}
-            />
-          ))}
+        {foodData
+          ? foodData.map((value: any, index: number) => (
+              <Card
+                dispatch={dispatch}
+                foodId={value._id}
+                key={index}
+                index={index}
+                navigation={navigation}
+                image={value.foodImage ? value.foodImage : image}
+                nameofFood={value.foodName}
+              />
+            ))
+          : liked.map((value: any, index: number) => (
+              <Card
+                dispatch={dispatch}
+                foodId={value._id}
+                key={index}
+                index={index}
+                navigation={navigation}
+                image={value.foodImage ? value.foodImage : image}
+                nameofFood={value.foodName}
+              />
+            ))}
       </ScrollView>
     </View>
   );

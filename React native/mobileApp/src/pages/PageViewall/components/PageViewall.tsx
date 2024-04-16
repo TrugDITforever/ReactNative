@@ -1,21 +1,14 @@
 import * as React from "react";
 import {
   StyleSheet,
-  Button,
   View,
   SafeAreaView,
-  Image,
   Text,
-  Alert,
-  TextInput,
   TouchableOpacity,
-  ScrollView,
-  ActivityIndicator,
-  StatusBar,
 } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import Card from "./Card/Card";
 import Statusbar from "../../../components/Statusbar/Statusbar";
+import HeadervsButtonBack from "../../../components/Header/HeadervsButtonBack";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -40,10 +33,10 @@ const PageViewall: React.FC<Prop> = ({ navigation }) => {
   const [onload, setonload] = React.useState(false);
   return (
     <SafeAreaView style={styles.container}>
-      <Statusbar />
+      <Statusbar/>
       <View style={{ width: "100%", height: "100%" }}>
         {/* button back and title of page */}
-        <View style={{ flexDirection: "row", margin: 10 }}>
+        {/* <View style={{ flexDirection: "row", margin: 10 }}>
           <View style={{ width: "15%" }}>
             <TouchableOpacity
               style={styles.buttonBackandLike}
@@ -63,7 +56,9 @@ const PageViewall: React.FC<Prop> = ({ navigation }) => {
               Title of Page when click on
             </Text>
           </View>
-        </View>
+        </View> */}
+      <HeadervsButtonBack isShown={false} navigation={navigation}/>
+
         <View style={{ width: "100%" }}>
           {/* Card render */}
           <Card navigation={navigation}></Card>

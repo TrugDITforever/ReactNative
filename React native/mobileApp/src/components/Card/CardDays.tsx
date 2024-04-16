@@ -11,15 +11,13 @@ import {
 } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import commonstyles from "./commonstyles/style";
 
 interface Prop {
   Time?: string;
   navigation?: any;
   image?: string;
   nameofFood?: string;
+  foodId: string;
   index: number;
   key?: number;
 }
@@ -126,7 +124,7 @@ const CardDay: React.FC<Prop> = ({ navigation, image, index, nameofFood }) => {
               }}
             >
               <Text numberOfLines={2} style={styles.textNameFood}>
-                Macaroni and Cheese
+                {nameofFood}
               </Text>
             </View>
             <View

@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getFoodData } from "../services/adminServices/getFoodData";
-interface FoodData {
-  foodId: number;
-  foodName: string;
-  foodImage: string;
-  calories: number;
-  level: string;
-  serves: number;
-  description: string;
-  ingredients: string;
-  instruction: string;
-}
+import { FoodData } from "../commonData/foodData";
 export const useFetchFoodData = () => {
   const [foodData, setFoodData] = useState<FoodData[]>([]);
   const [isloading, setisloading] = useState<boolean>(true);

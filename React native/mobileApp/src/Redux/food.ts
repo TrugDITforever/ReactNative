@@ -7,37 +7,29 @@ interface FoodData {
   level: string;
   serves: number;
   description: string;
-  ingredients: string;
-  instruction: string;
+  ingredients: string[];
+  instructions: string;
 }
 
 const initialState: FoodData = {
   foodId: 1,
   foodName: "japanese",
-  foodImage: "",
+  foodImage: "string",
   calories: 123,
   level: "string",
   serves: 1,
   description: "string",
-  ingredients: "string",
-  instruction: "string",
+  ingredients: [""],
+  instructions: "string",
 };
 export const foodinfo = createSlice({
   name: "foodinfo",
   initialState,
   reducers: {
-    updateFoodInfo: (state, aciton) => {
+    updateFoodInfo: (state, action) => {
       return {
         ...state,
-        foodId: aciton.payload.foodId,
-        foodName: aciton.payload.foodName,
-        foodImage: aciton.payload.foodImage,
-        calories: aciton.payload.calories,
-        level: aciton.payload.level,
-        serves: aciton.payload.serves,
-        description: aciton.payload.decription,
-        ingredients: aciton.payload.ingredients,
-        instruction: aciton.payload.instruction,
+        ...action.payload
       };
     },
   },

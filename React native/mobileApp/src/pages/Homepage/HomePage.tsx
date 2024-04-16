@@ -24,6 +24,7 @@ import CardDay from "./components/Card/CardDays";
 import CardLoading from "./components/Card/CardLoading";
 import Statusbar from "../../components/Statusbar/Statusbar";
 import { useFetchFoodData } from "../../features/authentication/hooks/useFetchFoodData";
+import CardExploreMore from "./components/Card/CardExploreMore";
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#ffff",
@@ -39,6 +40,7 @@ interface Props {
 }
 const HomePage: React.FC<Props> = ({ navigation }) => {
   const { foodData, isloading } = useFetchFoodData();
+  // console.log(foodData);
   const dispatch = useDispatch();
   return (
     <SafeAreaView style={styles.container}>
@@ -64,17 +66,24 @@ const HomePage: React.FC<Props> = ({ navigation }) => {
               </Text>
               <CardRecommend
                 navigation={navigation}
-                foodData={foodData}
+                foodData={foodData.filter((item) =>
+                  item.mealType.includes("recommended")
+                )}
                 dispatch={dispatch}
               />
+
               <CardRecipes
                 navigation={navigation}
-                foodData={foodData}
+                foodData={foodData.filter((item) =>
+                  item.mealType.includes("recipes")
+                )}
                 dispatch={dispatch}
               />
               <CardPopular
                 navigation={navigation}
-                foodData={foodData}
+                foodData={foodData.filter((item) =>
+                  item.mealType.includes("Popular")
+                )}
                 dispatch={dispatch}
               />
               <CardCollections
@@ -92,8 +101,11 @@ const HomePage: React.FC<Props> = ({ navigation }) => {
                 dispatch={dispatch}
                 Time={"Breakfast"}
                 navigation={navigation}
-                foodData={foodData}
+                foodData={foodData.filter((item) =>
+                  item.mealType.includes("Breakfast")
+                )}
               />
+              <CardExploreMore navigation={navigation} dispatch={dispatch} />
             </ScrollView>
           </View>
         )}
@@ -102,15 +114,3 @@ const HomePage: React.FC<Props> = ({ navigation }) => {
   );
 };
 export default HomePage;
-{
-  /* <CardDay
-              Time={"Lunch"}
-              images={images.lunch}
-              navigation={navigation}
-            />
-            <CardDay
-              Time={"Dinner"}
-              images={images.breakfast}
-              navigation={navigation}
-            /> */
-}
