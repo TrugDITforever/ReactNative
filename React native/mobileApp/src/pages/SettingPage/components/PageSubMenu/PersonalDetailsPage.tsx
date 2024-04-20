@@ -14,11 +14,23 @@ import Userinfo from "../../../UserProfile/components/Userinfo";
 const PageDetails = () => {
   const user = useSelector((state: any) => state.userinfo);
   const dispatch = useDispatch();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
+  const [username, setUsername] = useState(user.username);
+  const [descriptions, setdecription] = useState(user.description);
   const [profilePicture, setProfilePicture] = useState(null);
+  const changeName = (text: string) => {
+    setName(text);
+  };
+  const changeusername = (text: string) => {
+    setUsername(text);
+  };
+  const changedescription = (text: string) => {
+    setdecription(text);
+  };
+  const changeemail = (text: string) => {
+    setEmail(text);
+  };
   return (
     <View style={styles.container}>
       <View style={{ marginLeft: 15, marginRight: 15 }}>
@@ -29,30 +41,32 @@ const PageDetails = () => {
         <TextInput
           style={styles.input}
           placeholder="Name"
-          value={user.name}
-          onChangeText={setName}
+          value={name}
+          onChangeText={changeName}
         />
         <Text style={styles.inputheader}>Username</Text>
         <TextInput
           style={styles.input}
           placeholder="Username"
-          value={user.username}
-          onChangeText={setUsername}
+          value={username}
+          onChangeText={changeusername}
         />
         <Text style={styles.inputheader}>Email</Text>
         <TextInput
           style={styles.input}
           placeholder="Email"
           value={email}
-          onChangeText={setEmail}
+          onChangeText={changeemail}
           keyboardType="email-address"
         />
 
         <TextInput
           style={styles.textInput}
+          value={descriptions}
           multiline={true}
           numberOfLines={4}
           placeholder="Edit your description here..."
+          onChangeText={changedescription}
         />
         <TouchableOpacity style={styles.buttonContainer}>
           <Text style={styles.textSubmit}>Submit</Text>

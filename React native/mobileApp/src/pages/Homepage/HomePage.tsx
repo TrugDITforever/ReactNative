@@ -25,6 +25,8 @@ import CardLoading from "./components/Card/CardLoading";
 import Statusbar from "../../components/Statusbar/Statusbar";
 import { useFetchFoodData } from "../../features/authentication/hooks/useFetchFoodData";
 import CardExploreMore from "./components/Card/CardExploreMore";
+import { getUserAsyncData } from "../../features/authentication/auth/getUserDataFromAsync";
+import { updateUser } from "../../Redux/user";
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#ffff",
@@ -40,8 +42,26 @@ interface Props {
 }
 const HomePage: React.FC<Props> = ({ navigation }) => {
   const { foodData, isloading } = useFetchFoodData();
-  // console.log(foodData);
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    const getuserData = async () => {
+      const userdata = await getUserAsyncData();
+      if (userdata) {
+        const newValue = {
+          id: userdata._id,
+          userimage: userdata.profileImage,
+          username: userdata.username,
+          name: userdata.name,
+          email: userdata.email,
+          description: userdata.description,
+        };
+        console.log(userdata);
+        dispatch(updateUser(newValue));
+      }
+    };
+    getuserData();
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
       <Statusbar />

@@ -13,7 +13,7 @@ interface Props {
   userProfile: string;
   foodData?: FoodInfo[];
 }
-const FoodeDetails: React.FC<Props> = ({ foodname, username , userProfile}) => {
+const FoodeDetails: React.FC<Props> = ({ foodname, username, userProfile }) => {
   return (
     <View style={styles.containerForNameofFood}>
       <Text style={styles.textNameFood}>{foodname}</Text>
@@ -27,18 +27,7 @@ const FoodeDetails: React.FC<Props> = ({ foodname, username , userProfile}) => {
       </Text>
       {/* people view */}
       <View style={styles.imageViewContainer}>
-        <Image
-          source={{uri: userProfile}}
-          style={styles.imageView}
-        />
-        {/* <Image
-          source={require("../../../../../assets/image/avatar.jpg")}
-          style={styles.imageView}
-        />
-        <Image
-          source={require("../../../../../assets/image/avatar.jpg")}
-          style={styles.imageView}
-        /> */}
+        <Image source={{ uri: userProfile }} style={styles.imageView} />
         <Text
           style={{
             fontFamily: "Nunito-Bold",
@@ -46,7 +35,7 @@ const FoodeDetails: React.FC<Props> = ({ foodname, username , userProfile}) => {
             opacity: 0.5,
           }}
         >
-      {username}
+          {username}
         </Text>
       </View>
       {/* subDetails */}
@@ -54,6 +43,7 @@ const FoodeDetails: React.FC<Props> = ({ foodname, username , userProfile}) => {
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
+          paddingBottom: 10,
         }}
       >
         {/* calories */}
@@ -119,8 +109,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageView: {
-    width: 27,
-    height: 27,
+    width: 30,
+    height: 30,
     borderRadius: 50,
     resizeMode: "cover",
     borderWidth: 2,

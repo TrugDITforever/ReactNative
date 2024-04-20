@@ -3,10 +3,16 @@ const userController = require("../controller/userActionController/userControlle
 const adminActionController = require("../controller/adminActionController/adminController");
 const router = express.Router();
 router.use(express.json());
-router.post("/v1/checkuser", userController.userLogin);
-router.get("/v1/getAlluser", adminActionController.fetchDataUser);
-router.get("/v1/getAllfood", adminActionController.fetchDataFood);
-router.get("/v1/getFoodByID/:foodId", userController.getFoodById);
-router.get("/v1/fetchUserposts", adminActionController.fetchuserPosts);
+/// user login
+router.post("/api/checkuser", userController.userLogin);
+/// user sign up
+router.post("/api/userRegister", userController.userSignup);
+/// get all user accounts
+router.get("/api/getAlluser", adminActionController.fetchDataUser);
+/// get all food
+router.get("/api/getAllfood", adminActionController.fetchDataFood);
+/// get food by ID
+router.get("/api/getFoodByID/:foodId", userController.getFoodById);
+router.get("/api/fetchUserPostById/:userId", userController.fetchuserPostsbyId);
+router.get("/api/fetchUserposts", adminActionController.fetchuserPosts);
 module.exports = router;
-        

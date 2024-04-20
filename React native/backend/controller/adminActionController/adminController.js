@@ -19,7 +19,7 @@ exports.fetchDataFood = (req, res) => {
 /// get all post of user
 exports.fetchuserPosts = (req, res) => {
   const ownerId = new ObjectId("66146d7338795a648ebee702");
-  postModel
+  foodModel
     .aggregate([
       { $match: {} },
       {
@@ -27,29 +27,18 @@ exports.fetchuserPosts = (req, res) => {
           from: "users",
           localField: "ownerId",
           foreignField: "_id",
-          as: "userInfo",
-        },
-      },
-      {
-        $lookup: {
-          from: "foods",
-          localField: "foodId",
-          foreignField: "_id",
-          as: "foodInfo",
+          as: "userpost",
         },
       },
       {
         $project: {
-          _id: 0,
-          userInfo: {
+          _id: 1,
+          foodName: 1,
+          foodImage: 1,
+          userpost: {
             _id: 1,
             username: 1,
             profileImage: 1,
-          },
-          foodInfo: {
-            _id: 1,
-            foodName: 1,
-            foodImage: 1,
           },
         },
       },

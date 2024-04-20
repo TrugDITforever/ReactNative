@@ -1,27 +1,31 @@
 import axios from "axios";
 import { BASE_URL } from "../fixIp/ip";
 interface UserData {
-  id: number;
-  name: string;
-  usernames: string;
-  email: string;
-  password: string;
-  success: string;
-  dataUser: any;
+  _id?: string;
+  name?: string;
+  username?: string;
+  email?: string;
+  profileImage?: string;
+  password?: string;
+  description?: string;
+  dataUser?: any;
+  success: boolean;
+  error: string;
 }
 export async function userRegister(
-  name: string,
+  fullname: string,
   email: string,
   password: string
 ): Promise<UserData> {
   try {
-    const response = await axios.post(`${BASE_URL}:8080/v1/userRegister`, {
-      name,
+    const response = await axios.post(`${BASE_URL}:8080/api/userRegister`, {
+      fullname,
       email,
       password,
     });
     return response.data;
   } catch (error: any) {
-    throw new Error(error.message);
+    console.error(error);
+    return error.response.data;
   }
 }

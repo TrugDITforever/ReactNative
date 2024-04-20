@@ -28,7 +28,7 @@ const UserProfile: React.FC<Prop> = ({ navigation }) => {
           <Userinfo />
         </View>
         {/* Post of User will be showed here */}
-        <View style={{ marginTop: "15%" }}>
+        <View style={{ marginTop: "15%", width: "100%", height: "62%" }}>
           <PostCard navigation={navigation} />
         </View>
       </View>

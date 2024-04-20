@@ -63,7 +63,7 @@ const UserContainer: React.FC<Prop> = ({ navigation }) => {
               fontFamily: "Nunito-Bold",
             }}
           >
-            {userinfo.username}
+            {userinfo.username? userinfo.username : userinfo.name}
           </Text>
         </View>
       </View>

@@ -35,9 +35,9 @@ const CardImage: React.FC<Props> = ({
           <View style={styles.buttonlike}>
             <TouchableOpacity onPress={() => handlePress(index)}>
               {liked[index] ? (
-                <Ionicons name={"heart"} size={20} color={"red"} />
+                <Ionicons name={"heart"} size={24} color={"red"} />
               ) : (
-                <Ionicons name={"heart-outline"} size={20} />
+                <Ionicons name={"heart-outline"} size={24} />
               )}
             </TouchableOpacity>
           </View>
@@ -48,22 +48,17 @@ const CardImage: React.FC<Props> = ({
 };
 export default CardImage;
 const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    marginTop: 20,
-    height: "95%",
-  },
   backgroundImage: {
     resizeMode: "cover",
     position: "absolute",
     width: "100%",
     height: "100%",
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
+    borderTopRightRadius: 15,
+    borderTopLeftRadius: 15,
   },
   cardContain: {
     width: "100%",
-    height: 180,
+    height: 230,
     position: "relative",
   },
   containerForRatingandLike: {

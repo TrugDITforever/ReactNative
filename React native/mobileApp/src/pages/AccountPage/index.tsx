@@ -3,23 +3,31 @@ import { View, SafeAreaView, StyleSheet, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import SigninForm from "./FormSignin";
 import SignupForm from "./FormSignup";
+import { isfirstTimeLogin } from "../../features/authentication/auth/checkIsfirstTimeLogin";
 import { useDispatch, useSelector } from "react-redux";
 
 interface Props {
   navigation: any;
 }
 const AccountPage: React.FC<Props> = ({ navigation }) => {
-  const [user, getuser] = React.useState<any>([]);
   const [showSignin, setShowSignin] = React.useState<boolean>(true);
-  const userinfo = useSelector((state: any) => state.userinfo);
+  const [ischeck, setischeck] = React.useState<boolean>(false);
   const dispatch = useDispatch();
   const navigateToSignup = () => {
     setShowSignin(false);
   };
-
   const navigateToSignin = () => {
     setShowSignin(true);
   };
+  React.useEffect(() => {
+    const check = async () => {
+      const isLogged = await isfirstTimeLogin();
+      if (isLogged) {
+        navigation.navigate("Details");
+      }
+    };
+    check();
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
@@ -36,7 +44,8 @@ const AccountPage: React.FC<Props> = ({ navigation }) => {
         >
           {showSignin ? (
             <View style={styles.textHeader}>
-              <Text style={styles.titleText}>Hello Sign in!</Text>
+              <Text style={styles.titleText}>Hello</Text>
+              <Text style={styles.titleText}>Welcome back!</Text>
             </View>
           ) : (
             <View style={styles.textHeader}>
@@ -62,6 +71,7 @@ const AccountPage: React.FC<Props> = ({ navigation }) => {
             <SignupForm
               navigation={navigation}
               navigateToSignin={navigateToSignin}
+              dispatch={dispatch}
             />
           )}
         </View>
@@ -89,9 +99,7 @@ const styles = StyleSheet.create({
   },
   textHeader: {
     height: "100%",
-    width: "40%",
-    alignItems: "center",
     justifyContent: "center",
-    marginLeft: 5,
+    marginLeft: 20,
   },
 });

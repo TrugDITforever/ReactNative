@@ -11,6 +11,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const styles = StyleSheet.create({
   container: {
     width: "100%",
@@ -109,6 +110,33 @@ const ListMenu: React.FC<Prop> = ({ navigation }) => {
                 </View>
               </TouchableOpacity>
             ))}
+            <TouchableOpacity
+              style={styles.subMenu}
+              onPress={() => {
+                AsyncStorage.removeItem("token"), navigation.replace("Intro");
+              }}
+            >
+              {/* icon */}
+              <View>
+                <Ionicons
+                  name="log-out-outline"
+                  size={24}
+                  color={styles.colorOfIcon.color}
+                />
+              </View>
+              {/* Text */}
+              <View style={{ width: "70%" }}>
+                <Text style={styles.textMenu}>Log out</Text>
+              </View>
+              {/* icon arrow */}
+              <View>
+                <AntDesign
+                  name="right"
+                  size={20}
+                  color={styles.colorOfIcon.color}
+                />
+              </View>
+            </TouchableOpacity>
           </View>
         </View>
       </View>

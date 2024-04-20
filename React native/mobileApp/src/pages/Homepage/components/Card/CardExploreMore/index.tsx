@@ -45,9 +45,7 @@ const CardExploreMore: React.FC<Prop> = ({ navigation, dispatch }) => {
         {userpost.map((value, index) => (
           <View key={index} style={[styles.cardContainBorder]}>
             <TouchableOpacity
-              onPress={() =>
-                usefetchFoodByID(value.foodInfo[0]._id, navigation, dispatch)
-              }
+              onPress={() => usefetchFoodByID(value._id, navigation, dispatch)}
               activeOpacity={1}
             >
               {/* card image */}
@@ -55,12 +53,13 @@ const CardExploreMore: React.FC<Prop> = ({ navigation, dispatch }) => {
                 index={index}
                 liked={liked}
                 handlePress={handlePress}
-                foodImage={value.foodInfo[0].foodImage}
+                foodImage={value.foodImage}
               />
               {/* details of food */}
-              <FoodeDetails foodname={value.foodInfo[0].foodName} 
-              username= {value.userInfo[0].username}
-                userProfile={value.userInfo[0].profileImage}
+              <FoodeDetails
+                foodname={value.foodName}
+                username={value.userpost[0].username}
+                userProfile={value.userpost[0].profileImage}
               />
             </TouchableOpacity>
           </View>
@@ -80,14 +79,12 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   cardContainBorder: {
-    width: 380,
-    height: 300,
     backgroundColor: "#fff",
-    borderRadius: 20,
-    marginLeft: 10,
-    marginRight: 10,
+    borderRadius: 15,
+    marginLeft: 15,
+    marginRight: 15,
     marginBottom: 25,
-    elevation: 2,
+    elevation: 1,
     shadowColor: "#000",
   },
   boxword: {

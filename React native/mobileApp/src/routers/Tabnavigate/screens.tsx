@@ -6,88 +6,50 @@ import AccountPage from "../../pages/AccountPage";
 import UserProfile from "../../pages/UserProfile/UserProfile";
 import FavoritePage from "../../pages/FavoritePage/Collections";
 import SearchPage from "../../pages/SearchingPage/SearchPage";
+import AddPage from "../../pages/AddingPage";
 // import for navigationP
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider } from "react-redux";
 // import for react-native icon
 import Ionicons from "react-native-vector-icons/Ionicons";
-import AntDesign from "react-native-vector-icons/AntDesign";
+import Feather from "react-native-vector-icons/Feather";
 import Octicons from "react-native-vector-icons/Octicons";
 import Foundation from "react-native-vector-icons/Foundation";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { StyleSheet, Text, View } from "react-native";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  TouchableOpacity,
+} from "react-native";
 
 // Start code navigation
 const Tab = createBottomTabNavigator();
-export const Drawer = createDrawerNavigator();
-export const Drawermenu = () => {
-  return (
-    <Drawer.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Drawer.Screen name="Menu" component={TabScreen} />
-    </Drawer.Navigator>
-  );
+const Stack = createNativeStackNavigator();
+interface Props {
+  navigation: any;
+}
+export const AddPageStack: React.FC<Props> = ({ navigation }) => {
+  return <></>;
 };
-const styles = StyleSheet.create({
-  navContain: {
-    marginRight: 5,
-  },
-  navbarShow: {
-    borderRadius: 20,
-  },
-  navbarhide: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-    padding: 5,
-  },
-  textnav: {
-    color: "#FE724C",
-    fontSize: 14,
-    fontFamily: "Nunito-semiBold",
-  },
-  iconcolor: {
-    color: "#FE724C",
-    size: 24,
-  },
-  containiconandText: {
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingBottom: 10,
-    paddingTop: 10,
-    paddingLeft: 15,
-    paddingRight: 15,
-  },
-});
-
-export const TabScreen: React.FC = () => {
+export const TabScreen: React.FC<Props> = ({ navigation }) => {
   const listTapContent = [
     {
       name: "Home",
       component: HomePage,
       iconShow: (
-        <Foundation
-          name={"home"}
-          size={styles.iconcolor.size}
-          color={styles.iconcolor.color}
-        />
+        <Foundation name={"home"} size={28} color={styles.iconcolor.color} />
       ),
       tabText: "Home",
-      iconhide: (
-        <Octicons name={"home"} size={styles.iconcolor.size} color={"#ccc"} />
-      ),
+      iconhide: <Octicons name={"home"} size={24} color={"#000"} />,
     },
     {
       name: "Search",
       component: SearchPage,
       iconShow: (
-        <Ionicons
+        <Feather
           name={"search"}
           size={styles.iconcolor.size}
           color={styles.iconcolor.color}
@@ -95,26 +57,22 @@ export const TabScreen: React.FC = () => {
       ),
       tabText: "Search",
       iconhide: (
-        <Ionicons name={"search"} size={styles.iconcolor.size} color={"#ccc"} />
+        <Feather name={"search"} size={styles.iconcolor.size} color={"#000"} />
       ),
     },
     {
       name: "Collections",
       component: FavoritePage,
       iconShow: (
-        <MaterialCommunityIcons
-          name={"heart-multiple"}
+        <AntDesign
+          name={"heart"}
           size={styles.iconcolor.size}
           color={styles.iconcolor.color}
         />
       ),
       tabText: "Collect",
       iconhide: (
-        <MaterialCommunityIcons
-          name={"heart-multiple-outline"}
-          size={styles.iconcolor.size}
-          color={"#ccc"}
-        />
+        <Feather name={"heart"} size={styles.iconcolor.size} color={"#000"} />
       ),
     },
     {
@@ -129,7 +87,7 @@ export const TabScreen: React.FC = () => {
       ),
       tabText: "Profile",
       iconhide: (
-        <Octicons name={"person"} size={styles.iconcolor.size} color={"#ccc"} />
+        <Octicons name={"person"} size={styles.iconcolor.size} color={"#000"} />
       ),
     },
   ];
@@ -137,9 +95,11 @@ export const TabScreen: React.FC = () => {
     <Tab.Navigator
       screenOptions={{
         tabBarShowLabel: false,
+        tabBarHideOnKeyboard: true,
         headerShown: false,
         tabBarStyle: {
-          borderTopWidth: 0,
+          backgroundColor: "#fff",
+          borderTopWidth: 0.5,
           elevation: 0,
         },
       }}
@@ -157,7 +117,7 @@ export const TabScreen: React.FC = () => {
                     <View style={styles.navbarShow}>
                       <View style={styles.containiconandText}>
                         {value.iconShow}
-                        <Text style={styles.textnav}>{value.tabText}</Text>
+                        {/* <Text style={styles.textnav}>{value.tabText}</Text> */}
                       </View>
                     </View>
                   ) : (
@@ -172,3 +132,23 @@ export const TabScreen: React.FC = () => {
     </Tab.Navigator>
   );
 };
+const styles = StyleSheet.create({
+  navContain: {},
+  navbarShow: {},
+  navbarhide: {},
+  textnav: {
+    color: "#FE724C",
+    fontSize: 14,
+    fontFamily: "Nunito-semiBold",
+  },
+  iconcolor: {
+    color: "#FE724C",
+    size: 26,
+  },
+  containiconandText: {
+    paddingBottom: 5,
+    paddingTop: 10,
+    borderBottomWidth: 1,
+    borderColor: "#FE724C",
+  },
+});

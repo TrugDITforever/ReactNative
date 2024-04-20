@@ -5,210 +5,241 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
+  KeyboardAvoidingView,
+  Image,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
 import { SubmitSignIn } from "../../features/authentication/submitSignin";
+
 interface PropsForLogin {
   navigation: any;
   dispatch: any;
   navigateToSignup: () => void;
 }
+
 const SinginForm: React.FC<PropsForLogin> = ({
   navigateToSignup,
   dispatch,
   navigation,
 }) => {
-  const [email, setemail] = useState<string>("");
-  const [password, setpassword] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [show, setShow] = useState<boolean>(true);
-  const [emailerr, setemailerr] = useState<boolean>(false);
-  const [passerr, setpasserr] = useState<boolean>(false);
-  const [accounterr, setaccerr] = useState<boolean>(false);
-  //start function
-  const changeEmail = (text: string) => {
-    setemail(text);
-  };
-  const chagePass = (passs: string) => {
-    setpassword(passs);
-  };
-  /// function login
+  const [emailerr, setEmailErr] = useState<boolean>(false);
+  const [passerr, setPassErr] = useState<boolean>(false);
+  const [accounterr, setAccErr] = useState<boolean>(false);
+
+  const changeEmail = (text: string) => setEmail(text);
+  const changePass = (pass: string) => setPassword(pass);
+
   const handleSubmit = () => {
     SubmitSignIn(
       email,
       password,
-      setemailerr,
-      setpasserr,
+      setEmailErr,
+      setPassErr,
       navigation,
       dispatch,
-      setaccerr
+      setAccErr
     );
   };
+
   return (
-    <View style={styles.container}>
-      {/* Gmail */}
-      <View style={{ position: "relative" }}>
-        <Text style={styles.label}>E-mail:</Text>
-        {emailerr && (
-          <Text style={styles.errormesss}>* Email cannot be empty</Text>
-        )}
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your gmail"
-          onChangeText={changeEmail}
-          value={email}
-          autoCapitalize="none"
-          keyboardType="email-address"
-        />
-        <Text style={{ position: "absolute", right: 0, top: 30 }}>
-          <Ionicons name={"checkmark-sharp"} size={18} />
-        </Text>
-      </View>
-      {/* Password */}
-      <View style={{ position: "relative" }}>
-        <Text style={styles.label}>Password:</Text>
-        {passerr && (
-          <Text style={styles.errormesss}>* Password cannot be empty</Text>
-        )}
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your password"
-          onChangeText={chagePass}
-          value={password}
-          secureTextEntry={show ? true : false}
-        />
-        <Text style={{ position: "absolute", right: 0, top: 30 }}>
-          <Ionicons
-            name={show ? "eye" : "eye-off"}
-            size={18}
-            onPress={() => {
-              setShow(!show);
-            }}
-          />
-        </Text>
-      </View>
-      {/* Forgot pass */}
-      <View
-        style={{
-          marginTop: 30,
-          position: "relative",
-          width: "100%",
-          height: 20,
-        }}
-      >
-        <Text
-          style={{
-            fontSize: 18,
-            position: "absolute",
-            right: 0,
-            color: "#F98A4F",
-          }}
-        >
-          Forgot password?
-        </Text>
-      </View>
-      {/* Message invalid account */}
-      <View style={{ marginTop: 10 }}>
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>E-mail:</Text>
+          {emailerr && (
+            <Text style={styles.errorMsg}>* Email cannot be empty</Text>
+          )}
+          <View style={styles.passwordContainer}>
+            <TextInput
+              style={[styles.input, [accounterr ? styles.errborderInput : {}]]}
+              placeholder="Enter your email"
+              onChangeText={changeEmail}
+              value={email}
+              autoCapitalize="none"
+              keyboardType="email-address"
+            />
+          </View>
+        </View>
+
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Password:</Text>
+          {passerr && (
+            <Text style={styles.errorMsg}>* Password cannot be empty</Text>
+          )}
+          <View style={styles.passwordContainer}>
+            <TextInput
+              style={[styles.input, [accounterr ? styles.errborderInput : {}]]}
+              placeholder="Enter your password"
+              onChangeText={changePass}
+              value={password}
+              secureTextEntry={show ? true : false}
+            />
+            <TouchableOpacity
+              onPress={() => setShow(!show)}
+              style={styles.eyeIcon}
+            >
+              <Ionicons
+                name={show ? "eye" : "eye-off"}
+                color={"#ccc"}
+                size={20}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
         {accounterr && (
-          <Text style={styles.invalidacc}>
-            *Invalid email or password. Please try again!
-          </Text>
+          <Text style={styles.invalidAccMsg}>*Invalid email or password!</Text>
         )}
-      </View>
-      {/* Button submit */}
-      <View style={{ display: "flex", alignItems: "center", marginTop: 80 }}>
+        <View style={styles.forgotPassContainer}>
+          <Text style={styles.forgotPassText}>Forgot password?</Text>
+        </View>
+
         <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           <LinearGradient
             colors={["#F98A4F", "#FCA64F"]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
-            style={styles.linearbutton}
+            style={styles.linearButton}
           >
-            <Text
-              style={{ color: "#fff", fontFamily: "Nunito-Bold", fontSize: 30 }}
-            >
-              SIGN IN
-            </Text>
+            <Text style={styles.buttonText}>LOG IN</Text>
           </LinearGradient>
         </TouchableOpacity>
+
+        <Text style={styles.orText}>OR</Text>
+
+        <TouchableOpacity style={styles.googleButton}>
+          <Image
+            source={require("../../assets/image/icongoogle.png")}
+            style={styles.googleIcon}
+          />
+          <Text style={styles.googleButtonText}>Login with Google</Text>
+        </TouchableOpacity>
+
+        <View style={styles.signUpContainer}>
+          <Text style={styles.signUpText}>Don't have an account?</Text>
+          <Text style={styles.signUpLink} onPress={navigateToSignup}>
+            Sign up
+          </Text>
+        </View>
       </View>
-      {/* Button change to sign up form */}
-      <View
-        style={{
-          marginTop: 80,
-          width: "100%",
-          position: "relative",
-          height: "10%",
-        }}
-      >
-        <Text
-          style={{
-            position: "absolute",
-            right: 0,
-            fontSize: 16,
-            color: "#8F9090",
-            fontFamily: "Nunito-semiBold",
-          }}
-        >
-          Don't have account?
-        </Text>
-        <Text
-          style={{
-            fontSize: 20,
-            position: "absolute",
-            right: 0,
-            bottom: 0,
-            fontFamily: "Nunito-Bold",
-          }}
-          onPress={navigateToSignup}
-        >
-          Sign up
-        </Text>
-      </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
-export default SinginForm;
+
 const styles = StyleSheet.create({
   container: {
-    height: "90%",
+    flex: 1,
+    paddingHorizontal: 30,
     marginTop: 90,
-    marginLeft: 30,
-    marginRight: 30,
   },
-  errormesss: {
-    color: "red",
-  },
-  invalidacc: {
-    color: "red",
-    fontSize: 18,
-  },
-  input: {
-    height: 30,
-    borderBottomWidth: 1,
-    marginBottom: 20,
-    borderBottomColor: "#ccc",
+  inputContainer: {
+    marginBottom: 10,
   },
   label: {
     fontSize: 20,
     fontFamily: "Nunito-Medium",
     color: "#F98A4F",
+    paddingBottom: 5,
+  },
+  errorMsg: {
+    color: "red",
+  },
+  passwordContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  eyeIcon: {
+    position: "absolute",
+    right: 10,
+    bottom: 22,
+  },
+  errborderInput: {
+    borderColor: "red",
+  },
+  input: {
+    width: "100%",
+    borderWidth: 1,
+    borderColor: "#e1e1e1",
+    borderRadius: 10,
+    marginBottom: 10,
+    padding: 10,
+    paddingHorizontal: 10,
+  },
+  forgotPassContainer: {
+    width: "100%",
+    marginTop: 10,
+  },
+  forgotPassText: {
+    fontSize: 18,
+    fontFamily: "Nunito-Medium",
+    color: "#F98A4F",
+    textAlign: "right",
+  },
+  invalidAccMsg: {
+    color: "red",
+    fontSize: 16,
+    fontFamily: "Nunito-Regular",
   },
   button: {
-    borderRadius: 50,
-    display: "flex",
+    width: "100%",
+    marginTop: 50,
+  },
+  linearButton: {
+    borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
-    width: "100%",
     height: 60,
   },
-  linearbutton: {
-    backgroundColor: "#6807e3",
-    borderRadius: 50,
-    display: "flex",
+  buttonText: {
+    color: "#fff",
+    fontFamily: "Nunito-Bold",
+    fontSize: 30,
+  },
+  orText: {
+    color: "black",
+    marginVertical: 10,
+    fontSize: 16,
+    textAlign: "center",
+  },
+  googleButton: {
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    width: "100%",
-    height: 60,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: "#e1e1e1",
+    marginTop: 30,
+  },
+  googleIcon: {
+    width: 24,
+    height: 24,
+  },
+  googleButtonText: {
+    marginLeft: 10,
+    fontSize: 16,
+  },
+  signUpContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+  },
+  signUpText: {
+    fontSize: 16,
+    color: "#8F9090",
+    fontFamily: "Nunito-semiBold",
+  },
+  signUpLink: {
+    fontSize: 18,
+    color: "#F98A4F",
+    fontFamily: "Nunito-Bold",
+    marginLeft: 5,
   },
 });
+
+export default SinginForm;

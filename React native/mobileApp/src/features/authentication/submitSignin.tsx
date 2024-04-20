@@ -1,5 +1,7 @@
 import { updateUser } from "../../Redux/user";
 import { loginUser } from "./services/userService/userLogin";
+import { saveToken } from "./auth/saveToken";
+import { saveUserData } from "./auth/saveUserData";
 export const SubmitSignIn = async (
   email: string,
   password: string,
@@ -7,7 +9,7 @@ export const SubmitSignIn = async (
   setpasserr: (value: boolean) => void,
   navigation: any,
   dispatch: any,
-  setaccerr: (value: boolean) => void
+  setAccErr: (value: boolean) => void
 ) => {
   if (email && password) {
     setemailerr(false);
@@ -17,26 +19,29 @@ export const SubmitSignIn = async (
       password: password,
     };
     try {
-      loginUser(value.email, value.password).then((res) => {
-        if (res) {
-          const newValue = {
-            id: res.dataUser._id,
-            userimage: res.dataUser.profileImage,
-            username: res.dataUser.username,
-            name : res.dataUser.name,
-            email: res.dataUser.email,
-            description : res.dataUser.description,
-
-          };
-          dispatch(updateUser(newValue));
-          navigation.navigate("Details");
-          setaccerr(false);
-        } else {
-          setaccerr(true);
-        }
-      });
+      const { token, dataUser, success, error } = await loginUser(
+        value.email,
+        value.password
+      );
+      if (success && dataUser && token) {
+        const newValue = {
+          id: dataUser._id,
+          userimage: dataUser.profileImage,
+          username: dataUser.username,
+          name: dataUser.name,
+          email: dataUser.email,
+          description: dataUser.description,
+        };
+        console.log(token);
+        saveToken(token);
+        saveUserData(dataUser);
+        dispatch(updateUser(newValue));
+        navigation.navigate("Details");
+      } else {
+        setAccErr(true);
+      }
     } catch (error: any) {
-      console.error("AxiosError:", error.message);
+      setAccErr(true);
     }
   } else {
     setemailerr(true);
