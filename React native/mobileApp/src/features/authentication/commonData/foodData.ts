@@ -9,5 +9,6 @@ export interface FoodData {
   description: string;
   ingredients: string[];
   instruction: string;
-  foodData: any;
+  ownerId: string;
+  foodData: any;  
 }

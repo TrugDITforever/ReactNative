@@ -3,14 +3,15 @@ const dotenv = require("dotenv");
 const foodModel = require("../../model/foodModel");
 const userModel = require("../../model/userModel");
 const jwt = require("jsonwebtoken");
-/// show food deatails when user click on
+
+// / show food deatails when user click on
 exports.getFoodById = (req, res) => {
   const state = req.params.foodId;
   const foodId = new ObjectId(`${state}`);
   try {
     /// query find food by _id
-    foodModel.findOne({ _id: foodId }).then((food) => {
-      res.status(200).json({ foodData: food });
+    foodModel.findById({ _id: foodId }).then((food) => {
+      res.status(200).json({ foodData: food, success: true });
     });
   } catch (err) {
     throw new Error(err);
@@ -49,6 +50,7 @@ exports.userLogin = async (req, res) => {
 ///uesr signup to app
 exports.userSignup = async (req, res) => {
   const { fullname, email, password } = req.body;
+  const my_secret_key = process.env.jwt_token;
   const profileImage =
     "https://th.bing.com/th/id/OIP.hC6OpIcdstV531Pg7XnT7QHaHa?rs=1&pid=ImgDetMain";
   try {
@@ -64,17 +66,22 @@ exports.userSignup = async (req, res) => {
     });
     // Find user just added to database
     const newUser = await userModel.findOne({ email: email });
-
     if (newUser) {
-      res.status(201).json({ success: true, dataUser: newUser });
+      const userData = {
+        _id: newUser._id,
+        email: newUser.email,
+        role: newUser.role,
+      };
+      const token = jwt.sign(userData, my_secret_key, {
+        expiresIn: "3h",
+      });
+      res.status(200).json({ dataUser: newUser, success: true, token: token });
     } else {
       res.status(404).json({ success: false, error: "User not found" });
     }
   } catch (error) {
     if (error.code === 11000) {
       res.status(400).json({ success: false, error: "Email already existed." });
-    } else {
-      res.status(500).json({ success: false, error: "Internal server error" });
     }
   }
 };
@@ -106,11 +113,95 @@ exports.fetchuserPostsbyId = (req, res) => {
           },
         },
       },
-      { $limit: 10 },
     ])
     .then((data) => {
       res.status(200).json({
         postData: data,
       });
     });
+};
+///user update profile
+exports.userUpdateProfile = (req, res) => {
+  const state = req.body;
+  const stateId = req.params.userid;
+  const userid = new ObjectId(`${stateId}`);
+  const updatedInfo = {
+    name: state.name,
+    username: state.username,
+    email: state.email,
+    description: state.description,
+  };
+  try {
+    userModel
+      .findByIdAndUpdate({ _id: userid }, updatedInfo, { new: true })
+      .then((user) => {
+        res.status(200).json({ dataUser: user, success: true });
+      });
+  } catch (error) {
+    res.status(400).json({ error: "Can't update profile" });
+  }
+};
+///user delete account
+exports.userDeleteAccount = (req, res) => {
+  const userid = new ObjectId(`${req.params.userid}`);
+  console.log(userid);
+  try {
+    userModel.findByIdAndDelete(req.params.userid).then((user) => {
+      res.status(200).json({ deletedUser: user, success: true });
+    });
+  } catch {
+    res.status(400).json({ error: "Can't delete account" });
+  }
+};
+/// this is for user to post recipe
+/// insert into database then  create new recipe
+exports.userpostRecipe = (req, res) => {
+  const state = req.body;
+  const newRecipe = new foodModel({
+    foodName: state.foodName,
+    foodImage: state.foodImage,
+    description: state.description,
+    ingredients: state.ingredients,
+    instructions: state.instructions,
+    ownerId: new ObjectId(`${state.ownerId}`),
+  });
+  try {
+    newRecipe.save().then((newfood) => {
+      res.status(200).json({ newRecipe: newfood, success: true });
+    });
+  } catch (error) {
+    res.status(400).json({ error: "Can't create recipe" });
+  }
+};
+/// user update their recipe
+exports.userUpDatepostRecipe = (req, res) => {
+  const state = req.body;
+  const foodid = req.params.foodid;
+  const updateRecipe = {
+    foodName: state.foodName,
+    foodImage: state.foodImage,
+    description: state.description,
+    ingredients: state.ingredients,
+    instructions: state.instructions,
+  };
+  try {
+    foodModel
+      .findByIdAndUpdate({ _id: foodid }, updateRecipe, { new: true })
+      .then((newfood) => {
+        res.status(200).json({ newRecipe: newfood, success: true });
+      });
+  } catch (error) {
+    res.status(400).json({ error: "Can't update recipe" });
+  }
+};
+/// user delete their recipe
+exports.userDeleteRecipe = (req, res) => {
+  const id = req.params.id;
+  try {
+    foodModel.findByIdAndDelete(id).then((food) => {
+      res.status(200).json({ deletedRecipe: food, success: true });
+    });
+  } catch (error) {
+    res.status(400).json({ success: false });
+  }
 };

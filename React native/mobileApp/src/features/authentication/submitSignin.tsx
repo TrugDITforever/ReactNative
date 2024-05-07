@@ -33,6 +33,7 @@ export const SubmitSignIn = async (
           description: dataUser.description,
         };
         console.log(token);
+        console.log(dataUser);
         saveToken(token);
         saveUserData(dataUser);
         dispatch(updateUser(newValue));

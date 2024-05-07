@@ -17,33 +17,40 @@ const FoodeDetails: React.FC<Props> = ({ foodname, username, userProfile }) => {
   return (
     <View style={styles.containerForNameofFood}>
       <Text style={styles.textNameFood}>{foodname}</Text>
-      {/* Rating star */}
-      <Text style={styles.textRating}>
-        <AntDesign name={"star"} color={"orange"} size={11} />
-        <AntDesign name={"star"} color={"orange"} size={11} />
-        <AntDesign name={"star"} color={"orange"} size={11} />
-        <AntDesign name={"star"} color={"orange"} size={11} />
-        <AntDesign name={"star"} color={"orange"} size={11} />
-      </Text>
-      {/* people view */}
-      <View style={styles.imageViewContainer}>
-        <Image source={{ uri: userProfile }} style={styles.imageView} />
-        <Text
-          style={{
-            fontFamily: "Nunito-Bold",
-            marginLeft: 15,
-            opacity: 0.5,
-          }}
-        >
-          {username}
-        </Text>
+      <View style={styles.containerForRatingandLike}>
+        {/* rating, level, love */}
+        <View style={styles.ratingContain}>
+          {/* for rating */}
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <View>
+              <AntDesign name={"star"} size={16} color={"orange"} />
+            </View>
+            <Text style={styles.textRating}>4.5</Text>
+          </View>
+          {/* for like */}
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <AntDesign name={"heart"} size={16} color={"red"} />
+            <Text style={styles.textRating}>273k</Text>
+          </View>
+        </View>
       </View>
       {/* subDetails */}
       <View
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
-          paddingBottom: 10,
         }}
       >
         {/* calories */}
@@ -53,7 +60,7 @@ const FoodeDetails: React.FC<Props> = ({ foodname, username, userProfile }) => {
             opacity: 0.6,
           }}
         >
-          <Ionicons name={"flame-outline"} size={16} /> 123 calories
+          <Ionicons name={"flame-outline"} size={16} />123 calories
         </Text>
         {/* time cooking */}
         <Text
@@ -62,7 +69,7 @@ const FoodeDetails: React.FC<Props> = ({ foodname, username, userProfile }) => {
             opacity: 0.6,
           }}
         >
-          <Ionicons name={"timer-outline"} size={16} /> 20 mins
+          <Ionicons name={"timer-outline"} size={16} />20 mins
         </Text>
         {/* Level */}
         <Text
@@ -71,7 +78,7 @@ const FoodeDetails: React.FC<Props> = ({ foodname, username, userProfile }) => {
             opacity: 0.6,
           }}
         >
-          <Ionicons name={"flash-outline"} size={16} /> Easy
+          <Ionicons name={"flash-outline"} size={16} />Easy
         </Text>
         <Text
           style={{
@@ -79,7 +86,7 @@ const FoodeDetails: React.FC<Props> = ({ foodname, username, userProfile }) => {
             opacity: 0.6,
           }}
         >
-          <Ionicons name={"git-branch-outline"} size={16} /> Serves 4
+          <Ionicons name={"git-branch-outline"} size={16} />Serves 4
         </Text>
       </View>
     </View>
@@ -88,8 +95,21 @@ const FoodeDetails: React.FC<Props> = ({ foodname, username, userProfile }) => {
 export default FoodeDetails;
 const styles = StyleSheet.create({
   textRating: {
-    letterSpacing: 2,
-    paddingBottom: 5,
+    paddingLeft: 5,
+    fontFamily: "Nunito-Regular",
+  },
+  containerForRatingandLike: {
+    flexDirection: "row",
+    width: "100%",
+    paddingBottom: 10,
+    paddingTop: 10,
+  },
+  ratingContain: {
+    width: "27%",
+    borderRadius: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    fontFamily: "Nunito-semiBold",
   },
   containerForNameofFood: {
     paddingTop: 5,
@@ -100,21 +120,5 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     fontSize: 18,
     fontFamily: "Nunito-Bold",
-    paddingBottom: 5,
-  },
-  imageViewContainer: {
-    height: 30,
-    marginBottom: 5,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  imageView: {
-    width: 30,
-    height: 30,
-    borderRadius: 50,
-    resizeMode: "cover",
-    borderWidth: 2,
-    borderColor: "#fff",
-    marginRight: -10,
   },
 });

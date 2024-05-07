@@ -1,6 +1,8 @@
 import { userRegister } from "./services/userService/userSignup";
 import { updateUser } from "../../Redux/user";
 import { err } from "react-native-svg/lib/typescript/xml";
+import { saveToken } from "./auth/saveToken";
+import { saveUserData } from "./auth/saveUserData";
 export const SubmitSignUp = async (
   name: string,
   email: string,
@@ -18,30 +20,33 @@ export const SubmitSignUp = async (
       password: password,
     };
     try {
-      const result = await userRegister(
+      const { token, dataUser, success, error } = await userRegister(
         value.name,
         value.email,
         value.password
       );
-      console.log(result);
-      if (result.success == true) {
+      if (success && dataUser && token) {
+        console.log(dataUser);
         const newValue = {
-          id: result.dataUser._id,
-          userimage: result.dataUser.profileImage,
-          username: result.dataUser.username,
-          name: result.dataUser.name,
-          email: result.dataUser.email,
-          description: result.dataUser.description,
+          id: dataUser._id,
+          userimage: dataUser.profileImage,
+          username: dataUser.username,
+          name: dataUser.name,
+          email: dataUser.email,
+          description: dataUser.description,
         };
+        saveToken(token);
+        saveUserData(dataUser);
         dispatch(updateUser(newValue));
         navigation.navigate("Details");
         setaccerr(false);
-      } else if (result.success == false) {
-        setGeneralError(result.error);
+      } else if (success == false && error) {
+        setGeneralError(error);
         setaccerr(true);
       }
     } catch (error: any) {
-      throw new Error(error.message);
+      setGeneralError(error);
+      setaccerr(true);
     }
   } else {
     setGeneralError("Please fill in the information");

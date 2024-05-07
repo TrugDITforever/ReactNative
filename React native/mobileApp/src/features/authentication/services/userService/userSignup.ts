@@ -8,24 +8,34 @@ interface UserData {
   profileImage?: string;
   password?: string;
   description?: string;
-  dataUser?: any;
-  success: boolean;
-  error: string;
+}
+
+interface SignUpResponse {
+  success?: boolean;
+  error?: string;
+  token?: string;
+  dataUser?: UserData;
 }
 export async function userRegister(
   fullname: string,
   email: string,
   password: string
-): Promise<UserData> {
+): Promise<SignUpResponse> {
   try {
     const response = await axios.post(`${BASE_URL}:8080/api/userRegister`, {
       fullname,
       email,
       password,
     });
-    return response.data;
+    if (response.data.success) {
+      const token = response.data.token;
+      const dataUser = response.data.dataUser;
+      const success = response.data.success;
+      return { success, token, dataUser };
+    } else {
+      throw new Error("signup failed");
+    }
   } catch (error: any) {
-    console.error(error);
     return error.response.data;
   }
 }

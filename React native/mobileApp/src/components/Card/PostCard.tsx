@@ -16,10 +16,10 @@ interface Prop {
   dispatch?: any;
 }
 const PostCard: React.FC<Prop> = ({ navigation, userpost, dispatch }) => {
-  const screenWidth = Dimensions.get("window");
-  const [liked, setlike] = React.useState(
-    Array.from({ length: 18 }, () => false)
-  );
+  const numColumns = 3; // Số lượng cột mong muốn
+  const screenWidth = Dimensions.get("window").width; // Lấy chiều rộng của màn hình
+
+  const cardWidth = screenWidth / numColumns;
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.flexCard}>
@@ -27,7 +27,11 @@ const PostCard: React.FC<Prop> = ({ navigation, userpost, dispatch }) => {
           <TouchableOpacity
             key={index}
             style={styles.cardContain}
-            onPress={() => usefetchFoodByID(value._id, navigation, dispatch)}
+            onPress={() =>
+              usefetchFoodByID(value._id, navigation, dispatch).then(() => {
+                navigation.push("Cooking");
+              })
+            }
             activeOpacity={1}
           >
             <Image
@@ -96,13 +100,12 @@ export const styles = StyleSheet.create({
   flexCard: {
     flexDirection: "row",
     flexWrap: "wrap",
-    display: "flex",
-    justifyContent: "space-between",
   },
   cardContain: {
     width: "33%",
     height: 180,
-    marginBottom: 2,
+    marginLeft: 1,
+    marginBottom: 1,
   },
   marginLastIndex: {
     marginRight: 10,

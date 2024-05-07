@@ -36,11 +36,11 @@ const UserContainer: React.FC<Prop> = ({ navigation }) => {
               width: 50,
               height: 50,
               borderRadius: 50,
-              objectFit: "contain",
+              resizeMode: "cover",
               borderWidth: 2,
               borderColor: "#ccc",
             }}
-            source={require("../../../../assets/image/default-image.jpg")}
+            source={{ uri: userinfo.userimage }}
           />
         </View>
       </View>
@@ -63,7 +63,7 @@ const UserContainer: React.FC<Prop> = ({ navigation }) => {
               fontFamily: "Nunito-Bold",
             }}
           >
-            {userinfo.username? userinfo.username : userinfo.name}
+            {userinfo.username ? userinfo.username : userinfo.name}
           </Text>
         </View>
       </View>

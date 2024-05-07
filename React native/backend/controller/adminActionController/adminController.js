@@ -12,7 +12,8 @@ exports.fetchDataUser = (req, res) => {
 };
 /// get all food information base on mealType
 exports.fetchDataFood = (req, res) => {
-  foodModel.find().then((food) => {
+  const state = req.params;
+  foodModel.find({ mealType: state.mealType }).then((food) => {
     res.status(200).json({ foodData: food });
   });
 };

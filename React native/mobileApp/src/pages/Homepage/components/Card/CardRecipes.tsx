@@ -12,6 +12,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import commonStyle from "./commonstyles/style";
 import Card from "../../../../components/Card/CardRecipes";
+import { useFetchFoodData } from "../../../../features/authentication/hooks/useFetchFoodData";
 
 export const styles = StyleSheet.create({
   container: {
@@ -72,25 +73,21 @@ export const styles = StyleSheet.create({
     display: "flex",
     width: "100%",
     flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 10,
+    paddingLeft: 15,
+    paddingRight: 15,
   },
   textbox: {
     fontFamily: "Nunito-Bold",
     fontSize: 18,
     fontWeight: "600",
-    width: "77%",
-    marginLeft: 15,
   },
   textViewall: {
-    fontSize: 14,
-    textAlign: "center",
-    alignItems: "center",
-    paddingRight: 10,
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingLeft: 10,
-    borderRadius: 10,
-    fontFamily: "Nunito-Medium",
+    fontSize: 13,
+    fontFamily: "Nunito-Regular",
+    color: "#F98A4F",
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
@@ -104,13 +101,9 @@ interface Prop {
   dispatch?: any;
   image?: string;
 }
-const CardRecipes: React.FC<Prop> = ({
-  navigation,
-  foodData,
-  dispatch,
-  image,
-}) => {
-  const screenWidth = Dimensions.get("window");
+const CardRecipes: React.FC<Prop> = ({ navigation, dispatch, image }) => {
+  const prop = "recipes for today";
+  const { foodData, isloading } = useFetchFoodData(prop);
   const [liked, setlike] = React.useState(
     Array.from({ length: 5 }, () => false)
   );

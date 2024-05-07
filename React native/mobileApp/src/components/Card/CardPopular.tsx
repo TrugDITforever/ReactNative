@@ -13,11 +13,14 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { Prop } from "./commonProp";
+import { usefetchFoodByID } from "../../features/authentication/hooks/useFetchFoodById";
 const CardPopular: React.FC<Prop> = ({
   navigation,
   image,
   index,
   nameofFood,
+  foodId,
+  dispatch,
 }) => {
   const screenWidth = Dimensions.get("window");
   const [liked, setlike] = React.useState(
@@ -44,7 +47,9 @@ const CardPopular: React.FC<Prop> = ({
       <TouchableOpacity
         style={styles.cardContain}
         onPress={() => {
-          navigation.navigate("Cooking");
+          usefetchFoodByID(foodId, navigation, dispatch).then((res) => {
+            navigation.push("Cooking");
+          });
         }}
         activeOpacity={1}
       >

@@ -1,24 +1,28 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Toast from "react-native-toast-message";
 import {
   View,
   TextInput,
   Button,
-  Image,
+  ActivityIndicator,
   Text,
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
 import Userinfo from "../../../UserProfile/components/Userinfo";
-
+import { useSubmitupdateinfo } from "../../../../features/authentication/hooks/useUpdateInfo";
+import ModalImage from "./modalImage";
 const PageDetails = () => {
-  const user = useSelector((state: any) => state.userinfo);
+  const userinfo = useSelector((state: any) => state.userinfo);
   const dispatch = useDispatch();
-  const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
-  const [username, setUsername] = useState(user.username);
-  const [descriptions, setdecription] = useState(user.description);
-  const [profilePicture, setProfilePicture] = useState(null);
+  const [name, setName] = useState(userinfo.name);
+  const [email, setEmail] = useState(userinfo.email);
+  const [username, setUsername] = useState(userinfo.username);
+  const [description, setdecription] = useState(userinfo.description);
+  const [profilePicture, setProfilePicture] = useState<string>("");
+  const [ishow, setshowmodalimage] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const changeName = (text: string) => {
     setName(text);
   };
@@ -31,10 +35,32 @@ const PageDetails = () => {
   const changeemail = (text: string) => {
     setEmail(text);
   };
+  const handleupdateinfo = () => {
+    setLoading(true);
+    setTimeout(() => {
+      useSubmitupdateinfo(
+        userinfo.id,
+        name,
+        username,
+        email,
+        description,
+        dispatch
+      ).then(() => {
+        setLoading(false),
+          Toast.show({
+            type: "success",
+            text1: "Update success 👋",
+          });
+      });
+    }, 2000);
+  };
   return (
     <View style={styles.container}>
       <View style={{ marginLeft: 15, marginRight: 15 }}>
-        <Userinfo />
+        <Userinfo
+          setshowmodalimage={setshowmodalimage}
+          profilePicture={profilePicture}
+        />
       </View>
       <View style={styles.formcontainer}>
         <Text style={styles.inputheader}>Name</Text>
@@ -62,16 +88,28 @@ const PageDetails = () => {
 
         <TextInput
           style={styles.textInput}
-          value={descriptions}
+          value={description}
           multiline={true}
           numberOfLines={4}
           placeholder="Edit your description here..."
           onChangeText={changedescription}
         />
-        <TouchableOpacity style={styles.buttonContainer}>
-          <Text style={styles.textSubmit}>Submit</Text>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={handleupdateinfo}
+        >
+          {loading ? (
+            <ActivityIndicator size="large" color={"#fff"} />
+          ) : (
+            <Text style={styles.textSubmit}>Submit</Text>
+          )}
         </TouchableOpacity>
       </View>
+      <ModalImage
+        ishow={ishow}
+        setshowmodalimage={setshowmodalimage}
+        setimage={setProfilePicture}
+      />
     </View>
   );
 };
@@ -109,7 +147,6 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontFamily: "Nunito-semiBold",
     fontSize: 18,
-    padding: 15,
   },
   textInput: {
     backgroundColor: "#f6f6f6",
@@ -126,6 +163,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: "100%",
+    height: "10%",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#000",

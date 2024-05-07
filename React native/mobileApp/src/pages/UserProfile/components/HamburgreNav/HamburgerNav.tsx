@@ -12,7 +12,9 @@ export const HamburgerNav: React.FC<Prop> = ({ navigation }) => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.buttonAdd}
-          // onPress={() => navigation.navigate("Settings")}
+          onPress={() =>
+            navigation.push("CreateRecipePage", { showupdate: false })
+          }
         >
           <Feather name={"plus-square"} size={27} color={"#000"} />
         </TouchableOpacity>
@@ -39,7 +41,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   buttonhambur: {
-    paddingLeft: 10,
+    paddingLeft: 20,
   },
   buttonAdd: {},
 });

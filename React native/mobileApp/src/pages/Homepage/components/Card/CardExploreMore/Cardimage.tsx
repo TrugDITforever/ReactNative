@@ -53,12 +53,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: "100%",
-    borderTopRightRadius: 15,
-    borderTopLeftRadius: 15,
   },
   cardContain: {
     width: "100%",
-    height: 230,
+    height: 330,
     position: "relative",
   },
   containerForRatingandLike: {

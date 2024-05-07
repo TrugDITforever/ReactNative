@@ -1,26 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 interface FoodData {
-  foodId: number;
+  foodId: string;
   foodName: string;
   foodImage: string;
   calories: number;
   level: string;
   serves: number;
   description: string;
-  ingredients: string[];
+  ingredients: [];
   instructions: string;
+  ownerId: string;
 }
 
 const initialState: FoodData = {
-  foodId: 1,
+  foodId: "",
   foodName: "japanese",
   foodImage: "string",
   calories: 123,
   level: "string",
   serves: 1,
   description: "string",
-  ingredients: [""],
+  ingredients: [],
   instructions: "string",
+  ownerId: "string",
 };
 export const foodinfo = createSlice({
   name: "foodinfo",
@@ -29,7 +31,7 @@ export const foodinfo = createSlice({
     updateFoodInfo: (state, action) => {
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       };
     },
   },

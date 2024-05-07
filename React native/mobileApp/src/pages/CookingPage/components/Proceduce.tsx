@@ -18,13 +18,17 @@ const Proceduce = () => {
     <View style={{ width: "100%" }}>
       <View style={commonStyles.containerFordetails}>
         <View style={commonStyles.headerTextcontain}>
-          <Ionicons name="bonfire-outline" size={20} color={"#fff"} />
-          <Text style={commonStyles.headerText}>Instructions</Text>
+          <Ionicons name="bonfire-outline" size={20} color={"#FF8A00"} />
+          <Text style={commonStyles.headerText}>Directions</Text>
         </View>
         {resultSplitingredients.map((value, index) => (
-          <Text key={index} style={commonStyles.textDetais}>
-            {++index}. {value}
-          </Text>
+          <View
+            key={index}
+            style={{ flexDirection: "row", alignItems: "center" }}
+          >
+            <Text style={{ color: "#FF8A00" }}>{++index}</Text>
+            <Text style={commonStyles.textDetais}>{value}</Text>
+          </View>
         ))}
       </View>
     </View>

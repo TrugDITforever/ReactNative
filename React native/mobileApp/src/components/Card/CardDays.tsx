@@ -1,16 +1,8 @@
 import * as React from "react";
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  TouchableOpacity,
-  Platform,
-} from "react-native";
+import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { usefetchFoodByID } from "../../features/authentication/hooks/useFetchFoodById";
 
 interface Prop {
   Time?: string;
@@ -20,9 +12,16 @@ interface Prop {
   foodId: string;
   index: number;
   key?: number;
+  dispatch: any;
 }
-const CardDay: React.FC<Prop> = ({ navigation, image, index, nameofFood }) => {
-  const screenWidth = Dimensions.get("window");
+const CardDay: React.FC<Prop> = ({
+  navigation,
+  image,
+  index,
+  nameofFood,
+  foodId,
+  dispatch,
+}) => {
   const [liked, setlike] = React.useState(
     Array.from({ length: 8 }, () => false)
   );
@@ -42,10 +41,12 @@ const CardDay: React.FC<Prop> = ({ navigation, image, index, nameofFood }) => {
       ]}
     >
       <TouchableOpacity
-        onPress={() => {
-          navigation.navigate("Cooking");
-        }}
         activeOpacity={1}
+        onPress={() => {
+          usefetchFoodByID(foodId, navigation, dispatch).then(() => {
+            navigation.push("Cooking");
+          });
+        }}
       >
         <View style={styles.cardContain}>
           <Image source={{ uri: image }} style={styles.backgroundImage} />

@@ -12,6 +12,7 @@ import FoodeDetails from "./FoodDetails";
 import { useFetchUserPost } from "../../../../../features/authentication/hooks/useFetchUserPost";
 import { usefetchFoodByID } from "../../../../../features/authentication/hooks/useFetchFoodById";
 import UserProfile from "../../../../UserProfile/UserProfile";
+import User from "./User";
 
 interface Prop {
   navigation: any;
@@ -45,10 +46,18 @@ const CardExploreMore: React.FC<Prop> = ({ navigation, dispatch }) => {
         {userpost.map((value, index) => (
           <View key={index} style={[styles.cardContainBorder]}>
             <TouchableOpacity
-              onPress={() => usefetchFoodByID(value._id, navigation, dispatch)}
+              onPress={() =>
+                usefetchFoodByID(value._id, navigation, dispatch).then(() => {
+                  navigation.push("Cooking");
+                })
+              }
               activeOpacity={1}
             >
               {/* card image */}
+              <User
+                username={value.userpost[0].username}
+                userProfile={value.userpost[0].profileImage}
+              />
               <CardImage
                 index={index}
                 liked={liked}
@@ -80,12 +89,10 @@ const styles = StyleSheet.create({
   },
   cardContainBorder: {
     backgroundColor: "#fff",
-    borderRadius: 15,
-    marginLeft: 15,
-    marginRight: 15,
+    // borderRadius: 15,
     marginBottom: 25,
-    elevation: 1,
-    shadowColor: "#000",
+    // elevation: 1,
+    // shadowColor: "#000",
   },
   boxword: {
     display: "flex",

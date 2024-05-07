@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "auto",
     borderRadius: 10,
-    marginTop: "10%",
+    marginTop: "3%",
     alignItems: "center",
   },
   imageContainer: {
@@ -42,18 +42,35 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
 });
-const Userinfo = () => {
+interface Prop {
+  profilePicture?: string;
+  setshowmodalimage?: any;
+}
+const Userinfo: React.FC<Prop> = ({ setshowmodalimage, profilePicture }) => {
   const userinfo = useSelector((state: any) => state.userinfo);
   return (
     <View style={styles.container}>
       <View style={styles.userinfoContainer}>
         <View style={styles.imageContainer}>
-          <Image
-            style={styles.image}
-            source={{
-              uri: userinfo.userimage,
-            }}
-          ></Image>
+          {profilePicture ? (
+            <TouchableOpacity onPress={() => setshowmodalimage(true)}>
+              <Image
+                style={styles.image}
+                source={{
+                  uri: userinfo.userimage,
+                }}
+              />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity activeOpacity={1}>
+              <Image
+                style={styles.image}
+                source={{
+                  uri: userinfo.userimage,
+                }}
+              />
+            </TouchableOpacity>
+          )}
         </View>
         <View style={{ alignItems: "center" }}>
           <Text style={styles.textName}>{userinfo.username}</Text>

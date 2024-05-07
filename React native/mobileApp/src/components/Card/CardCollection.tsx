@@ -31,11 +31,6 @@ const CardCollections: React.FC<Prop> = ({
       return newLikes;
     });
   }, []);
-  const fetchfoodByID = React.useCallback(() => {
-    if (foodId) {
-      usefetchFoodByID(foodId, navigation, dispatch);
-    } else return;
-  }, []);
   return (
     <View
       style={[
@@ -45,8 +40,12 @@ const CardCollections: React.FC<Prop> = ({
     >
       <TouchableOpacity
         style={styles.cardContain}
-        onPress={() => fetchfoodByID}
         activeOpacity={1}
+        onPress={() => {
+          usefetchFoodByID(foodId, navigation, dispatch).then(() => {
+            navigation.push("Cooking");
+          });
+        }}
       >
         <View style={styles.cardContain}>
           <Image source={{ uri: image }} style={styles.backgroundImage} />

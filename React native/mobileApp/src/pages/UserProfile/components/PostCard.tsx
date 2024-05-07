@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import PostCard from "../../../components/Card/PostCard";
 import { usefetchUserPostById } from "../../../features/authentication/hooks/useFetchUserPostbyId";
 import { useDispatch, useSelector } from "react-redux";
+import { getUserAsyncData } from "../../../features/authentication/auth/getUserDataFromAsync";
+import { updateUser } from "../../../Redux/user";
 
 interface Prop {
   navigation: any;
@@ -11,9 +13,14 @@ interface Prop {
 const PostCardofUser: React.FC<Prop> = ({ navigation }) => {
   const userinfo = useSelector((state: any) => state.userinfo);
   const dispatch = useDispatch();
-  const { userpost, isloading } = usefetchUserPostById(userinfo.id);
+  const [fetching, setisfetching] = React.useState<boolean>(false);
+  const { userpost, isloading } = usefetchUserPostById(
+    userinfo.id,
+    fetching,
+    setisfetching
+  );
   return (
-    <View style={{ }}>
+    <View>
       <PostCard
         navigation={navigation}
         userpost={userpost}

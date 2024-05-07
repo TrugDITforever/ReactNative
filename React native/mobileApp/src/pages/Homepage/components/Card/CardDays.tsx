@@ -15,7 +15,54 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import commonstyles from "./commonstyles/style";
 import Card from "../../../../components/Card/CardDays";
+import { useFetchFoodData } from "../../../../features/authentication/hooks/useFetchFoodData";
+import { useDispatch } from "react-redux";
 
+interface Prop {
+  Time?: string;
+  navigation?: any;
+  foodData?: any;
+  dispatch?: any;
+}
+const CardDay: React.FC<Prop> = ({ Time, navigation, dispatch }) => {
+  const prop = "Breakfast";
+  const { foodData, isloading } = useFetchFoodData(prop);
+  const [liked, setlike] = React.useState(
+    Array.from({ length: 8 }, () => false)
+  );
+  const handlePress = React.useCallback((index: number) => {
+    setlike((prevLiked) => {
+      const newLikes = [...prevLiked];
+      newLikes[index] = !newLikes[index];
+      return newLikes;
+    });
+  }, []);
+  return (
+    <View style={[styles.container]}>
+      <View style={styles.boxword}>
+        <Text style={styles.textbox}>{Time}</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Viewall")}>
+          <Text style={commonstyles.textViewall}>View All</Text>
+        </TouchableOpacity>
+      </View>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {foodData.map((value: any, index: number) => (
+          <Card
+            Time={Time}
+            key={index}
+            foodId={value._id}
+            index={index}
+            navigation={navigation}
+            image={value.foodImage}
+            nameofFood={value.foodName}
+            dispatch={dispatch}
+          />
+        ))}
+      </ScrollView>
+    </View>
+  );
+};
+export default CardDay;
 const styles = StyleSheet.create({
   container: {
     width: "100%",
@@ -32,14 +79,15 @@ const styles = StyleSheet.create({
     display: "flex",
     width: "100%",
     flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     marginBottom: 10,
+    paddingLeft: 15,
+    paddingRight: 15,
   },
   textbox: {
     fontFamily: "Nunito-Bold",
     fontSize: 18,
-    fontWeight: "600",
-    width: "77%",
-    marginLeft: 15,
   },
   cardContain: {
     width: "100%",
@@ -84,46 +132,3 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-interface Prop {
-  Time?: string;
-  navigation?: any;
-  foodData?: any;
-  dispatch?: any;
-}
-const CardDay: React.FC<Prop> = ({ Time, navigation, foodData, dispatch }) => {
-  const screenWidth = Dimensions.get("window");
-  const [liked, setlike] = React.useState(
-    Array.from({ length: 8 }, () => false)
-  );
-  const handlePress = React.useCallback((index: number) => {
-    setlike((prevLiked) => {
-      const newLikes = [...prevLiked];
-      newLikes[index] = !newLikes[index];
-      return newLikes;
-    });
-  }, []);
-  return (
-    <View style={[styles.container]}>
-      <View style={styles.boxword}>
-        <Text style={styles.textbox}>{Time}</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Viewall")}>
-          <Text style={commonstyles.textViewall}>View All</Text>
-        </TouchableOpacity>
-      </View>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {foodData.map((value: any, index: number) => (
-          <Card
-            Time={Time}
-            key={index}
-            foodId={value.foodId}
-            index={index}
-            navigation={navigation}
-            image={value.foodImage}
-            nameofFood={value.foodName}
-          />
-        ))}
-      </ScrollView>
-    </View>
-  );
-};
-export default CardDay;

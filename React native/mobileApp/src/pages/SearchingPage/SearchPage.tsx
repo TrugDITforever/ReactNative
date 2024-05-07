@@ -12,6 +12,7 @@ import {
   ScrollView,
   ActivityIndicator,
   StatusBar,
+  KeyboardAvoidingView,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SearchInput from "./components/SearchInput";
@@ -44,7 +45,7 @@ const SearchPage: React.FC<Prop> = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <Statusbar />
       <View style={{ width: "100%", height: "100%" }}>
-        <View style={{ flexDirection: "row", margin: 10 }}>
+        {/* <View style={{ flexDirection: "row", margin: 10 }}>
           <View
             style={{
               width: "100%",
@@ -56,12 +57,9 @@ const SearchPage: React.FC<Prop> = ({ navigation }) => {
               Search Food
             </Text>
           </View>
-        </View>
+        </View> */}
         {/* search input */}
         <SearchInput />
-        {/* List searching */}
-        <SearchedList />
-        {/* Results search */}
         <SearchResults navigation={navigation} />
       </View>
     </SafeAreaView>

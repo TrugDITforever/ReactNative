@@ -9,20 +9,18 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-import AntDesign from "react-native-vector-icons/AntDesign";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import commonStyle from "./commonstyles/style";
 import Card from "../../../../components/Card/CardPopular";
+import { useFetchFoodData } from "../../../../features/authentication/hooks/useFetchFoodData";
 
 interface Prop {
   navigation?: any;
   foodData?: any;
   dispatch?: any;
 }
-const CardPopular: React.FC<Prop> = ({ navigation, foodData, dispatch }) => {
-  const screenWidth = Dimensions.get("window");
+const CardPopular: React.FC<Prop> = ({ navigation, dispatch }) => {
+  const prop = "Popular";
+  const { foodData, isloading } = useFetchFoodData(prop);
   const [liked, setlike] = React.useState(
     Array.from({ length: 8 }, () => false)
   );
@@ -78,14 +76,15 @@ const styles = StyleSheet.create({
     display: "flex",
     width: "100%",
     flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     marginBottom: 10,
+    paddingLeft: 15,
+    paddingRight: 15,
   },
   textbox: {
     fontFamily: "Nunito-Bold",
     fontSize: 18,
-    fontWeight: "600",
-    width: "77%",
-    marginLeft: 15,
   },
   cardContain: {
     width: "100%",

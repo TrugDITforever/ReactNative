@@ -11,18 +11,16 @@ import commonStyle from "./commonstyles/style";
 import Card from "../../../../components/Card/CardCollection";
 import { usefetchFoodByID } from "../../../../features/authentication/hooks/useFetchFoodById";
 import { useDispatch } from "react-redux";
+import { useFetchFoodData } from "../../../../features/authentication/hooks/useFetchFoodData";
 
 interface Prop {
   navigation?: any;
   foodData?: any;
   dispatch?: any;
 }
-const CardCollections: React.FC<Prop> = ({
-  navigation,
-  foodData,
-  dispatch,
-}) => {
-  const screenWidth = Dimensions.get("window");
+const CardCollections: React.FC<Prop> = ({ navigation, dispatch }) => {
+  const prop = "healthy";
+  const { foodData, isloading } = useFetchFoodData(prop);
   return (
     <View style={[styles.container]}>
       <View style={styles.boxword}>
@@ -66,14 +64,15 @@ const styles = StyleSheet.create({
     display: "flex",
     width: "100%",
     flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     marginBottom: 10,
+    paddingLeft: 15,
+    paddingRight: 15,
   },
   textbox: {
     fontFamily: "Nunito-Bold",
     fontSize: 18,
-    fontWeight: "600",
-    width: "77%",
-    marginLeft: 15,
   },
   cardContain: {
     width: "100%",

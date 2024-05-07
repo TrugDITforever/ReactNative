@@ -23,12 +23,12 @@ const UserProfile: React.FC<Prop> = ({ navigation }) => {
       <Statusbar />
       <View style={{ width: "100%", height: "100%" }}>
         {/* User image. name and button edit profile */}
-        <View style={{ marginLeft: 15, marginRight: 15 }}>
+        <View style={{ marginLeft: 15, marginRight: 15, height: "40%" }}>
           <HamburgerNav navigation={navigation} />
           <Userinfo />
         </View>
         {/* Post of User will be showed here */}
-        <View style={{ marginTop: "15%", width: "100%", height: "62%" }}>
+        <View style={{ width: "100%", height: "60%" }}>
           <PostCard navigation={navigation} />
         </View>
       </View>

@@ -11,94 +11,20 @@ import {
 } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    marginTop: 10,
-  },
-  backgroundImage: {
-    resizeMode: "cover",
-    position: "absolute",
-    width: "100%",
-    height: "100%",
-    borderRadius: 10,
-  },
-  boxword: {
-    display: "flex",
-    width: "100%",
-    flexDirection: "row",
-    marginBottom: 5,
-  },
-  textbox: {
-    fontFamily: "Nunito-Bold",
-    fontSize: 18,
-    fontWeight: "600",
-    width: "77%",
-    marginLeft: 15,
-  },
-  cardContain: {
-    width: "100%",
-    height: 150,
-    position: "relative",
-  },
-  cardContainBorder: {
-    width: "48%",
-    height: 220,
-    borderRadius: 10,
-    backgroundColor: "#fff",
-    marginBottom: 15,
-  },
-  textViewall: {
-    fontSize: 13,
-    textAlign: "center",
-    alignItems: "center",
-    paddingRight: 10,
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingLeft: 10,
-    borderRadius: 10,
-    fontFamily: "Nunito-Regular",
-  },
-  containerForRatingandLike: {
-    display: "flex",
-    flexDirection: "row",
-    height: "auto",
-  },
-  textRating: {
-    paddingLeft: 5,
-    opacity: 0.5,
-    fontFamily: "Nunito-Medium",
-  },
-  containerForNameofFood: {
-    bottom: 0,
-    marginLeft: 5,
-  },
-  textNameFood: {
-    borderRadius: 10,
-    fontSize: 16,
-    fontFamily: "Nunito-Bold",
-  },
-  buttonlike: {
-    width: 30,
-    height: 30,
-    backgroundColor: "#f1f1f1",
-    borderRadius: 20,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
+import { useFetchFoodData } from "../../../features/authentication/hooks/useFetchFoodData";
+import { usefetchFoodByID } from "../../../features/authentication/hooks/useFetchFoodById";
+import { useDispatch } from "react-redux";
 
 interface Prop {
   navigation: any;
-  setloadingwhenfetch: () => void;
 }
-const CardforMore: React.FC<Prop> = ({ navigation, setloadingwhenfetch }) => {
-  const screenWidth = Dimensions.get("window");
+const CardforMore: React.FC<Prop> = ({ navigation }) => {
+  const recommended = "Popular";
+  const { foodData, isloading } = useFetchFoodData(recommended);
   const [liked, setlike] = React.useState(
     Array.from({ length: 8 }, () => false)
   );
+  const dispatch = useDispatch();
   const handlePress = React.useCallback((index: number) => {
     setlike((prevLiked) => {
       const newLikes = [...prevLiked];
@@ -123,15 +49,19 @@ const CardforMore: React.FC<Prop> = ({ navigation, setloadingwhenfetch }) => {
           justifyContent: "space-between",
         }}
       >
-        {liked.map((value, index) => (
+        {foodData.map((value, index) => (
           <View key={index} style={[styles.cardContainBorder]}>
             <TouchableOpacity
-              onPress={() => setloadingwhenfetch()}
+              onPress={() =>
+                usefetchFoodByID(value._id, navigation, dispatch).then(() =>
+                  navigation.push("Cooking")
+                )
+              }
               activeOpacity={1}
             >
               <View style={styles.cardContain}>
                 <Image
-                  source={require("../../../../assets/image/food.jpg")}
+                  source={{ uri: value.foodImage }}
                   style={styles.backgroundImage}
                 />
                 {/* details of food */}
@@ -208,7 +138,7 @@ const CardforMore: React.FC<Prop> = ({ navigation, setloadingwhenfetch }) => {
                     }}
                   >
                     <Text numberOfLines={2} style={styles.textNameFood}>
-                      Macaroni and Cheese
+                      {value.foodName}
                     </Text>
                   </View>
                   <View
@@ -228,3 +158,73 @@ const CardforMore: React.FC<Prop> = ({ navigation, setloadingwhenfetch }) => {
   );
 };
 export default CardforMore;
+const styles = StyleSheet.create({
+  container: {
+    width: "100%",
+    marginTop: "10%",
+  },
+  backgroundImage: {
+    resizeMode: "cover",
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    borderRadius: 10,
+  },
+  boxword: {
+    display: "flex",
+    width: "100%",
+    paddingLeft: 15,
+    paddingRight: 15,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  textbox: {
+    fontFamily: "Nunito-Bold",
+    fontSize: 18,
+  },
+  cardContain: {
+    width: "100%",
+    height: 150,
+    position: "relative",
+  },
+  cardContainBorder: {
+    width: "48%",
+    height: 220,
+    borderRadius: 10,
+    backgroundColor: "#fff",
+    marginBottom: 15,
+  },
+  textViewall: {
+    fontSize: 13,
+    fontFamily: "Nunito-Regular",
+    color: "#ffa800",
+  },
+  containerForRatingandLike: {
+    display: "flex",
+    flexDirection: "row",
+    height: "auto",
+  },
+  textRating: {
+    paddingLeft: 5,
+    opacity: 0.5,
+    fontFamily: "Nunito-Medium",
+  },
+  containerForNameofFood: {
+    bottom: 0,
+    marginLeft: 5,
+  },
+  textNameFood: {
+    borderRadius: 10,
+    fontSize: 16,
+    fontFamily: "Nunito-Bold",
+  },
+  buttonlike: {
+    width: 30,
+    height: 30,
+    backgroundColor: "#f1f1f1",
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

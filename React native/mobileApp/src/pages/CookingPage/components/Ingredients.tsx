@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 const Ingredients = () => {
   const foodInfo = useSelector((state: any) => state.foodinfo);
   const splitText = React.useCallback(
-    (text: string): String[] => { 
+    (text: string): String[] => {
       return text.split(",");
     },
     [1]
@@ -18,7 +18,7 @@ const Ingredients = () => {
       <View style={commonStyles.containerFordetails}>
         {/* Header for text of Ingredient */}
         <View style={commonStyles.headerTextcontain}>
-          <AntDesign name="book" size={20} color={"#fff"} />
+          <AntDesign name="book" size={20} color={"#FF8A00"} />
           <Text style={commonStyles.headerText}>Ingredients</Text>
         </View>
         {foodInfo.ingredients.map((item: any, index: number) => (
@@ -31,7 +31,7 @@ const Ingredients = () => {
               opacity: 0.7,
             }}
           >
-            <AntDesign name="pluscircle" /> {item}
+            <AntDesign name="pluscircle" color={"#FF8A00"} size={16} /> {item}
           </Text>
         ))}
       </View>

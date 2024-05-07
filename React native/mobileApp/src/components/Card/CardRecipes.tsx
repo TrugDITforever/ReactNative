@@ -39,7 +39,11 @@ const CardRecipes: React.FC<Prop> = ({
           styles.cardContain,
           [index === liked.length - 1 ? styles.marginLastIndex : {}],
         ]}
-        onPress={() =>  usefetchFoodByID(foodId, navigation, dispatch)}
+        onPress={() =>
+          usefetchFoodByID(foodId, navigation, dispatch).then(() => {
+            navigation.push("Cooking");
+          })
+        }
         activeOpacity={1}
       >
         <Image source={{ uri: image }} style={styles.backgroundImage} />

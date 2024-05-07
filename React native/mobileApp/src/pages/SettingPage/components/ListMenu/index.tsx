@@ -5,13 +5,15 @@ import {
   Image,
   ImageBackground,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { StyleSheet } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import CustomAlert from "../../../../components/Modal/CustomAlert";
+import { useDeleteacc } from "../../../../features/authentication/hooks/useDeleteUser";
+import { useSelector } from "react-redux";
 const styles = StyleSheet.create({
   container: {
     width: "100%",
@@ -67,6 +69,17 @@ const ListMenu: React.FC<Prop> = ({ navigation }) => {
       icon: "chatbox-ellipses",
     },
   ]);
+  const userinfo = useSelector((state: any) => state.userinfo);
+  const [isshow, setisshow] = React.useState<boolean>(false);
+  const handleOppenmodal = () => {
+    setisshow(true);
+  };
+  const handlecancel = () => {
+    setisshow(false);
+  };
+  const handleDeleteAccount = () => {
+    useDeleteacc(userinfo.id, navigation);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.listContainer}>
@@ -113,7 +126,8 @@ const ListMenu: React.FC<Prop> = ({ navigation }) => {
             <TouchableOpacity
               style={styles.subMenu}
               onPress={() => {
-                AsyncStorage.removeItem("token"), navigation.replace("Intro");
+                AsyncStorage.removeItem("token"), navigation.navigate("Home");
+                navigation.replace("AccountPage");
               }}
             >
               {/* icon */}
@@ -137,7 +151,36 @@ const ListMenu: React.FC<Prop> = ({ navigation }) => {
                 />
               </View>
             </TouchableOpacity>
+            {/* Delete Account */}
+            <TouchableOpacity style={styles.subMenu} onPress={handleOppenmodal}>
+              {/* icon */}
+              <View>
+                <Ionicons
+                  name="trash"
+                  size={24}
+                  color={styles.colorOfIcon.color}
+                />
+              </View>
+              {/* Text */}
+              <View style={{ width: "70%" }}>
+                <Text style={styles.textMenu}>Delete account</Text>
+              </View>
+              {/* icon arrow */}
+              <View>
+                <AntDesign
+                  name="right"
+                  size={20}
+                  color={styles.colorOfIcon.color}
+                />
+              </View>
+            </TouchableOpacity>
           </View>
+          <CustomAlert
+            visible={isshow}
+            message="Are you sure you want to delete this account?"
+            onClose={handlecancel}
+            ondelete={handleDeleteAccount}
+          />
         </View>
       </View>
     </View>

@@ -16,6 +16,8 @@ const loadCustomFonts = async () => {
     "Nunito-semiBold": require("./src/assets/fonts/Nunito-SemiBold.ttf"),
   });
 };
+import Toast, { BaseToast, ErrorToast } from "react-native-toast-message";
+import { NavigationContainer } from "@react-navigation/native";
 const App = () => {
   const [isFontLoaded, setIsFontLoaded] = useState(false);
   if (!isFontLoaded) {
@@ -24,10 +26,38 @@ const App = () => {
       .catch((error) => console.error("Error loading fonts:", error));
     return null;
   }
+  /// custom toast message
+  const toastConfig = {
+    success: (props: any) => (
+      <BaseToast
+        {...props}
+        style={{ borderColor: "green", borderLeftWidth: 5 }}
+        // contentContainerStyle={{ paddingHorizontal: 15 }}
+        text1Style={{
+          fontSize: 16,
+          fontFamily: "Nunito-Bold",
+        }}
+      />
+    ),
+    error: (props: any) => (
+      <ErrorToast
+        {...props}
+        text1Style={{
+          fontSize: 17,
+        }}
+        text2Style={{
+          fontSize: 15,
+        }}
+      />
+    ),
+  };
   return (
-    <Provider store={store}>
-      <Stackscreens />
-    </Provider>
+    <NavigationContainer>
+      <Provider store={store}>
+        <Stackscreens />
+      </Provider>
+      <Toast config={toastConfig} />
+    </NavigationContainer>
   );
 };
 export default App;

@@ -23,7 +23,7 @@ const AccountPage: React.FC<Props> = ({ navigation }) => {
     const check = async () => {
       const isLogged = await isfirstTimeLogin();
       if (isLogged) {
-        navigation.navigate("Details");
+        navigation.replace("Details");
       }
     };
     check();

@@ -13,8 +13,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons/faArrowRight";
 import { LinearGradient } from "expo-linear-gradient";
 import { Button } from "react-native";
+import { isfirstTimeLogin } from "../../features/authentication/auth/checkIsfirstTimeLogin";
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  subcontainer: {
     flex: 1,
   },
   overlay: {
@@ -30,17 +34,19 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   textgetstart: {
-    fontSize: 25,
+    fontSize: 24,
     fontFamily: "Nunito-semiBold",
     color: "#fff",
   },
   button: {
+    width: "100%",
     backgroundColor: "#F98A4F",
-    padding: 15,
-    borderRadius: 20,
+    borderRadius: 10,
     marginTop: 30,
+    padding: 10,
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
     flexDirection: "row",
   },
 });
@@ -48,16 +54,31 @@ interface Prop {
   navigation: any;
 }
 const Intropage: React.FC<Prop> = ({ navigation }) => {
+  React.useEffect(() => {
+    const check = async () => {
+      const isLogged = await isfirstTimeLogin();
+      if (isLogged) {
+        navigation.replace("Details");
+      }
+    };
+    check();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar />
       <ImageBackground
-        style={styles.container}
+        style={styles.subcontainer}
         source={require("../../assets/image/cookloading.png")}
       >
         <View style={styles.overlay} />
         <View
-          style={{ position: "absolute", bottom: 50, alignItems: "center" }}
+          style={{
+            position: "absolute",
+            bottom: 50,
+            alignItems: "center",
+            padding: 20,
+          }}
         >
           <Text style={styles.textIntro}>
             Welcome to CookMate, your culinary companion for delicious recipes

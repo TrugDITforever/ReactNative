@@ -10,8 +10,8 @@ const Description = () => {
       <View style={commonStyles.containerFordetails}>
         {/* Header for text of description */}
         <View style={commonStyles.headerTextcontain}>
-          <AntDesign name="paperclip" size={20} color={"#fff"} />
-          <Text style={commonStyles.headerText}> Description</Text>
+          <AntDesign name="paperclip" size={20} color={"#FF8A00"} />
+          <Text style={commonStyles.headerText}>Description</Text>
         </View>
         <Text style={commonStyles.textDetais}>{foodinfo.description}</Text>
       </View>
