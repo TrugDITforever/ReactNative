@@ -113,12 +113,47 @@ exports.fetchuserPostsbyId = (req, res) => {
           },
         },
       },
+      // { $limit: 20 },
     ])
     .then((data) => {
       res.status(200).json({
         postData: data,
       });
     });
+};
+/// fetch userLikedPost by id
+exports.fetchUserLikedPost = (req, res) => {
+  const state = req.params.userId;
+  const userID = new ObjectId(`${state}`);
+  try {
+    userModel
+      .aggregate([
+        { $match: { _id: userID } },
+        {
+          $unwind: "$liked",
+        },
+        {
+          $lookup: {
+            from: "foods",
+            localField: "liked",
+            foreignField: "_id",
+            as: "userpost",
+          },
+        },
+        {
+          $project: {
+            _id: { $arrayElemAt: ["$userpost._id", 0] },
+            foodImage: { $arrayElemAt: ["$userpost.foodImage", 0] },
+          },
+        },
+        // { $limit: 20 },
+      ])
+      .then((data) => {
+        res.status(200).json({
+          postData: data,
+        });
+      });
+  } catch (error) {}
 };
 ///user update profile
 exports.userUpdateProfile = (req, res) => {
@@ -144,7 +179,6 @@ exports.userUpdateProfile = (req, res) => {
 ///user delete account
 exports.userDeleteAccount = (req, res) => {
   const userid = new ObjectId(`${req.params.userid}`);
-  console.log(userid);
   try {
     userModel.findByIdAndDelete(req.params.userid).then((user) => {
       res.status(200).json({ deletedUser: user, success: true });
@@ -196,7 +230,7 @@ exports.userUpDatepostRecipe = (req, res) => {
 };
 /// user delete their recipe
 exports.userDeleteRecipe = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.foodid;
   try {
     foodModel.findByIdAndDelete(id).then((food) => {
       res.status(200).json({ deletedRecipe: food, success: true });
@@ -205,3 +239,50 @@ exports.userDeleteRecipe = (req, res) => {
     res.status(400).json({ success: false });
   }
 };
+/// user add a new recipe to their likes
+///check if user liked it or not
+exports.userLikesRecipe = async (req, res) => {
+  const userId = req.params.userid;
+  const foodId = req.body.recipeId;
+  try {
+    const isliked = await userModel.findOne({
+      _id: userId,
+      liked: foodId,
+    });
+    if (isliked) {
+      userModel
+        .findByIdAndUpdate(userId, {
+          $pull: { liked: new ObjectId(`${foodId}`) },
+        })
+        .then((food) => {
+          res.status(200).json({ success: false, removed: foodId });
+        });
+    } else {
+      userModel
+        .findByIdAndUpdate(userId, {
+          $push: { liked: new ObjectId(`${foodId}`) },
+        })
+        .then((food) => {
+          res.status(200).json({ success: true, added: foodId });
+        });
+    }
+  } catch (error) {
+    res.status(400).json({ success: false });
+  }
+};
+///
+exports.checkisLiked = async (req, res) => {
+  const userId = req.params.userid;
+  const foodId = req.query.recipeId;
+  try {
+    const data = await userModel.findOne({ _id: userId, liked: foodId });
+    if (data) {
+      res.status(200).json({ success: true, exist: true });
+    } else {
+      res.status(200).json({ success: true, exist: false });
+    }
+  } catch (error) {
+    res.status(400).json({ success: false });
+  }
+};
+/// fetching user liked recipe

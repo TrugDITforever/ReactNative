@@ -14,10 +14,10 @@ interface FoodData {
 
 const initialState: FoodData = {
   foodId: "",
-  foodName: "japanese",
-  foodImage: "string",
-  calories: 123,
-  level: "string",
+  foodName: "",
+  foodImage: "testing",
+  calories: 0,
+  level: "",
   serves: 1,
   description: "string",
   ingredients: [],

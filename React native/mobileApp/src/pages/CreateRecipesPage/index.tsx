@@ -50,13 +50,13 @@ const CreateRecipeScreen: React.FC<Prop> = ({ navigation, route }) => {
   const handleSubmit = () => {
     submitCreateRecipes(recipeData).then((res) => {
       dispatch(clearAllFields());
-      navigation.goBack();
+      navigation.navigate("PostOfUser", { success: true });
     });
   };
   const handleupdateRecipe = () => {
     submitUpdateRecipe(updaterecipeData).then(() => {
       dispatch(clearAllFields());
-      navigation.goBack();
+      navigation.navigate("PostOfUser", { success: true });
     });
   };
   return (

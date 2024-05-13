@@ -10,6 +10,6 @@ export async function fetchUserPostById(
     );
     return res.data.postData;
   } catch (error: any) {
-    throw new Error(error);
+    return error.response.data;
   }
 }

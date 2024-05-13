@@ -7,8 +7,14 @@ interface Props {
   message?: string;
   onClose: any;
   handleEdit: () => void;
+  handleDelete: () => void;
 }
-const ModalEditvsDel: React.FC<Props> = ({ visible, onClose, handleEdit }) => {
+const ModalEditvsDel: React.FC<Props> = ({
+  visible,
+  onClose,
+  handleEdit,
+  handleDelete,
+}) => {
   return (
     <Modal visible={visible} transparent animationType="fade">
       <TouchableOpacity
@@ -60,7 +66,7 @@ const ModalEditvsDel: React.FC<Props> = ({ visible, onClose, handleEdit }) => {
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={onClose}
+                onPress={handleDelete}
                 style={{
                   padding: 10,
                   borderRadius: 5,

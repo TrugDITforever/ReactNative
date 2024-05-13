@@ -13,5 +13,5 @@ export interface userPostData {
   foodName: string;
   foodImage: string;
   userpost: UserInfo[];
-  postData: any;
+  // postData: any;
 }

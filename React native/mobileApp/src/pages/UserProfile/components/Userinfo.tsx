@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
   textName: {
     fontFamily: "Nunito-Bold",
-    fontSize: 24,
+    fontSize: 18,
     padding: 5,
   },
   description: {

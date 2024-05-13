@@ -10,11 +10,28 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import { useSelector } from "react-redux";
+import { likeRecipe } from "../../../features/authentication/services/userService/userLikeRecipe";
+import { checkIsLike } from "../../../features/authentication/services/userService/checkisLike";
 interface Props {
   navigation: any;
 }
 const FoodimgName: React.FC<Props> = ({ navigation }) => {
-  const foodinfo = useSelector((state: any) => state.foodinfo);
+  const food = useSelector((state: any) => state.foodinfo);
+  const user = useSelector((state: any) => state.userinfo);
+  const [islike, setislike] = React.useState<boolean>(false);
+  const [ischeck, setcheck] = React.useState<boolean>(true);
+  React.useEffect(() => {
+    const islikedState = async () => {
+      await checkIsLike(user.id, food.foodId).then((isLike) =>
+        setislike(isLike)
+      );
+    };
+    islikedState();
+  }, [food.foodId]);
+  const handleLike = async () => {
+    const res = await likeRecipe(user.id, food.foodId);
+    setislike(res);
+  };
   return (
     <View>
       {/* Food image */}
@@ -32,7 +49,7 @@ const FoodimgName: React.FC<Props> = ({ navigation }) => {
           }}
         >
           <ImageBackground
-            source={{ uri: foodinfo.foodImage }}
+            source={{ uri: food.foodImage }}
             borderRadius={20}
             resizeMode="cover"
             style={{
@@ -48,8 +65,10 @@ const FoodimgName: React.FC<Props> = ({ navigation }) => {
                 right: 0,
               }}
             >
+              {/* <Text>{food.foodId}</Text> */}
               <TouchableOpacity
-                activeOpacity={1}
+                onPress={handleLike}
+                // activeOpacity={1}
                 style={{
                   borderRadius: 50,
                   backgroundColor: "rgba(255, 255, 255, 0.5)",
@@ -57,7 +76,11 @@ const FoodimgName: React.FC<Props> = ({ navigation }) => {
                 }}
               >
                 <View style={{ padding: 7, paddingBottom: 5 }}>
-                  <Ionicons name={"heart-outline"} size={24} />
+                  {islike ? (
+                    <Ionicons name={"heart"} size={24} color={"red"} />
+                  ) : (
+                    <Ionicons name={"heart-outline"} size={24} />
+                  )}
                 </View>
               </TouchableOpacity>
             </View>
@@ -74,7 +97,7 @@ const FoodimgName: React.FC<Props> = ({ navigation }) => {
         {/* Food's name */}
         <View style={{ margin: 10, width: "70%" }}>
           <Text style={{ fontFamily: "Nunito-Bold", fontSize: 22 }}>
-            {foodinfo.foodName}
+            {food.foodName}
           </Text>
         </View>
         {/* button save */}

@@ -16,10 +16,6 @@ interface Prop {
   dispatch?: any;
 }
 const PostCard: React.FC<Prop> = ({ navigation, userpost, dispatch }) => {
-  const numColumns = 3; // Số lượng cột mong muốn
-  const screenWidth = Dimensions.get("window").width; // Lấy chiều rộng của màn hình
-
-  const cardWidth = screenWidth / numColumns;
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.flexCard}>

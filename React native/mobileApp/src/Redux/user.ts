@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 interface User {
   id: string;
-  name?: string;
+  name: string;
   userimage?: string;
   username: string;
   password: string;
@@ -9,14 +9,13 @@ interface User {
   description?: string;
 }
 const initialState: User = {
-  id: "66146d7338795a648ebee701",
-  name: "Quang Trung",
-  username: "TrungQ",
-  userimage:
-    "https://th.bing.com/th/id/R.672212381b4893096723bcecdb7f1c27?rik=YvWkjp4%2fJ3e0OQ&pid=ImgRaw&r=0",
-  password: "123",
-  email: "dotrung1512@gmail.com",
-  description: "I love cooking with different recipes",
+  id: "",
+  name: "",
+  username: "",
+  userimage: "testing",
+  password: "",
+  email: "",
+  description: "",
 };
 export const userinfo = createSlice({
   name: "userinfo",

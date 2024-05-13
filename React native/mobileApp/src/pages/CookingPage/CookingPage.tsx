@@ -22,6 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Statusbar from "../../components/Statusbar/Statusbar";
 import ModalEditvsDel from "./components/ModalinCookPage";
 import { usefetchFoodByID } from "../../features/authentication/hooks/useFetchFoodById";
+import { deleteRecipe } from "../../features/authentication/services/userService/userDeleteRecipe";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -39,8 +40,11 @@ const CookingPage: React.FC<Prop> = ({ navigation }) => {
   const handleEdit = () => {
     usefetchFoodByID(food.foodId, navigation, dispatch).then(
       () => console.log(food.foodId),
-      navigation.navigate("CreateRecipePage", { showupdate: true })
+      navigation.push("CreateRecipePage", { showupdate: true })
     );
+  };
+  const handleDelete = () => {
+    deleteRecipe(food.foodId).then(() => navigation.navigate("Profile"));
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -102,6 +106,7 @@ const CookingPage: React.FC<Prop> = ({ navigation }) => {
         visible={visible}
         onClose={setVisible}
         handleEdit={handleEdit}
+        handleDelete={handleDelete}
       />
     </SafeAreaView>
   );

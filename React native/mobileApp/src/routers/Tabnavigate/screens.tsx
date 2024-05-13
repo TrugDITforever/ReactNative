@@ -13,7 +13,7 @@ import { Provider } from "react-redux";
 import Feather from "react-native-vector-icons/Feather";
 import Octicons from "react-native-vector-icons/Octicons";
 import Foundation from "react-native-vector-icons/Foundation";
-import AntDesign from "react-native-vector-icons/AntDesign";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { StyleSheet, View } from "react-native";
 import { getUserAsyncData } from "../../features/authentication/auth/getUserDataFromAsync";
@@ -169,18 +169,18 @@ export const TabScreen: React.FC<Props> = ({ navigation }) => {
               {focused ? (
                 <View style={styles.navbarShow}>
                   <View style={styles.containiconandText}>
-                    <Octicons
-                      name={"person-fill"}
-                      size={styles.iconcolor.size}
+                    <Ionicons
+                      name={"person-circle-outline"}
+                      size={30}
                       color={styles.iconcolor.color}
                     />
                   </View>
                 </View>
               ) : (
                 <View style={styles.navbarhide}>
-                  <Octicons
-                    name={"person"}
-                    size={styles.iconcolor.size}
+                  <Ionicons
+                    name={"person-circle-outline"}
+                    size={30}
                     color={"#000"}
                   />
                 </View>

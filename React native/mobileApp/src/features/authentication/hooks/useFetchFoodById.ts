@@ -23,7 +23,6 @@ export const usefetchFoodByID = async (
           ownerId: res.foodData.ownerId,
         };
         dispatch(updateFoodInfo(newFoodInfo));
-        // console.log(newFoodInfo);
         dispatch(updatepostFoodInfo(newFoodInfo));
         // navigation.push("Cooking");
         /// store new food information into redux
