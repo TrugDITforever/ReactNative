@@ -12,22 +12,55 @@ import Feather from "react-native-vector-icons/Feather";
 import { useSelector } from "react-redux";
 import { likeRecipe } from "../../../features/authentication/services/userService/userLikeRecipe";
 import { checkIsLike } from "../../../features/authentication/services/userService/checkisLike";
+import { checkIsAdded } from "../../../features/authentication/hooks/userCheckIsAdded";
+import {
+  PropCheckCollection,
+  checkIsaddToCollection,
+} from "../../../features/authentication/services/userService/checkisAddtoCollection";
 interface Props {
+  handleShowmodal: any;
   navigation: any;
+  submitDone: boolean;
+  isadded: boolean;
+  setisadded: (prop: boolean) => void;
+  setsubmitDone: (prop: boolean) => void;
 }
-const FoodimgName: React.FC<Props> = ({ navigation }) => {
+const FoodimgName: React.FC<Props> = ({
+  submitDone,
+  handleShowmodal,
+  isadded,
+  setisadded,
+  setsubmitDone,
+}) => {
   const food = useSelector((state: any) => state.foodinfo);
   const user = useSelector((state: any) => state.userinfo);
   const [islike, setislike] = React.useState<boolean>(false);
-  const [ischeck, setcheck] = React.useState<boolean>(true);
+  const [isexist, setisexist] = React.useState<boolean>(false);
+  // const { isexist } = checkIsAdded(user.id, food.foodId);
+  const propvalue: PropCheckCollection = {
+    userID: user.id,
+    recipeID: food.foodId,
+  };
+  /// function check is recipe added to the collection
+  // const fetching = async () => {
+  //   await checkIsaddToCollection(propvalue).then((exist) => setisexist(exist));
+  // };
   React.useEffect(() => {
+    // check is liked
     const islikedState = async () => {
       await checkIsLike(user.id, food.foodId).then((isLike) =>
         setislike(isLike)
       );
     };
+    // fetching();
     islikedState();
   }, [food.foodId]);
+  React.useEffect(() => {
+    if (submitDone) {
+      setsubmitDone(false);
+      setisadded(!isadded);
+    }
+  }, [submitDone]);
   const handleLike = async () => {
     const res = await likeRecipe(user.id, food.foodId);
     setislike(res);
@@ -100,7 +133,7 @@ const FoodimgName: React.FC<Props> = ({ navigation }) => {
             {food.foodName}
           </Text>
         </View>
-        {/* button save */}
+        {/* button save to collection */}
         <View
           style={{
             position: "absolute",
@@ -110,13 +143,18 @@ const FoodimgName: React.FC<Props> = ({ navigation }) => {
         >
           <TouchableOpacity
             activeOpacity={1}
+            onPress={handleShowmodal}
             style={{
               borderRadius: 12,
               backgroundColor: "#ccc",
             }}
           >
             <View style={{ padding: 5, paddingRight: 7, paddingLeft: 7 }}>
-              <Feather name={"bookmark"} size={24} color={"#fff"} />
+              {isadded ? (
+                <Ionicons name={"bookmark"} size={24} color={"orange"} />
+              ) : (
+                <Ionicons name={"bookmark-outline"} size={24} color={"#fff"} />
+              )}
             </View>
           </TouchableOpacity>
         </View>

@@ -38,14 +38,14 @@ const HomePage: React.FC<Props> = ({ navigation }) => {
         {isloading ? (
           <CardLoading />
         ) : (
-          <View style={{ width: "100%", height: "92%" }}>
+          <View style={{ width: "100%", height: "93%" }}>
             <ScrollView showsVerticalScrollIndicator={false}>
               <View style={{ margin: 15 }}>
                 <Text
                   style={{
                     fontSize: 24,
                     fontFamily: "Nunito-Bold",
-                    color: "orange",
+                    color: "#F98A4F",
                   }}
                 >
                   What do you want
@@ -54,7 +54,7 @@ const HomePage: React.FC<Props> = ({ navigation }) => {
                   style={{
                     fontSize: 24,
                     fontFamily: "Nunito-Bold",
-                    color: "orange",
+                    color: "#F98A4F",
                   }}
                 >
                   to cook today?

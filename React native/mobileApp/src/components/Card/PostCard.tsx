@@ -16,10 +16,13 @@ interface Prop {
   dispatch?: any;
 }
 const PostCard: React.FC<Prop> = ({ navigation, userpost, dispatch }) => {
+  const filteredPostData = userpost.filter(
+    (item: any) => Object.keys(item).length !== 0
+  );
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.flexCard}>
-        {userpost.map((value: any, index: number) => (
+        {filteredPostData.map((value: any, index: number) => (
           <TouchableOpacity
             key={index}
             style={styles.cardContain}

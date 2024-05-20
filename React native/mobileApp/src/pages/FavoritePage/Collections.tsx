@@ -1,25 +1,90 @@
 import React, { useState } from "react";
 import {
   StyleSheet,
-  Button,
   View,
   SafeAreaView,
-  Image,
   Text,
-  Alert,
-  TextInput,
-  FlatList,
-  ScrollView,
-  ActivityIndicator,
-  StatusBar,
   TouchableOpacity,
 } from "react-native";
 import FavorList from "./components/FavorList";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import Feather from "react-native-vector-icons/Feather";
 import SearchInput from "./components/SearchInput";
 import Statusbar from "../../components/Statusbar/Statusbar";
+import CollectionsList from "./components/CollectionList";
+import ModalAddCollection from "./components/Modal";
 
-const Separator = () => <View style={styles.separator} />;
+interface Prop {
+  navigation: any;
+}
+const FavoritePage: React.FC<Prop> = ({ navigation }) => {
+  const [onload, setonload] = useState(false);
+  const [showmodal, setshowmodal] = useState(false);
+  const [donefetching, setdonefetching] = useState(false);
+  const handleShowmodal = () => setshowmodal(true);
+  return (
+    <SafeAreaView style={styles.container}>
+      <Statusbar />
+      <View style={{ width: "100%", height: "100%" }}>
+        <View style={{ width: "100%", height: "auto", marginTop: 10 }}>
+          {/* for form search in collection */}
+          <SearchInput />
+          <View
+            style={{
+              width: "100%",
+              justifyContent: "center",
+              margin: 15,
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: "Nunito-Bold",
+                fontSize: 24,
+                marginBottom: 15,
+              }}
+            >
+              Collections
+            </Text>
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "34%",
+              }}
+              onPress={handleShowmodal}
+            >
+              <Feather name="folder-plus" size={24} color={"#F98A4F"} />
+              <Text
+                style={{
+                  fontFamily: "Nunito-Medium",
+                  fontSize: 16,
+                  color: "#F98A4F",
+                }}
+              >
+                New Collection
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={{ width: "100%" }}>
+          {/* List Favorite card */}
+          {/* <FavorList navigation={navigation} /> */}
+          <CollectionsList
+            navigation={navigation}
+            donefetching={donefetching}
+            setdonefetching={setdonefetching}
+          />
+        </View>
+        <ModalAddCollection
+          visible={showmodal}
+          onClose={setshowmodal}
+          setdonefetching={setdonefetching}
+        />
+      </View>
+    </SafeAreaView>
+  );
+};
+export default FavoritePage;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -63,36 +128,3 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
   },
 });
-interface Prop {
-  navigation: any;
-}
-const FavoritePage: React.FC<Prop> = ({ navigation }) => {
-  const [onload, setonload] = useState(false);
-  return (
-    <SafeAreaView style={styles.container}>
-      <Statusbar />
-      <View style={{ width: "100%", height: "100%" }}>
-        <View style={{ width: "100%", height: "auto", marginTop: 10 }}>
-          {/* for form search in collection */}
-          <SearchInput />
-          <View
-            style={{
-              width: "100%",
-              justifyContent: "center",
-              margin: 15,
-            }}
-          >
-            <Text style={{ fontFamily: "Nunito-Bold", fontSize: 24 }}>
-              Collections
-            </Text>
-          </View>
-        </View>
-        <View style={{ width: "100%" }}>
-          {/* List Favorite card */}
-          <FavorList navigation={navigation} />
-        </View>
-      </View>
-    </SafeAreaView>
-  );
-};
-export default FavoritePage;

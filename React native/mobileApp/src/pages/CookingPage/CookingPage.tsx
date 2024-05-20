@@ -23,6 +23,16 @@ import Statusbar from "../../components/Statusbar/Statusbar";
 import ModalEditvsDel from "./components/ModalinCookPage";
 import { usefetchFoodByID } from "../../features/authentication/hooks/useFetchFoodById";
 import { deleteRecipe } from "../../features/authentication/services/userService/userDeleteRecipe";
+import ModalCollection from "./components/ModalCollection";
+import { checkIsAdded } from "../../features/authentication/hooks/userCheckIsAdded";
+import {
+  CollectionProp,
+  addRecipeToCollection,
+} from "../../features/authentication/services/userService/addRecipetoCollection";
+import {
+  PropCheckCollection,
+  checkIsaddToCollection,
+} from "../../features/authentication/services/userService/checkisAddtoCollection";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -33,19 +43,70 @@ interface Prop {
   navigation: any;
 }
 const CookingPage: React.FC<Prop> = ({ navigation }) => {
-  const [visible, setVisible] = React.useState<boolean>(false);
   const user = useSelector((state: any) => state.userinfo);
   const food = useSelector((state: any) => state.foodinfo);
+  ///
+  const [visible, setVisible] = React.useState<boolean>(false);
+  const [showmodal, setshowmodal] = React.useState(false);
+  const [submitDone, setsubmitDone] = React.useState(false);
+  const [fetchingDone, setfetchingDone] = React.useState(false);
+  const [isadded, setisadded] = React.useState<boolean>(false);
   const dispatch = useDispatch();
+
+  ///
+  const propvalue: PropCheckCollection = {
+    userID: user.id,
+    recipeID: food.foodId,
+  };
+  const fetching = async () => {
+    await checkIsaddToCollection(propvalue).then((exist) => setisadded(exist));
+  };
+  //function
+  React.useEffect(() => {
+    fetching().then(() => {
+      setTimeout(() => {
+        setfetchingDone(true);
+      }, 1000);
+    });
+  });
+  // submit base on state of is added to collection
+  const handleShowmodal = () => {
+    if (isadded) {
+      const newValue: CollectionProp = {
+        ownerID: user.id,
+        collectionID: "",
+        recipeID: food.foodId,
+      };
+      addRecipeToCollection(newValue).then(() => setisadded(false));
+      return;
+    }
+    setshowmodal(true);
+  };
   const handleEdit = () => {
     usefetchFoodByID(food.foodId, navigation, dispatch).then(
-      () => console.log(food.foodId),
       navigation.push("CreateRecipePage", { showupdate: true })
     );
   };
   const handleDelete = () => {
     deleteRecipe(food.foodId).then(() => navigation.navigate("Profile"));
   };
+
+  if (!fetchingDone) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: "#fff",
+        }}
+      >
+        <Statusbar />
+        <HeadervsButtonBack navigation={navigation} />
+        <View>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      </View>
+    );
+  }
   return (
     <SafeAreaView style={styles.container}>
       <Statusbar />
@@ -76,7 +137,14 @@ const CookingPage: React.FC<Prop> = ({ navigation }) => {
           {/* <ListofOwnerAndCountry /> */}
           {/*  */}
           <View>
-            <FoodimgName navigation={navigation} />
+            <FoodimgName
+              isadded={isadded}
+              setisadded={setisadded}
+              navigation={navigation}
+              handleShowmodal={handleShowmodal}
+              submitDone={submitDone}
+              setsubmitDone={setsubmitDone}
+            />
             {/* Stars */}
             <View style={{ marginLeft: 15 }}>
               <Text style={{ letterSpacing: 5 }}>
@@ -107,6 +175,11 @@ const CookingPage: React.FC<Prop> = ({ navigation }) => {
         onClose={setVisible}
         handleEdit={handleEdit}
         handleDelete={handleDelete}
+      />
+      <ModalCollection
+        visible={showmodal}
+        onClose={setshowmodal}
+        setsubmitDone={setsubmitDone}
       />
     </SafeAreaView>
   );

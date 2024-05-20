@@ -27,6 +27,7 @@ interface Props {
 }
 export const TabScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useDispatch();
+
   React.useEffect(() => {
     const getuserData = async () => {
       const userdata = await getUserAsyncData();
@@ -44,7 +45,10 @@ export const TabScreen: React.FC<Props> = ({ navigation }) => {
     };
     getuserData();
   }, []);
-
+  const iconcolor = {
+    color: "#F98A4F",
+    size: 26,
+  };
   return (
     <Tab.Navigator
       screenOptions={{
@@ -70,7 +74,7 @@ export const TabScreen: React.FC<Props> = ({ navigation }) => {
                     <Foundation
                       name={"home"}
                       size={28}
-                      color={styles.iconcolor.color}
+                      color={iconcolor.color}
                     />
                   </View>
                 </View>
@@ -94,8 +98,8 @@ export const TabScreen: React.FC<Props> = ({ navigation }) => {
                   <View style={styles.containiconandText}>
                     <Feather
                       name={"search"}
-                      size={styles.iconcolor.size}
-                      color={styles.iconcolor.color}
+                      size={iconcolor.size}
+                      color={iconcolor.color}
                     />
                   </View>
                 </View>
@@ -103,7 +107,7 @@ export const TabScreen: React.FC<Props> = ({ navigation }) => {
                 <View style={styles.navbarhide}>
                   <Feather
                     name={"search"}
-                    size={styles.iconcolor.size}
+                    size={iconcolor.size}
                     color={"#000"}
                   />
                 </View>
@@ -118,9 +122,9 @@ export const TabScreen: React.FC<Props> = ({ navigation }) => {
         options={{
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <Feather name={"plus-square"} size={styles.iconcolor.size} />
+              <Feather name={"plus-square"} size={iconcolor.size} />
             ) : (
-              <Feather name={"plus-square"} size={styles.iconcolor.size} />
+              <Feather name={"plus-square"} size={iconcolor.size} />
             ),
         }}
         /// more knowlegde about how can we interact with bottom tab
@@ -142,8 +146,8 @@ export const TabScreen: React.FC<Props> = ({ navigation }) => {
                   <View style={styles.containiconandText}>
                     <FontAwesome
                       name={"bookmark"}
-                      size={styles.iconcolor.size}
-                      color={styles.iconcolor.color}
+                      size={iconcolor.size}
+                      color={iconcolor.color}
                     />
                   </View>
                 </View>
@@ -151,7 +155,7 @@ export const TabScreen: React.FC<Props> = ({ navigation }) => {
                 <View style={styles.navbarhide}>
                   <FontAwesome
                     name={"bookmark-o"}
-                    size={styles.iconcolor.size}
+                    size={iconcolor.size}
                     color={"#000"}
                   />
                 </View>
@@ -172,7 +176,7 @@ export const TabScreen: React.FC<Props> = ({ navigation }) => {
                     <Ionicons
                       name={"person-circle-outline"}
                       size={30}
-                      color={styles.iconcolor.color}
+                      color={iconcolor.color}
                     />
                   </View>
                 </View>
@@ -195,15 +199,12 @@ export const TabScreen: React.FC<Props> = ({ navigation }) => {
 const styles = StyleSheet.create({
   navbarShow: {},
   navbarhide: {},
-  iconcolor: {
-    color: "#FF8A00",
-    size: 26,
-  },
+
   containiconandText: {
-    paddingBottom: 5,
+    paddingBottom: 10,
     paddingTop: 10,
-    borderBottomWidth: 1,
-    borderColor: "#FE724C",
+    borderBottomWidth: 2,
+    borderColor: "#F98A4F",
   },
 });
 // const listTapContent = [
@@ -211,7 +212,7 @@ const styles = StyleSheet.create({
 //     name: "Home",
 //     component: HomePage,
 //     iconShow: (
-//       <Foundation name={"home"} size={28} color={styles.iconcolor.color} />
+//       <Foundation name={"home"} size={28} color={iconcolor.color} />
 //     ),
 //     tabText: "Home",
 //     iconhide: <Octicons name={"home"} size={24} color={"#000"} />,
@@ -222,13 +223,13 @@ const styles = StyleSheet.create({
 //     iconShow: (
 //       <Feather
 //         name={"search"}
-//         size={styles.iconcolor.size}
-//         color={styles.iconcolor.color}
+//         size={iconcolor.size}
+//         color={iconcolor.color}
 //       />
 //     ),
 //     tabText: "Search",
 //     iconhide: (
-//       <Feather name={"search"} size={styles.iconcolor.size} color={"#000"} />
+//       <Feather name={"search"} size={iconcolor.size} color={"#000"} />
 //     ),
 //   },
 //   {
@@ -237,15 +238,15 @@ const styles = StyleSheet.create({
 //     iconShow: (
 //       <FontAwesome
 //         name={"bookmark"}
-//         size={styles.iconcolor.size}
-//         color={styles.iconcolor.color}
+//         size={iconcolor.size}
+//         color={iconcolor.color}
 //       />
 //     ),
 //     tabText: "Collect",
 //     iconhide: (
 //       <FontAwesome
 //         name={"bookmark-o"}
-//         size={styles.iconcolor.size}
+//         size={iconcolor.size}
 //         color={"#000"}
 //       />
 //     ),
@@ -256,13 +257,13 @@ const styles = StyleSheet.create({
 //     iconShow: (
 //       <Octicons
 //         name={"person-fill"}
-//         size={styles.iconcolor.size}
-//         color={styles.iconcolor.color}
+//         size={iconcolor.size}
+//         color={iconcolor.color}
 //       />
 //     ),
 //     tabText: "Profile",
 //     iconhide: (
-//       <Octicons name={"person"} size={styles.iconcolor.size} color={"#000"} />
+//       <Octicons name={"person"} size={iconcolor.size} color={"#000"} />
 //     ),
 //   },
 // ];

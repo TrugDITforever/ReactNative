@@ -89,7 +89,7 @@ const CreateRecipeScreen: React.FC<Prop> = ({ navigation, route }) => {
         screenOptions={{
           tabBarLabelStyle: styles.tabBarLabel,
           tabBarIndicatorStyle: styles.tabBarIndicator,
-          tabBarActiveTintColor: "#FE724C",
+          tabBarActiveTintColor: "#F98A4F",
           tabBarInactiveTintColor: "#000",
           tabBarScrollEnabled: true,
         }}
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     fontFamily: "Nunito-Bold",
   },
   tabBarIndicator: {
-    backgroundColor: "#FE724C",
+    backgroundColor: "#F98A4F",
     height: 2,
   },
   textSubmit: {
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#FE724C",
+    backgroundColor: "#F98A4F",
     position: "absolute",
     borderRadius: 20,
     bottom: 0,

@@ -8,18 +8,18 @@ export const usefetchUserPostById = (
 ) => {
   const [isloading, setisloading] = React.useState<boolean>(false);
   const [userpost, setuserpost] = React.useState<userPostData[]>([]);
+  const fetchData = async () => {
+    try {
+      setisfetching(true);
+      await fetchUserPostById(id).then((res) => {
+        setuserpost(res);
+        // setisfetching(false);
+      });
+    } catch (error: any) {
+      console.error("Error fetching data:", error);
+    }
+  };
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setisfetching(true);
-        await fetchUserPostById(id).then((res) => {
-          setuserpost(res);
-          // setisfetching(false);
-        });
-      } catch (error: any) {
-        console.error("Error fetching data:", error);
-      }
-    };
     fetchData();
   }, [fetching]);
   return { userpost, isloading };

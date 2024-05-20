@@ -36,4 +36,15 @@ router.delete("/api/deleteRecipe/:foodid", userController.userDeleteRecipe);
 router.put("/api/likeRecipe/:userid", userController.userLikesRecipe);
 /// check is like recipe
 router.get("/api/checklikeRecipe/:userid", userController.checkisLiked);
+/// fetch user collection
+router.get("/api/fetchCollections/:userid", userController.fetchCollections);
+/// user create a new collection
+router.post("/api/createCollection/:userid", userController.createCollection);
+/// user add a recipe to selected collection
+router.put("/api/addRecipetoCollection/:userid", userController.addCollection);
+/// checkif user added recipe to any collection or not
+router.get(
+  "/api/checkIsaddedtoCollection/:userid",
+  userController.checkisdaddedtoCollection
+);
 module.exports = router;

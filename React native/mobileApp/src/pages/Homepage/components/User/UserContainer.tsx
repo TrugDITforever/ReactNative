@@ -12,44 +12,34 @@ const UserContainer: React.FC<Prop> = ({ navigation }) => {
   return (
     <View
       style={{
-        width: "100%",
         height: "7%",
         flexDirection: "row",
         alignItems: "center",
         backgroundColor: "#fff",
         borderBottomWidth: 1,
         borderBottomColor: "#ededed",
-        marginTop: 10,
-        paddingBottom: 10,
+        paddingLeft: 15,
       }}
     >
-      <View
-        style={{
-          width: "16%",
-          height: "100%",
-          paddingLeft: 15,
-        }}
-      >
-        <View style={{ width: "100%", height: "100%" }}>
-          <Image
-            style={{
-              width: 50,
-              height: 50,
-              borderRadius: 50,
-              resizeMode: "cover",
-              borderWidth: 2,
-              borderColor: "#ccc",
-            }}
-            source={{ uri: userinfo.userimage }}
-          />
-        </View>
+      <View>
+        <Image
+          style={{
+            width: 45,
+            height: 45,
+            borderRadius: 50,
+            resizeMode: "cover",
+            borderWidth: 2,
+            borderColor: "#ccc",
+          }}
+          source={{ uri: userinfo.userimage }}
+        />
       </View>
       {/* name user */}
       <View style={{ width: "70%" }}>
-        <View style={{ paddingLeft: 15 }}>
+        <View style={{ paddingLeft: 5 }}>
           <Text
             style={{
-              fontSize: 16,
+              fontSize: 14,
               color: "#535353",
               fontFamily: "Nunito-Medium",
             }}
@@ -59,7 +49,7 @@ const UserContainer: React.FC<Prop> = ({ navigation }) => {
           </Text>
           <Text
             style={{
-              fontSize: 18,
+              fontSize: 16,
               fontFamily: "Nunito-Bold",
             }}
           >

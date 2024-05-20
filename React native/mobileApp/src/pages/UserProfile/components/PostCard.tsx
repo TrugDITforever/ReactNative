@@ -15,7 +15,6 @@ interface Prop {
 
 const PostCardofUser: React.FC<Prop> = ({ navigation, route }) => {
   const { success } = route.params || false;
-  console.log("render");
   const userinfo = useSelector((state: any) => state.userinfo);
   const dispatch = useDispatch();
   const [fetching, setisfetching] = React.useState<boolean>(true);

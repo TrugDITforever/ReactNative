@@ -1,19 +1,5 @@
 import * as React from "react";
-import {
-  StyleSheet,
-  Button,
-  View,
-  SafeAreaView,
-  Image,
-  Text,
-  Alert,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  ActivityIndicator,
-  StatusBar,
-  KeyboardAvoidingView,
-} from "react-native";
+import { StyleSheet, View, SafeAreaView } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SearchInput from "./components/SearchInput";
 import SearchedList from "./components/SearchedList";

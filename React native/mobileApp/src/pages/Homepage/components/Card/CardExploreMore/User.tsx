@@ -9,7 +9,7 @@ interface Prop {
 const User: React.FC<Prop> = ({ userProfile, username }) => {
   return (
     <View style={styles.imageViewContainer}>
-      <View style={{ width: 40, height: 40 }}>
+      <View style={{ width: 45, height: 45 }}>
         <Image source={{ uri: userProfile }} style={styles.imageView} />
       </View>
       <Text
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     height: "100%",
     borderRadius: 50,
     resizeMode: "cover",
-    borderWidth: 2,
-    borderColor: "#fff",
+    borderWidth: 1,
+    borderColor: "#ccc",
   },
 });

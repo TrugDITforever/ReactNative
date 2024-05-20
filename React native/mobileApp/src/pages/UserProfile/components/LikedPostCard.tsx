@@ -14,7 +14,6 @@ const LikedPostCard: React.FC<Prop> = ({ navigation }) => {
   const dispatch = useDispatch();
   const [fetching, setisfetching] = React.useState<boolean>(false);
   const { userpost } = fetchUserLikedPosts(userinfo.id);
-  console.log(userpost);
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }}>
       <PostCard
