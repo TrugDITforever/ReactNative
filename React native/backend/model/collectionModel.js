@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const collectionSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
+  id: mongoose.Schema.Types.ObjectId,
   name: String,
   ownerId: mongoose.Schema.Types.ObjectId,
   recipeID: [mongoose.Schema.Types.ObjectId],

@@ -11,6 +11,7 @@ import CardLoading from "./components/Card/CardLoading";
 import Statusbar from "../../components/Statusbar/Statusbar";
 import { useFetchFoodData } from "../../features/authentication/hooks/useFetchFoodData";
 import CardExploreMore from "./components/Card/CardExploreMore";
+import CardCourse from "./components/Card/CardCourse";
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#ffff",
@@ -40,16 +41,19 @@ const HomePage: React.FC<Props> = ({ navigation }) => {
         ) : (
           <View style={{ width: "100%", height: "93%" }}>
             <ScrollView showsVerticalScrollIndicator={false}>
-              <View style={{ margin: 15 }}>
-                <Text
-                  style={{
-                    fontSize: 24,
-                    fontFamily: "Nunito-Bold",
-                    color: "#F98A4F",
-                  }}
-                >
-                  What do you want
-                </Text>
+              <View style={{ margin: 15, marginBottom: 5 }}>
+                <View>
+                  <Text
+                    style={{
+                      fontSize: 24,
+                      fontFamily: "Nunito-Bold",
+                      color: "#F98A4F",
+                    }}
+                  >
+                    What do you want
+                  </Text>
+                </View>
+
                 <Text
                   style={{
                     fontSize: 24,
@@ -61,20 +65,15 @@ const HomePage: React.FC<Props> = ({ navigation }) => {
                 </Text>
               </View>
               <CardRecommend navigation={navigation} dispatch={dispatch} />
-
               <CardRecipes navigation={navigation} dispatch={dispatch} />
-              <CardPopular navigation={navigation} dispatch={dispatch} />
               <CardCollections navigation={navigation} dispatch={dispatch} />
+              <CardPopular navigation={navigation} dispatch={dispatch} />
               <CardDay
                 dispatch={dispatch}
                 Time={"Highly rated"}
                 navigation={navigation}
               />
-              <CardDay
-                dispatch={dispatch}
-                Time={"Breakfast"}
-                navigation={navigation}
-              />
+              <CardCourse navigation={navigation} />
               <CardExploreMore navigation={navigation} dispatch={dispatch} />
             </ScrollView>
           </View>

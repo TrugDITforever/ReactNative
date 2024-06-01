@@ -57,6 +57,7 @@ const SinginForm: React.FC<PropsForLogin> = ({
             <TextInput
               style={[styles.input, [accounterr ? styles.errborderInput : {}]]}
               placeholder="Enter your email"
+              placeholderTextColor="white"
               onChangeText={changeEmail}
               value={email}
               autoCapitalize="none"
@@ -74,6 +75,7 @@ const SinginForm: React.FC<PropsForLogin> = ({
             <TextInput
               style={[styles.input, [accounterr ? styles.errborderInput : {}]]}
               placeholder="Enter your password"
+              placeholderTextColor="white"
               onChangeText={changePass}
               value={password}
               secureTextEntry={show ? true : false}
@@ -167,6 +169,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     padding: 10,
     paddingHorizontal: 10,
+    color: "#fff",
   },
   forgotPassContainer: {
     width: "100%",
@@ -199,7 +202,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   orText: {
-    color: "black",
+    color: "white",
     marginVertical: 10,
     fontSize: 16,
     textAlign: "center",
@@ -222,6 +225,7 @@ const styles = StyleSheet.create({
   googleButtonText: {
     marginLeft: 10,
     fontSize: 16,
+    color: "white",
   },
   signUpContainer: {
     flexDirection: "row",

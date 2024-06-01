@@ -3,6 +3,9 @@ const userController = require("../controller/userActionController/userControlle
 const adminActionController = require("../controller/adminActionController/adminController");
 const router = express.Router();
 router.use(express.json());
+/// get all user account
+router.get("/api/admin/getUserAccount", adminActionController.fetchDataUser);
+
 /// user login
 router.post("/api/checkuser", userController.userLogin);
 /// user sign up
@@ -47,4 +50,10 @@ router.get(
   "/api/checkIsaddedtoCollection/:userid",
   userController.checkisdaddedtoCollection
 );
+/// searching results
+router.get("/api/searchRecipe", userController.searchingRecipe);
+/// fetching all courses
+router.get("/api/fetchingCourses", adminActionController.fetchCourses);
+/// check is add to cart
+router.get("/api/checkIsAddToCart/:userid", userController.checkisdaddedtoCart);
 module.exports = router;

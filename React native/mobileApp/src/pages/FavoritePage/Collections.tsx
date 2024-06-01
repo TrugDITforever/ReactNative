@@ -47,9 +47,8 @@ const FavoritePage: React.FC<Prop> = ({ navigation }) => {
             <TouchableOpacity
               style={{
                 flexDirection: "row",
-                justifyContent: "space-between",
+                justifyContent: "flex-start",
                 alignItems: "center",
-                width: "34%",
               }}
               onPress={handleShowmodal}
             >
@@ -59,6 +58,7 @@ const FavoritePage: React.FC<Prop> = ({ navigation }) => {
                   fontFamily: "Nunito-Medium",
                   fontSize: 16,
                   color: "#F98A4F",
+                  paddingLeft: 5,
                 }}
               >
                 New Collection

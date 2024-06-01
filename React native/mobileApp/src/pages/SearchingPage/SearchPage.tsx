@@ -5,6 +5,9 @@ import SearchInput from "./components/SearchInput";
 import SearchedList from "./components/SearchedList";
 import SearchResults from "./components/SearchResults";
 import Statusbar from "../../components/Statusbar/Statusbar";
+import { FoodData } from "../../features/authentication/commonData/foodData";
+import { useFetchFoodData } from "../../features/authentication/hooks/useFetchFoodData";
+import { searchingRecipe } from "../../features/authentication/services/userService/userSearchingRecipe";
 
 const styles = StyleSheet.create({
   container: {
@@ -26,27 +29,45 @@ interface Prop {
   navigation: any;
 }
 const SearchPage: React.FC<Prop> = ({ navigation }) => {
-  const [onload, setonload] = React.useState(false);
+  const recommended = "recommended";
+  const { foodData, isloading } = useFetchFoodData(recommended);
+  const [searchValue, setSearchValue] = React.useState<string>("");
+  const [recipeList, setrecipeList] = React.useState<FoodData[]>(foodData);
+  const [isServerSearch, setIsServerSearch] = React.useState<boolean>(false);
+  React.useEffect(() => {
+    const fetching = async () => {
+      if (searchValue) {
+        const res = await searchingRecipe(searchValue);
+        setrecipeList(res);
+        setIsServerSearch(true);
+      } else {
+        setIsServerSearch(false);
+        setrecipeList(foodData);
+      }
+    };
+    fetching();
+  }, [foodData, searchValue]);
+  /// searchValue filter
+  const filteredRecipes = React.useMemo(() => {
+    if (isServerSearch) return recipeList;
+    const lowercasedTerm = searchValue.toLowerCase();
+    return recipeList.filter((recipe) =>
+      recipe.foodName.toLowerCase().includes(lowercasedTerm)
+    );
+  }, [searchValue, recipeList, isServerSearch]);
+  console.log(foodData);
+  ///
   return (
     <SafeAreaView style={styles.container}>
       <Statusbar />
       <View style={{ width: "100%", height: "100%" }}>
-        {/* <View style={{ flexDirection: "row", margin: 10 }}>
-          <View
-            style={{
-              width: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Text style={{ fontFamily: "Nunito-Bold", fontSize: 24 }}>
-              Search Food
-            </Text>
-          </View>
-        </View> */}
         {/* search input */}
-        <SearchInput />
-        <SearchResults navigation={navigation} />
+        <SearchInput
+          setSearchValue={setSearchValue}
+          searchValue={searchValue}
+        />
+        {/*  */}
+        <SearchResults navigation={navigation} recipeList={filteredRecipes} />
       </View>
     </SafeAreaView>
   );

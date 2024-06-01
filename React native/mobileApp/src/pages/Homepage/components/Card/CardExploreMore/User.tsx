@@ -28,9 +28,9 @@ export default User;
 const styles = StyleSheet.create({
   imageViewContainer: {
     height: 50,
-    padding: 10,
     flexDirection: "row",
     alignItems: "center",
+    marginBottom: 5,
   },
   imageView: {
     width: "100%",

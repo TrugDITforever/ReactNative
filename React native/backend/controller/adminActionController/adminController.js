@@ -1,14 +1,21 @@
-const usermodel = require("../../model/userModel");
+const userModel = require("../../model/userModel");
 const foodModel = require("../../model/foodModel");
 const postModel = require("../../model/postModel");
+const courseModel = require("../../model/courseModel");
 const { ObjectId } = require("mongodb");
 /// get all user information
 exports.fetchDataUser = (req, res) => {
-  usermodel.find().then((user) => {
-    res.status(200).json({
+  try {
+    userModel.find().then((user) => {
+      res.status(200).json({
+        UserData: user,
+      });
+    });
+  } catch (error) {
+    res.status(400).json({
       UserData: user,
     });
-  });
+  }
 };
 /// get all food information base on mealType
 exports.fetchDataFood = (req, res) => {
@@ -50,4 +57,20 @@ exports.fetchuserPosts = (req, res) => {
         postData: data,
       });
     });
+};
+// get all courses
+exports.fetchCourses = async (req, res) => {
+  try {
+    const results = await courseModel.find({});
+    if (results) {
+      res.status(200).json({
+        success: true,
+        courses: results,
+      });
+    } else
+      res.status(200).json({
+        success: false,
+        courses: results,
+      });
+  } catch (error) {}
 };

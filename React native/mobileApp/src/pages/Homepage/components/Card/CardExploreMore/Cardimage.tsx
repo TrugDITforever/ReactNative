@@ -53,10 +53,11 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: "100%",
+    borderRadius: 20,
   },
   cardContain: {
     width: "100%",
-    height: 330,
+    height: 280,
     position: "relative",
   },
   containerForRatingandLike: {
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
   },
   buttonlike: {
     right: 0,
-    margin: 10,
+    margin: 15,
     width: 32,
     height: 32,
     backgroundColor: "#fff",

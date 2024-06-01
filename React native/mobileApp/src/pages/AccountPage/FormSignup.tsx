@@ -70,6 +70,7 @@ const SignupForm: React.FC<Prop> = ({
             <TextInput
               style={[styles.input, [accounterr ? styles.errborderInput : {}]]}
               placeholder="Enter your name"
+              placeholderTextColor="white"
               onChangeText={changeFullname}
               value={name}
               autoCapitalize="none"
@@ -84,6 +85,7 @@ const SignupForm: React.FC<Prop> = ({
             <TextInput
               style={[styles.input, [accounterr ? styles.errborderInput : {}]]}
               placeholder="Enter your email"
+              placeholderTextColor="white"
               onChangeText={changeEmail}
               value={email}
               autoCapitalize="none"
@@ -98,6 +100,7 @@ const SignupForm: React.FC<Prop> = ({
             <TextInput
               style={[styles.input, [accounterr ? styles.errborderInput : {}]]}
               placeholder="Enter your password"
+              placeholderTextColor="white"
               onChangeText={changepass}
               value={password}
               secureTextEntry={show ? true : false}
@@ -123,6 +126,7 @@ const SignupForm: React.FC<Prop> = ({
             <TextInput
               style={[styles.input, { flex: 1 }]}
               placeholder="Confirm Password"
+              placeholderTextColor="white"
               onChangeText={changeconfirm}
               value={confirm}
               secureTextEntry={show ? true : false}
@@ -188,6 +192,7 @@ const SignupForm: React.FC<Prop> = ({
               fontSize: 18,
               color: "#F98A4F",
               fontFamily: "Nunito-Bold",
+              paddingLeft: 5,
             }}
             onPress={navigateToSignin}
           >
@@ -234,6 +239,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     padding: 10,
     paddingHorizontal: 10,
+    color: "white",
   },
   label: {
     fontSize: 20,

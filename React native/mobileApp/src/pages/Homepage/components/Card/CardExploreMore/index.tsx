@@ -45,25 +45,28 @@ const CardExploreMore: React.FC<Prop> = ({ navigation, dispatch }) => {
       >
         {userpost.map((value, index) => (
           <View key={index} style={[styles.cardContainBorder]}>
-            <TouchableOpacity
-              onPress={() =>
-                usefetchFoodByID(value._id, navigation, dispatch).then(() => {
-                  navigation.push("Cooking");
-                })
-              }
-              activeOpacity={1}
-            >
+            <TouchableOpacity activeOpacity={1}>
               {/* card image */}
               <User
                 username={value.userpost[0].username}
                 userProfile={value.userpost[0].profileImage}
               />
-              <CardImage
-                index={index}
-                liked={liked}
-                handlePress={handlePress}
-                foodImage={value.foodImage}
-              />
+              <TouchableOpacity
+                onPress={() =>
+                  usefetchFoodByID(value._id, navigation, dispatch).then(() => {
+                    navigation.push("Cooking");
+                  })
+                }
+                activeOpacity={1}
+              >
+                <CardImage
+                  index={index}
+                  liked={liked}
+                  handlePress={handlePress}
+                  foodImage={value.foodImage}
+                />
+              </TouchableOpacity>
+
               {/* details of food */}
               <FoodeDetails
                 foodname={value.foodName}
@@ -81,6 +84,7 @@ export default CardExploreMore;
 const styles = StyleSheet.create({
   container: {
     width: "100%",
+    padding: 15,
   },
   cardContain: {
     width: "100%",
@@ -89,10 +93,7 @@ const styles = StyleSheet.create({
   },
   cardContainBorder: {
     backgroundColor: "#fff",
-    // borderRadius: 15,
     marginBottom: 25,
-    // elevation: 1,
-    // shadowColor: "#000",
   },
   boxword: {
     display: "flex",
@@ -106,6 +107,5 @@ const styles = StyleSheet.create({
     color: "#F98A4F",
     fontWeight: "600",
     width: "77%",
-    marginLeft: 15,
   },
 });

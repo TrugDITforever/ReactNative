@@ -33,7 +33,7 @@ const PageViewall: React.FC<Prop> = ({ navigation }) => {
   const [onload, setonload] = React.useState(false);
   return (
     <SafeAreaView style={styles.container}>
-      <Statusbar/>
+      <Statusbar />
       <View style={{ width: "100%", height: "100%" }}>
         {/* button back and title of page */}
         {/* <View style={{ flexDirection: "row", margin: 10 }}>
@@ -57,7 +57,7 @@ const PageViewall: React.FC<Prop> = ({ navigation }) => {
             </Text>
           </View>
         </View> */}
-      <HeadervsButtonBack isShown={false} navigation={navigation}/>
+        <HeadervsButtonBack isShown={false} navigation={navigation} />
 
         <View style={{ width: "100%" }}>
           {/* Card render */}

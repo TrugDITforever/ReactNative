@@ -14,7 +14,44 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 interface Prop {
   navigation: any;
 }
-
+const fakeArrray = [
+  {
+    _id: "6615ae3507a0cfd0cde4d13b",
+    foodName: "Chicken Alfredo Pasta",
+    foodImage:
+      "https://th.bing.com/th/id/OIP.exQhgOEPwS6wSvoJvCeQNgHaJQ?rs=1&pid=ImgDetMain",
+  },
+  {
+    _id: "66183743efba40ad42f6f3a8",
+    foodName: "Spaghetti Carbonara",
+    foodImage:
+      "https://www.adashofginger.co.uk/wp-content/uploads/2014/11/spaghetti-carbonara.jpg",
+  },
+  {
+    _id: "66183743efba40ad42f6f3a9",
+    foodName: "Caprese Salad",
+    foodImage:
+      "https://th.bing.com/th/id/OIP.x5x4j74u7R1v989fMYxFCgHaJn?rs=1&pid=ImgDetMain",
+  },
+  {
+    _id: "66183743efba40ad42f6f3aa",
+    foodName: "Beef Stir Fry",
+    foodImage:
+      "https://th.bing.com/th/id/OIP.cM0v1ACbOfkOT8AqmeapmAHaKz?rs=1&pid=ImgDetMain",
+  },
+  {
+    _id: "66183743efba40ad42f6f3ab",
+    foodName: "Grilled Salmon",
+    foodImage:
+      "https://www.cookingclassy.com/wp-content/uploads/2018/05/grilled-salmon-3.jpg",
+  },
+  {
+    _id: "66183743efba40ad42f6f3ac",
+    foodName: "Vegetable Curry",
+    foodImage:
+      "https://www.tasteofhome.com/wp-content/uploads/2017/10/Slow-Cooked-Vegetable-Curry_EXPS_SDAS17_148481_D04_07_5b.jpg",
+  },
+];
 const CollectionsCard: React.FC<Prop> = ({ navigation }) => {
   const screenWidth = Dimensions.get("window");
   const [liked, setlike] = React.useState(
@@ -36,7 +73,7 @@ const CollectionsCard: React.FC<Prop> = ({ navigation }) => {
           alignItems: "center",
         }}
       >
-        {Array.from({ length: 5 }).map((value, index) => (
+        {fakeArrray.map((value, index) => (
           <View key={index} style={styles.cardContain}>
             <TouchableOpacity
               style={styles.cardContain}
@@ -46,7 +83,7 @@ const CollectionsCard: React.FC<Prop> = ({ navigation }) => {
               activeOpacity={1}
             >
               <Image
-                source={require("../../../../assets/image/pasta.jpg")}
+                source={{ uri: value.foodImage }}
                 style={styles.backgroundImage}
               />
               <View style={styles.overlay} />
@@ -54,7 +91,7 @@ const CollectionsCard: React.FC<Prop> = ({ navigation }) => {
               <View style={styles.containerForNameofFood}>
                 <View style={{ width: "70%" }}>
                   <Text numberOfLines={2} style={styles.textNameFood}>
-                    Sausage and cheese egg casserole
+                    {value.foodName}
                   </Text>
                 </View>
                 {/* container for star and like button */}
@@ -98,11 +135,7 @@ const CollectionsCard: React.FC<Prop> = ({ navigation }) => {
                       style={styles.buttonlike}
                       onPress={() => handlePress(index)}
                     >
-                      {liked[index] ? (
-                        <Ionicons name={"heart"} size={25} color={"red"} />
-                      ) : (
-                        <Ionicons name={"heart-outline"} size={25} />
-                      )}
+                      <Ionicons name={"bookmark"} size={25} color={"#F98A4F"} />
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -118,7 +151,7 @@ export default CollectionsCard;
 export const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: "90%",
+    height: "94%",
   },
   backgroundImage: {
     resizeMode: "cover",
@@ -128,8 +161,8 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
   },
   cardContain: {
-    width: 350,
-    height: 200,
+    width: 370,
+    height: 210,
     marginBottom: 20,
   },
   containerForRatingandLike: {

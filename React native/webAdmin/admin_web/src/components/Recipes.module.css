@@ -1,0 +1,78 @@
+.nunito-sans-header {
+  font-family: "Nunito Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700; /* Có thể thay đổi giá trị này từ 200 đến 1000 */
+  font-style: normal;
+  font-variation-settings: "wdth" 100, "YTLC" 500;
+}
+
+.container {
+  width: 100%;
+  /* background: linear-gradient(175deg, #ffe6b7, #ffffff); */
+}
+.drawerPlace {
+  width: 280px;
+}
+.flexcontainer {
+  display: flex;
+}
+.recipesContainer {
+  width: 80%;
+  margin: 50px;
+}
+
+.recipesTitle {
+  font-size: 24px;
+  color: #333;
+}
+
+.recipesList {
+  display: flex;
+  flex-wrap: wrap;
+}
+.card {
+  width: 250px;
+  /* border: 1px solid #ddd; */
+  /* background-color: #fff; */
+  border-radius: 8px;
+  overflow: hidden;
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+  margin: 10px;
+  text-align: left;
+}
+
+.foodImage {
+  width: 100%;
+  height: 200px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.ownerInfo {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+}
+
+.ownerImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  margin-right: 8px;
+  object-fit: cover;
+}
+
+.ownerName {
+  font-size: 16px;
+  font-weight: 500;
+}
+.foodName {
+  font-size: 16px;
+  font-weight: bold;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.foodInfo {
+  padding-left: 8px;
+}

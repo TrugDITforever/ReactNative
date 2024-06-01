@@ -60,7 +60,8 @@ const FoodeDetails: React.FC<Props> = ({ foodname, username, userProfile }) => {
             opacity: 0.6,
           }}
         >
-          <Ionicons name={"flame-outline"} size={16} />123 calories
+          <Ionicons name={"flame-outline"} size={16} />
+          123 calories
         </Text>
         {/* time cooking */}
         <Text
@@ -69,7 +70,8 @@ const FoodeDetails: React.FC<Props> = ({ foodname, username, userProfile }) => {
             opacity: 0.6,
           }}
         >
-          <Ionicons name={"timer-outline"} size={16} />20 mins
+          <Ionicons name={"timer-outline"} size={16} />
+          20 mins
         </Text>
         {/* Level */}
         <Text
@@ -78,7 +80,8 @@ const FoodeDetails: React.FC<Props> = ({ foodname, username, userProfile }) => {
             opacity: 0.6,
           }}
         >
-          <Ionicons name={"flash-outline"} size={16} />Easy
+          <Ionicons name={"flash-outline"} size={16} />
+          Easy
         </Text>
         <Text
           style={{
@@ -86,7 +89,8 @@ const FoodeDetails: React.FC<Props> = ({ foodname, username, userProfile }) => {
             opacity: 0.6,
           }}
         >
-          <Ionicons name={"git-branch-outline"} size={16} />Serves 4
+          <Ionicons name={"git-branch-outline"} size={16} />
+          Serves 4
         </Text>
       </View>
     </View>
@@ -112,7 +116,7 @@ const styles = StyleSheet.create({
     fontFamily: "Nunito-semiBold",
   },
   containerForNameofFood: {
-    paddingTop: 5,
+    marginTop: 5,
     paddingLeft: 10,
     paddingRight: 10,
   },

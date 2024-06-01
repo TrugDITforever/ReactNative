@@ -13,7 +13,6 @@ export const useFetchFoodData = (mealType: string) => {
           setFoodData(res);
         }
       } catch (error) {
-        console.error("Error fetching food data:", error);
         setisloading(true);
       }
     };

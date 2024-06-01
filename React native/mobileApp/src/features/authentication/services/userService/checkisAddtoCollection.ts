@@ -9,7 +9,6 @@ export interface PropCheckCollection {
 export async function checkIsaddToCollection(
   propvalue: PropCheckCollection
 ): Promise<boolean> {
-  const recipeID = propvalue.recipeID;
   try {
     const res = await axios.get(
       `${BASE_URL}:8080/api/checkIsaddedtoCollection/${propvalue.userID}`,

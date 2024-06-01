@@ -17,11 +17,13 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { useFetchFoodData } from "../../../features/authentication/hooks/useFetchFoodData";
 import { useDispatch } from "react-redux";
 import { usefetchFoodByID } from "../../../features/authentication/hooks/useFetchFoodById";
+import { FoodData } from "../../../features/authentication/commonData/foodData";
 
 interface Prop {
   navigation: any;
+  recipeList: any;
 }
-const SearchResults: React.FC<Prop> = ({ navigation }) => {
+const SearchResults: React.FC<Prop> = ({ navigation, recipeList }) => {
   const dispatch = useDispatch();
   const recommended = "recommended";
   const { foodData, isloading } = useFetchFoodData(recommended);
@@ -46,12 +48,14 @@ const SearchResults: React.FC<Prop> = ({ navigation }) => {
             alignItems: "center",
           }}
         >
-          {foodData.map((value, index) => (
+          {recipeList.map((value: any, index: number) => (
             <View key={index} style={styles.cardContain}>
               <TouchableOpacity
                 style={styles.cardContain}
                 onPress={() => {
-                  usefetchFoodByID(value._id, navigation, dispatch);
+                  usefetchFoodByID(value._id, navigation, dispatch).then(() => {
+                    navigation.navigate("Cooking");
+                  });
                 }}
                 activeOpacity={1}
               >
@@ -125,8 +129,8 @@ export default SearchResults;
 export const styles = StyleSheet.create({
   container: {
     width: "100%",
-    marginTop: 20,
-    height: "86%",
+    marginTop: 5,
+    height: "90%",
   },
   backgroundImage: {
     resizeMode: "cover",

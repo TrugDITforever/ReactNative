@@ -1,0 +1,67 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  /* background: linear-gradient(175deg, #ffe6b7, #ffffff); */
+  /* padding: 40px; */
+}
+.drawerPlace {
+  width: 280px;
+}
+.flexcontainer {
+  display: flex;
+}
+.usersContainer {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.usersTitle {
+  font-size: 24px;
+  color: #333;
+}
+
+.usersTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.usersTable td {
+  /* border: 1px solid #ddd; */
+  padding: 8px;
+  text-align: left;
+  /* background-color: #f9f9f9; */
+}
+.usersTable td:not(:nth-child(2)) {
+  /* border: 1px solid #ddd; */
+  text-align: center;
+}
+.usersTable th {
+  padding: 8px;
+  background-color: #ffe6b7;
+}
+
+.deleteButton {
+  color: white;
+  background-color: red;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.deleteButton:hover {
+  background-color: darkred;
+}
+.userImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+.tableContainer {
+  width: 80%;
+  margin: 50px;
+}

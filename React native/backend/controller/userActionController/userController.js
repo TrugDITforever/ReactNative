@@ -241,7 +241,7 @@ exports.userDeleteRecipe = (req, res) => {
   }
 };
 /// user add a new recipe to their likes
-///check if user liked it or not
+
 exports.userLikesRecipe = async (req, res) => {
   const userId = req.params.userid;
   const foodId = req.body.recipeId;
@@ -271,7 +271,7 @@ exports.userLikesRecipe = async (req, res) => {
     res.status(400).json({ success: false });
   }
 };
-///
+///check if user liked it or not
 exports.checkisLiked = async (req, res) => {
   const userId = req.params.userid;
   const foodId = req.query.recipeId;
@@ -300,6 +300,7 @@ exports.fetchCollections = async (req, res) => {
 /// create collection
 exports.createCollection = async (req, res) => {
   const userID = req.params.userid;
+  console.log(userID);
   const { name } = req.body.collection;
   const newCollection = new collectionModel({
     name: name,
@@ -391,6 +392,32 @@ exports.checkisdaddedtoCollection = async (req, res) => {
     } else {
       res.status(200).json({ success: true, exist: false });
     }
+  } catch (error) {
+    res.status(400).json({ success: false });
+  }
+};
+exports.checkisdaddedtoCart = async (req, res) => {
+  const userId = req.params.userid;
+  const courseID = req.query.courseID;
+  try {
+    const data = await userModel.findOne({ _id: userId, cart: courseID });
+    if (data) {
+      res.status(200).json({ success: true, exist: true });
+    } else {
+      res.status(200).json({ success: true, exist: false });
+    }
+  } catch (error) {
+    res.status(400).json({ success: false });
+  }
+};
+exports.searchingRecipe = async (req, res) => {
+  const recipeName = req.query.recipeName;
+  try {
+    foodModel
+      .find({ foodName: { $regex: recipeName, $options: "i" } })
+      .then((data) => {
+        res.status(200).json({ success: true, results: data });
+      });
   } catch (error) {
     res.status(400).json({ success: false });
   }

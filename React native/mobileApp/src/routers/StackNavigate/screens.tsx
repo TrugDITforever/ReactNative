@@ -11,6 +11,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { TabScreen } from "../Tabnavigate/screens";
 import CreateRecipeScreen from "../../pages/CreateRecipesPage";
 import { Prop } from "../../components/Card/commonProp";
+import SubCollection from "../../pages/FavoritePage/SubCollectionPage";
+import CoursePage from "../../pages/CoursePage";
 
 // Start code navigation
 const Stack = createNativeStackNavigator();
@@ -27,6 +29,8 @@ const Stacksreens: React.FC = () => {
       <Stack.Screen name="Viewall" component={PageViewall} />
       <Stack.Screen name="PageSubmenu" component={PageSubMenu} />
       <Stack.Screen name="CreateRecipePage" component={CreateRecipeScreen} />
+      <Stack.Screen name="SubCollections" component={SubCollection} />
+      <Stack.Screen name="CoursePage" component={CoursePage} />
     </Stack.Navigator>
   );
 };

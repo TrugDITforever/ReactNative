@@ -54,9 +54,9 @@ const CollectionsList: React.FC<Props> = ({
           <View key={index} style={styles.cardContain}>
             <TouchableOpacity
               style={styles.touchable}
-              // onPress={() => {
-              //   navigation.navigate("Cooking");
-              // }}
+              onPress={() => {
+                navigation.navigate("SubCollections");
+              }}
               activeOpacity={0}
             >
               {/* name of food */}
