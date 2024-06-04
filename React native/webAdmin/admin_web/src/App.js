@@ -6,6 +6,8 @@ import Recipes from "./components/Recipes";
 import Dashboard from "./components/DashBoard";
 import styles from "./App.css";
 import Header from "./components/Header";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         </main>
       </div>
     </Router>
+  //<Login/>
+  //<Register/>
   );
 }
 
