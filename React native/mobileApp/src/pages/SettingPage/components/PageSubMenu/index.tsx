@@ -12,6 +12,7 @@ import PageFeedBack from "./PageFeedBack";
 import PageDetails from "./PersonalDetailsPage";
 import HeadervsButtonBack from "../../../../components/Header/HeadervsButtonBack";
 import Statusbar from "../../../../components/Statusbar/Statusbar";
+import PageInvoices from "./PageInvoices";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -41,12 +42,14 @@ const PageSubMenu: React.FC<Prop> = ({ navigation, route }) => {
       <View style={{ width: "100%", height: "100%" }}>
         {/* button back */}
         <HeadervsButtonBack isShown={false} navigation={navigation} />
-        {index === 3 ? (
+        {index === 4 ? (
           <PageAbout />
-        ) : index === 4 ? (
+        ) : index === 5 ? (
           <PageFeedBack route={route} />
         ) : index === 0 ? (
           <PageDetails />
+        ) : index === 1 ? (
+          <PageInvoices navigation={navigation} />
         ) : (
           ""
         )}

@@ -55,7 +55,7 @@ const CollectionsList: React.FC<Props> = ({
             <TouchableOpacity
               style={styles.touchable}
               onPress={() => {
-                navigation.navigate("SubCollections");
+                navigation.navigate("SubCollections", { id: value._id });
               }}
               activeOpacity={0}
             >

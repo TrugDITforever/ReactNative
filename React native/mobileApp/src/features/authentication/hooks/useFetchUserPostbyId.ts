@@ -21,6 +21,6 @@ export const usefetchUserPostById = (
   };
   React.useEffect(() => {
     fetchData();
-  }, [fetching]);
+  }, []);
   return { userpost, isloading };
 };

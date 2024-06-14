@@ -27,7 +27,7 @@ const FavoritePage: React.FC<Prop> = ({ navigation }) => {
       <View style={{ width: "100%", height: "100%" }}>
         <View style={{ width: "100%", height: "auto", marginTop: 10 }}>
           {/* for form search in collection */}
-          <SearchInput />
+          {/* <SearchInput /> */}
           <View
             style={{
               width: "100%",

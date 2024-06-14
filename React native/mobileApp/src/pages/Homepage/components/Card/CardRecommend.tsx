@@ -37,7 +37,9 @@ const CardRecommend: React.FC<Prop> = ({ navigation, dispatch, image }) => {
     <View style={styles.container}>
       <View style={styles.boxword}>
         <Text style={styles.textbox}>Recommended for you</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Viewall")}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Viewall", { title: recommended })}
+        >
           <Text style={commonStyle.textViewall}>View All</Text>
         </TouchableOpacity>
       </View>

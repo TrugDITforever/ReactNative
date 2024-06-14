@@ -39,15 +39,13 @@ interface Prop {
   index: number;
   liked: boolean[];
   handlePress: (index: number) => void;
+  image: string;
 }
 
-const CardImage: React.FC<Prop> = ({ index, liked, handlePress }) => {
+const CardImage: React.FC<Prop> = ({ index, liked, handlePress, image }) => {
   return (
     <View style={styles.cardContain}>
-      <Image
-        source={require("../../../../../assets/image/porkrice.jpg")}
-        style={styles.backgroundImage}
-      />
+      <Image source={{ uri: image }} style={styles.backgroundImage} />
       {/* rating and like button */}
       <View style={styles.containerForRatingandLike}>
         {/* for button like */}

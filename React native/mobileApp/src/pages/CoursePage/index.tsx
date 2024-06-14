@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
+import AntDesign from "react-native-vector-icons/AntDesign";
 import Card from "./Card/Card";
 import Statusbar from "../../components/Statusbar/Statusbar";
 import HeadervsButtonBack from "../../components/Header/HeadervsButtonBack";
@@ -36,7 +37,21 @@ const CoursePage: React.FC<Prop> = ({ navigation }) => {
       <Statusbar />
       <View style={{ width: "100%", height: "100%" }}>
         {/* button back and title of page */}
-        <HeadervsButtonBack isShown={false} navigation={navigation} />
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <HeadervsButtonBack isShown={false} navigation={navigation} />
+          <TouchableOpacity
+            style={{ margin: 15 }}
+            onPress={() => navigation.navigate("CartPage")}
+          >
+            <AntDesign name="shoppingcart" size={24} />
+          </TouchableOpacity>
+        </View>
         <View style={{ width: "100%" }}>
           {/* Card render */}
           <Card navigation={navigation}></Card>

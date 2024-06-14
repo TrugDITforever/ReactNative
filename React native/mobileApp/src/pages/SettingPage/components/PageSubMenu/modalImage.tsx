@@ -16,21 +16,20 @@ interface Prop {
 const images = [
   {
     id: 1,
-    uri: "https://th.bing.com/th/id/R.99a429149891b8331ab9a4d9dcdeca89?rik=ZFGjK2aI0XNcog&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f08%2fFresh-hot-delicious-food-wallpaper.jpg&ehk=YcpVrjnOnSm%2fhnTl3VFd3ve98wBRCKiyDEZj%2fJ43ix8%3d&risl=&pid=ImgRaw&r=0",
+    uri: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
   },
   {
     id: 2,
-    uri: "https://th.bing.com/th/id/R.da0f9d4f79ede796113d198e964631b1?rik=ba4nm8LaaalLow&pid=ImgRaw&r=0",
+    uri: "https://th.bing.com/th/id/R.cc0234c86ae58bcce3fb2f910fe5912e?rik=q4pf1v1C2ayxRw&pid=ImgRaw&r=0",
   },
   {
     id: 3,
-    uri: "https://th.bing.com/th/id/R.909c0a545dcf0b4b3109ceb8edcc3127?rik=wUgnPJcOD9bLng&pid=ImgRaw&r=0",
+    uri: "https://th.bing.com/th/id/OIP.NZbE92m3LD7huAf5EfNhtAAAAA?w=474&h=474&rs=1&pid=ImgDetMain",
   },
   {
     id: 4,
-    uri: "https://www.greenleafservices.com/wp-content/uploads/2017/03/cuisines-live-s.jpg",
+    uri: "https://static.vecteezy.com/system/resources/previews/008/170/131/original/cute-cartoon-logo-character-of-chef-hand-drawn-chibi-character-isolated-background-vector.jpg",
   },
-  // Thêm các đối tượng hình ảnh khác nếu cần
 ];
 
 const ModalImage: React.FC<Prop> = ({ ishow, setshowmodalimage, setimage }) => {

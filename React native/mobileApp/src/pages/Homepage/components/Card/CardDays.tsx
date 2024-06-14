@@ -41,7 +41,9 @@ const CardDay: React.FC<Prop> = ({ Time, navigation, dispatch }) => {
     <View style={[styles.container]}>
       <View style={styles.boxword}>
         <Text style={styles.textbox}>{Time}</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Viewall")}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Viewall", { title: prop })}
+        >
           <Text style={commonstyles.textViewall}>View All</Text>
         </TouchableOpacity>
       </View>

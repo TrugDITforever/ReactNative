@@ -13,6 +13,9 @@ import CreateRecipeScreen from "../../pages/CreateRecipesPage";
 import { Prop } from "../../components/Card/commonProp";
 import SubCollection from "../../pages/FavoritePage/SubCollectionPage";
 import CoursePage from "../../pages/CoursePage";
+import CartPage from "../../pages/CartPage";
+import CourseDetail from "../../pages/CourseDetailPage";
+import CourseDetailPaid from "../../pages/CourseDetailPage/index2";
 
 // Start code navigation
 const Stack = createNativeStackNavigator();
@@ -31,6 +34,9 @@ const Stacksreens: React.FC = () => {
       <Stack.Screen name="CreateRecipePage" component={CreateRecipeScreen} />
       <Stack.Screen name="SubCollections" component={SubCollection} />
       <Stack.Screen name="CoursePage" component={CoursePage} />
+      <Stack.Screen name="CartPage" component={CartPage} />
+      <Stack.Screen name="CourseDetail" component={CourseDetail} />
+      <Stack.Screen name="CourseDetailPaid" component={CourseDetailPaid} />
     </Stack.Navigator>
   );
 };

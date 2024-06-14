@@ -118,7 +118,9 @@ const CardRecipes: React.FC<Prop> = ({ navigation, dispatch, image }) => {
     <View style={styles.container}>
       <View style={styles.boxword}>
         <Text style={styles.textbox}>Recipes for today</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Viewall")}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Viewall", { title: prop })}
+        >
           <Text style={commonStyle.textViewall}>View All</Text>
         </TouchableOpacity>
       </View>

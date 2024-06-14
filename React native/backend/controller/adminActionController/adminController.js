@@ -3,6 +3,7 @@ const foodModel = require("../../model/foodModel");
 const postModel = require("../../model/postModel");
 const courseModel = require("../../model/courseModel");
 const { ObjectId } = require("mongodb");
+const collectionModel = require("../../model/collectionModel");
 /// get all user information
 exports.fetchDataUser = (req, res) => {
   try {
@@ -72,5 +73,66 @@ exports.fetchCourses = async (req, res) => {
         success: false,
         courses: results,
       });
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+  }
+};
+// get all courses
+exports.fetchCourseByID = async (req, res) => {
+  const id = req.params.courseID;
+  try {
+    const results = await courseModel.find({ _id: id });
+    if (results) {
+      res.status(200).json({
+        success: true,
+        courses: results,
+      });
+    } else
+      res.status(200).json({
+        success: false,
+        courses: results,
+      });
+  } catch (error) {
+    console.error(error);
+  }
+};
+exports.fetchRecipeByCollectionID = async (req, res) => {
+  const id = req.params.collectionID;
+  try {
+    collectionModel
+      .aggregate([
+        { $match: { _id: new ObjectId(id) } },
+        // {
+        //   $unwind: "$cart",
+        // },
+        {
+          $lookup: {
+            from: "foods",
+            localField: "recipeID",
+            foreignField: "_id",
+            as: "results",
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            name: 1,
+            results: {
+              _id: 1,
+              foodImage: 1,
+              foodName: 1,
+            },
+          },
+        },
+      ])
+      .then((data) => {
+        res.status(200).json({
+          recipeData: data,
+        });
+      });
+  } catch (error) {
+    res.status(400).json({
+      succes: "Can not fetch Cart",
+    });
+  }
 };

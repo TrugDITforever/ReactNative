@@ -38,7 +38,9 @@ const CardPopular: React.FC<Prop> = ({ navigation, dispatch }) => {
     <View style={[styles.container]}>
       <View style={styles.boxword}>
         <Text style={styles.textbox}>Popular</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Viewall")}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Viewall", { title: prop })}
+        >
           <Text style={commonStyle.textViewall}>View All</Text>
         </TouchableOpacity>
       </View>

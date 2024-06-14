@@ -1,27 +1,33 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  View,
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View, SafeAreaView, Text } from "react-native";
 import FavorList from "./components/FavorList";
-import Feather from "react-native-vector-icons/Feather";
-import SearchInput from "./components/SearchInput";
+
 import Statusbar from "../../components/Statusbar/Statusbar";
-import CollectionsList from "./components/CollectionList";
-import ModalAddCollection from "./components/Modal";
+
 import HeadervsButtonBack from "../../components/Header/HeadervsButtonBack";
+import {
+  fetchRecipeByCollectionID,
+  recipeResponse,
+} from "../../features/authentication/services/adminServices/fetchRecipeinCollection";
 
 interface Prop {
   navigation: any;
+  route: any;
 }
-const SubCollection: React.FC<Prop> = ({ navigation }) => {
-  const [onload, setonload] = useState(false);
-  const [showmodal, setshowmodal] = useState(false);
-  const [donefetching, setdonefetching] = useState(false);
-  const handleShowmodal = () => setshowmodal(true);
+const SubCollection: React.FC<Prop> = ({ navigation, route }) => {
+  const { id } = route.params;
+  const [recipeList, setRecipeList] = React.useState<recipeResponse>();
+  const fetchingCollections = async () => {
+    try {
+      const res = await fetchRecipeByCollectionID(id);
+      setRecipeList(res);
+    } catch (error: any) {
+      return;
+    }
+  };
+  React.useEffect(() => {
+    fetchingCollections();
+  }, [id]);
   return (
     <SafeAreaView style={styles.container}>
       <Statusbar />
@@ -43,13 +49,13 @@ const SubCollection: React.FC<Prop> = ({ navigation }) => {
                 marginBottom: 15,
               }}
             >
-              All Saved Recipe
+              {recipeList?.name}
             </Text>
           </View>
         </View>
         <View style={{ width: "100%" }}>
           {/* List Favorite card */}
-          <FavorList navigation={navigation} />
+          <FavorList navigation={navigation} recipelist={recipeList?.results} />
         </View>
       </View>
     </SafeAreaView>

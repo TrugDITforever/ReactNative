@@ -33,6 +33,7 @@ import {
   PropCheckCollection,
   checkIsaddToCollection,
 } from "../../features/authentication/services/userService/checkisAddtoCollection";
+import { setTrue } from "../../Redux/action";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -83,12 +84,14 @@ const CookingPage: React.FC<Prop> = ({ navigation }) => {
     setshowmodal(true);
   };
   const handleEdit = () => {
-    usefetchFoodByID(food.foodId, navigation, dispatch).then(
-      navigation.push("CreateRecipePage", { showupdate: true })
-    );
+    usefetchFoodByID(food.foodId, navigation, dispatch).then(() => {
+      navigation.push("CreateRecipePage", { showupdate: true });
+    });
   };
   const handleDelete = () => {
-    deleteRecipe(food.foodId).then(() => navigation.navigate("Profile"));
+    deleteRecipe(food.foodId).then(() => {
+      dispatch(setTrue()), navigation.navigate("Profile");
+    });
   };
 
   if (!fetchingDone) {

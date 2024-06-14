@@ -17,6 +17,7 @@ import {
   submitUpdateRecipe,
   updateRecipeData,
 } from "../../features/authentication/hooks/useUpdateRecipe";
+import { setTrue } from "../../Redux/action";
 const Tab = createMaterialTopTabNavigator();
 interface Prop {
   navigation: any;
@@ -50,13 +51,14 @@ const CreateRecipeScreen: React.FC<Prop> = ({ navigation, route }) => {
   const handleSubmit = () => {
     submitCreateRecipes(recipeData).then((res) => {
       dispatch(clearAllFields());
-      navigation.navigate("PostOfUser", { success: true });
+      navigation.navigate("PostOfUser");
     });
   };
   const handleupdateRecipe = () => {
     submitUpdateRecipe(updaterecipeData).then(() => {
       dispatch(clearAllFields());
-      navigation.navigate("PostOfUser", { success: true });
+      dispatch(setTrue());
+      navigation.navigate("PostOfUser");
     });
   };
   return (

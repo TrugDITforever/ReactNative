@@ -11,7 +11,7 @@ const DrawerMenu = () => {
       <div className={styles.listContainer}>
         <ul>
           <li>
-            <Link to="/dashboard">
+            <Link to="/drawer/dashboard">
               <div className={styles.listIconContainer}>
                 <div className={styles.iconContainer}>
                   <i class="fa-solid fa-table-columns"></i>
@@ -21,7 +21,7 @@ const DrawerMenu = () => {
             </Link>
           </li>
           <li>
-            <Link to="/users">
+            <Link to="/drawer/users">
               <div className={styles.listIconContainer}>
                 <div className={styles.iconContainer}>
                   <i class="fa-solid fa-users-line"></i>
@@ -31,7 +31,7 @@ const DrawerMenu = () => {
             </Link>
           </li>
           <li>
-            <Link to="/recipes">
+            <Link to="/drawer/recipes">
               <div className={styles.listIconContainer}>
                 <div className={styles.iconContainer}>
                   <i class="fa-solid fa-bowl-rice"></i>

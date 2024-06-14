@@ -55,7 +55,6 @@ const SearchPage: React.FC<Prop> = ({ navigation }) => {
       recipe.foodName.toLowerCase().includes(lowercasedTerm)
     );
   }, [searchValue, recipeList, isServerSearch]);
-  console.log(foodData);
   ///
   return (
     <SafeAreaView style={styles.container}>

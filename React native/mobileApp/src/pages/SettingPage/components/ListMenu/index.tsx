@@ -53,6 +53,10 @@ const ListMenu: React.FC<Prop> = ({ navigation }) => {
       icon: "person",
     },
     {
+      text: "My Invoices",
+      icon: "receipt-outline",
+    },
+    {
       text: "Privacy",
       icon: "lock-closed",
     },

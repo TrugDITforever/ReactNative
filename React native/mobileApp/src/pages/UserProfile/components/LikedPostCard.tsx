@@ -4,6 +4,11 @@ import PostCard from "../../../components/Card/PostCard";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../../Redux/user";
 import { fetchUserLikedPosts } from "../../../features/authentication/hooks/useFetchUserLikedPost";
+import { setFalse } from "../../../Redux/action";
+import {
+  fetchUserLikedPost,
+  likedPostResponse,
+} from "../../../features/authentication/services/userService/fetchUserLikedPost";
 
 interface Prop {
   navigation: any;
@@ -12,8 +17,25 @@ interface Prop {
 const LikedPostCard: React.FC<Prop> = ({ navigation }) => {
   const userinfo = useSelector((state: any) => state.userinfo);
   const dispatch = useDispatch();
-  const [fetching, setisfetching] = React.useState<boolean>(false);
-  const { userpost } = fetchUserLikedPosts(userinfo.id);
+  // const [fetching, setisfetching] = React.useState<boolean>(false);
+  // const { userpost } = fetchUserLikedPosts(userinfo.id);
+  const boolean = useSelector((state: any) => state.boolean.value);
+  const [userpost, setuserpost] = React.useState<likedPostResponse[]>([]);
+  const fetching = async () => {
+    try {
+      await fetchUserLikedPost(userinfo.id).then((res) => {
+        setuserpost(res);
+      });
+    } catch (error) {
+      return "error fetching userliked posts";
+    }
+  };
+  React.useEffect(() => {
+    fetching();
+  }, [1]);
+  React.useEffect(() => {
+    if (boolean) fetching().then(() => dispatch(setFalse()));
+  }, [boolean]);
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }}>
       <PostCard

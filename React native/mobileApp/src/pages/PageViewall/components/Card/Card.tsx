@@ -13,6 +13,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import CardImage from "./Cardimage";
 import FoodeDetails from "./FoodDetails";
+import { useFetchFoodData } from "../../../../features/authentication/hooks/useFetchFoodData";
 const styles = StyleSheet.create({
   container: {
     width: "100%",
@@ -38,12 +39,14 @@ const styles = StyleSheet.create({
 
 interface Prop {
   navigation: any;
+  title: string;
 }
-const Card: React.FC<Prop> = ({ navigation }) => {
+const Card: React.FC<Prop> = ({ navigation, title }) => {
   const screenWidth = Dimensions.get("window");
   const [liked, setlike] = React.useState(
     Array.from({ length: 18 }, () => false)
   );
+  const { foodData, isloading } = useFetchFoodData(title);
   const handlePress = React.useCallback((index: number) => {
     setlike((prevLiked) => {
       const newLikes = [...prevLiked];
@@ -60,7 +63,7 @@ const Card: React.FC<Prop> = ({ navigation }) => {
           alignItems: "center",
         }}
       >
-        {Array.from({ length: 10 }).map((value, index) => (
+        {foodData.map((value, index) => (
           <View key={index} style={[styles.cardContainBorder]}>
             <TouchableOpacity
               onPress={() => {
@@ -73,6 +76,7 @@ const Card: React.FC<Prop> = ({ navigation }) => {
                 index={index}
                 liked={liked}
                 handlePress={handlePress}
+                image={value.foodImage}
               />
               {/* details of food */}
               <FoodeDetails />

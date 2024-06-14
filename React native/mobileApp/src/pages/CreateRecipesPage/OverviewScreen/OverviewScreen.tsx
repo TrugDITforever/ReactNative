@@ -15,7 +15,11 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import ModalAdd from "../Modal/ModalAdd";
 import ModalImage from "../Modal/modalImage";
 import { useDispatch, useSelector } from "react-redux";
-import { clearFoodImage, updatedecription } from "../../../Redux/postforfood";
+import {
+  clearFoodImage,
+  updateFoodName,
+  updatedecription,
+} from "../../../Redux/postforfood";
 interface Prop {
   navigation: any;
 }
@@ -94,12 +98,19 @@ const OverviewScreen: React.FC<Prop> = ({ navigation }) => {
                     height: "100%",
                     borderBottomColor: "#ccc",
                     borderBottomWidth: 1,
-                    justifyContent: "center",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    flexDirection: "row",
                   }}
                 >
                   <Text style={{ fontSize: 16, fontFamily: "Nunito-Medium" }}>
                     {postforfood.foodName}
                   </Text>
+                  <TouchableOpacity
+                    onPress={() => dispatch(updateFoodName({ foodName: "" }))}
+                  >
+                    <Ionicons name="close-outline" size={20} />
+                  </TouchableOpacity>
                 </View>
               ) : (
                 // button add title

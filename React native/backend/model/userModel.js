@@ -11,6 +11,7 @@ const Userschema = new mongoose.Schema({
   role: Number,
   liked: [mongoose.Schema.Types.ObjectId],
   cart: [mongoose.Schema.Types.ObjectId],
+  payment: [Object],
 });
 const userModel = new mongoose.model("users", Userschema);
 module.exports = userModel;

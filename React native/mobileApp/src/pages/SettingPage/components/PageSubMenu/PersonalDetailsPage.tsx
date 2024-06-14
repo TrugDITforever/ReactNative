@@ -10,9 +10,10 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import Userinfo from "../../../UserProfile/components/Userinfo";
+
 import { useSubmitupdateinfo } from "../../../../features/authentication/hooks/useUpdateInfo";
 import ModalImage from "./modalImage";
+import Userinfo from "./Userinfo";
 const PageDetails = () => {
   const userinfo = useSelector((state: any) => state.userinfo);
   const dispatch = useDispatch();

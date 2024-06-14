@@ -10,50 +10,16 @@ import {
 } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { Recipe } from "../../../features/authentication/services/adminServices/fetchRecipeinCollection";
+import { usefetchFoodByID } from "../../../features/authentication/hooks/useFetchFoodById";
+import { useDispatch } from "react-redux";
 
 interface Prop {
   navigation: any;
+  recipelist?: Recipe[];
 }
-const fakeArrray = [
-  {
-    _id: "6615ae3507a0cfd0cde4d13b",
-    foodName: "Chicken Alfredo Pasta",
-    foodImage:
-      "https://th.bing.com/th/id/OIP.exQhgOEPwS6wSvoJvCeQNgHaJQ?rs=1&pid=ImgDetMain",
-  },
-  {
-    _id: "66183743efba40ad42f6f3a8",
-    foodName: "Spaghetti Carbonara",
-    foodImage:
-      "https://www.adashofginger.co.uk/wp-content/uploads/2014/11/spaghetti-carbonara.jpg",
-  },
-  {
-    _id: "66183743efba40ad42f6f3a9",
-    foodName: "Caprese Salad",
-    foodImage:
-      "https://th.bing.com/th/id/OIP.x5x4j74u7R1v989fMYxFCgHaJn?rs=1&pid=ImgDetMain",
-  },
-  {
-    _id: "66183743efba40ad42f6f3aa",
-    foodName: "Beef Stir Fry",
-    foodImage:
-      "https://th.bing.com/th/id/OIP.cM0v1ACbOfkOT8AqmeapmAHaKz?rs=1&pid=ImgDetMain",
-  },
-  {
-    _id: "66183743efba40ad42f6f3ab",
-    foodName: "Grilled Salmon",
-    foodImage:
-      "https://www.cookingclassy.com/wp-content/uploads/2018/05/grilled-salmon-3.jpg",
-  },
-  {
-    _id: "66183743efba40ad42f6f3ac",
-    foodName: "Vegetable Curry",
-    foodImage:
-      "https://www.tasteofhome.com/wp-content/uploads/2017/10/Slow-Cooked-Vegetable-Curry_EXPS_SDAS17_148481_D04_07_5b.jpg",
-  },
-];
-const CollectionsCard: React.FC<Prop> = ({ navigation }) => {
-  const screenWidth = Dimensions.get("window");
+const CollectionsCard: React.FC<Prop> = ({ navigation, recipelist }) => {
+  const dispatch = useDispatch();
   const [liked, setlike] = React.useState(
     Array.from({ length: 5 }, () => true)
   );
@@ -73,12 +39,16 @@ const CollectionsCard: React.FC<Prop> = ({ navigation }) => {
           alignItems: "center",
         }}
       >
-        {fakeArrray.map((value, index) => (
+        {recipelist?.map((value, index) => (
           <View key={index} style={styles.cardContain}>
             <TouchableOpacity
               style={styles.cardContain}
               onPress={() => {
-                navigation.navigate("Cooking");
+                usefetchFoodByID(value._id, navigation, dispatch).then(
+                  (res) => {
+                    navigation.push("Cooking");
+                  }
+                );
               }}
               activeOpacity={1}
             >

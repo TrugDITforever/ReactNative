@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: "97%",
+    paddingHorizontal: 15,
   },
   cardContain: {
     // width: "100%",
@@ -30,8 +31,7 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   cardContainBorder: {
-    width: 370,
-    // height: 280,
+    width: "100%",
     backgroundColor: "#F8F8F8",
     borderRadius: 20,
     marginBottom: 25,
@@ -51,31 +51,21 @@ interface Prop {
 const Card: React.FC<Prop> = ({ navigation }) => {
   const [courseList, setCourseList] = React.useState<courseResponse>();
   const [isfetching, setisfetching] = React.useState<boolean>(false);
-  React.useEffect(() => {
-    const fetching = async () => {
-      try {
-        const res = await fetchingCourses();
-        if (res) {
-          setCourseList(res);
-        }
-      } catch (error) {
-        console.error("Cant fetching");
+  const fetching = async () => {
+    try {
+      const res = await fetchingCourses();
+      if (res) {
+        setCourseList(res);
       }
-    };
+    } catch (error) {
+      console.error("Cant fetching");
+    }
+  };
+  React.useEffect(() => {
     fetching();
   }, []);
-  console.log(courseList?.courses);
-  const screenWidth = Dimensions.get("window");
-  const [liked, setlike] = React.useState(
-    Array.from({ length: 18 }, () => false)
-  );
-  const handlePress = React.useCallback((index: number) => {
-    setlike((prevLiked) => {
-      const newLikes = [...prevLiked];
-      newLikes[index] = !newLikes[index];
-      return newLikes;
-    });
-  }, []);
+  // console.log(courseList?.courses);
+
   return (
     <View style={[styles.container]}>
       <ScrollView
@@ -86,11 +76,7 @@ const Card: React.FC<Prop> = ({ navigation }) => {
         }}
       >
         {courseList?.courses.map((value, index) => (
-          <View
-            key={index}
-            style={[styles.cardContainBorder]}
-            // source={require("../../../../assets/image/porkrice.jpg")}
-          >
+          <View key={index} style={[styles.cardContainBorder]}>
             <TouchableOpacity
               // onPress={() => {
               //   navigation.navigate("Cooking");
@@ -98,7 +84,12 @@ const Card: React.FC<Prop> = ({ navigation }) => {
               activeOpacity={1}
             >
               {/* card image */}
-              <View style={styles.cardContain}>
+              <TouchableOpacity
+                style={styles.cardContain}
+                onPress={() =>
+                  navigation.navigate("CourseDetail", { id: value._id })
+                }
+              >
                 <Image
                   source={{
                     uri: value.image,
@@ -124,9 +115,13 @@ const Card: React.FC<Prop> = ({ navigation }) => {
                     </Text>
                   </View>
                 </View>
-              </View>
+              </TouchableOpacity>
               {/* details of food */}
-              <FoodeDetails name={value.name} price={value.price} />
+              <FoodeDetails
+                name={value.name}
+                price={value.price}
+                id={value._id}
+              />
             </TouchableOpacity>
           </View>
         ))}

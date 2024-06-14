@@ -27,9 +27,11 @@ const styles = StyleSheet.create({
 });
 interface Prop {
   navigation: any;
+  route: any;
 }
 
-const PageViewall: React.FC<Prop> = ({ navigation }) => {
+const PageViewall: React.FC<Prop> = ({ navigation, route }) => {
+  const { title } = route.params;
   const [onload, setonload] = React.useState(false);
   return (
     <SafeAreaView style={styles.container}>
@@ -61,7 +63,7 @@ const PageViewall: React.FC<Prop> = ({ navigation }) => {
 
         <View style={{ width: "100%" }}>
           {/* Card render */}
-          <Card navigation={navigation}></Card>
+          <Card navigation={navigation} title={title}></Card>
         </View>
       </View>
     </SafeAreaView>

@@ -50,10 +50,25 @@ router.get(
   "/api/checkIsaddedtoCollection/:userid",
   userController.checkisdaddedtoCollection
 );
+/// fetching recipe in collection
+router.get(
+  "/api/fetchRecipeByCollectionID/:collectionID",
+  adminActionController.fetchRecipeByCollectionID
+);
 /// searching results
 router.get("/api/searchRecipe", userController.searchingRecipe);
 /// fetching all courses
 router.get("/api/fetchingCourses", adminActionController.fetchCourses);
 /// check is add to cart
 router.get("/api/checkIsAddToCart/:userid", userController.checkisdaddedtoCart);
+/// user add to cart
+router.put("/api/addCourse/:userid", userController.userAddCoursetoCart);
+router.get("/api/fetchShoppingCart/:userid", userController.fetchUserCart);
+router.put("/api/checkoutPayment/:userid", userController.checkoutPayment);
+router.get("/api/fetchInvoices/:userid", userController.fetchInvoices);
+///fetch course by ID
+router.get(
+  "/api/fetchCoursebyID/:courseID",
+  adminActionController.fetchCourseByID
+);
 module.exports = router;
