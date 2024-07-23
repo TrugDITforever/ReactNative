@@ -10,6 +10,7 @@ interface updateResponse {
 export async function updateinfo(
   userid: string,
   name: string,
+  profilePicture: string,
   username: string,
   email: string,
   description: string
@@ -19,6 +20,7 @@ export async function updateinfo(
       `${BASE_URL}:8080/api/updateinfo/${userid}`,
       {
         name,
+        profilePicture,
         username,
         email,
         description,

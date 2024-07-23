@@ -12,15 +12,11 @@ import {
 import AntDesign from "react-native-vector-icons/AntDesign";
 import FoodeDetails from "./FoodDetails";
 import {
-  Course,
-  courseResponse,
-  fetchingCourses,
-} from "../../../features/authentication/services/adminServices/fetchCourse";
-import {
   cartResponse,
   fetchShoppingCart,
 } from "../../../features/authentication/services/userService/fetchUserShoppingCart";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setFalse } from "../../../Redux/action";
 const styles = StyleSheet.create({
   container: {
     width: "100%",
@@ -54,6 +50,8 @@ const Card: React.FC<Prop> = ({ navigation }) => {
   const [cartList, setCartList] = React.useState<cartResponse>();
   const [reload, setReload] = React.useState<boolean>(false);
   const user = useSelector((state: any) => state.userinfo);
+  const boolean = useSelector((state: any) => state.boolean.value);
+
   const fetching = async () => {
     try {
       const res = await fetchShoppingCart(user.id);
@@ -67,10 +65,10 @@ const Card: React.FC<Prop> = ({ navigation }) => {
   React.useEffect(() => {
     fetching();
   }, [user.id]);
+  const dispatch = useDispatch();
   React.useEffect(() => {
-    if (reload) fetching().then(() => setReload(false));
-  }, [reload]);
-  // console.log(cartList?.shoppingcarts);
+    if (boolean) fetching().then(() => dispatch(setFalse()));
+  }, [boolean]);
 
   return (
     <View style={[styles.container]}>
@@ -83,12 +81,7 @@ const Card: React.FC<Prop> = ({ navigation }) => {
       >
         {cartList?.shoppingcarts.map((value, index) => (
           <View key={index} style={[styles.cardContainBorder]}>
-            <TouchableOpacity
-              // onPress={() => {
-              //   navigation.navigate("Cooking");
-              // }}
-              activeOpacity={1}
-            >
+            <TouchableOpacity activeOpacity={1}>
               {/* card image */}
               <View style={styles.cardContain}>
                 <Image

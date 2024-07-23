@@ -12,6 +12,7 @@ export interface Cart {
 export interface cartResponse {
   _id: string;
   shoppingcarts: Cart[];
+  cartList: [];
 }
 export interface CartListResponse {
   cartList: cartResponse;

@@ -9,7 +9,7 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { likeRecipe } from "../../../features/authentication/services/userService/userLikeRecipe";
 import { checkIsLike } from "../../../features/authentication/services/userService/checkisLike";
 import { checkIsAdded } from "../../../features/authentication/hooks/userCheckIsAdded";
@@ -17,6 +17,7 @@ import {
   PropCheckCollection,
   checkIsaddToCollection,
 } from "../../../features/authentication/services/userService/checkisAddtoCollection";
+import { setTrue } from "../../../Redux/action";
 interface Props {
   handleShowmodal: any;
   navigation: any;
@@ -35,7 +36,8 @@ const FoodimgName: React.FC<Props> = ({
   const food = useSelector((state: any) => state.foodinfo);
   const user = useSelector((state: any) => state.userinfo);
   const [islike, setislike] = React.useState<boolean>(false);
-  const [isexist, setisexist] = React.useState<boolean>(false);
+  const dispatch = useDispatch();
+
   // const { isexist } = checkIsAdded(user.id, food.foodId);
   const propvalue: PropCheckCollection = {
     userID: user.id,
@@ -64,6 +66,7 @@ const FoodimgName: React.FC<Props> = ({
   const handleLike = async () => {
     const res = await likeRecipe(user.id, food.foodId);
     setislike(res);
+    dispatch(setTrue());
   };
   return (
     <View>

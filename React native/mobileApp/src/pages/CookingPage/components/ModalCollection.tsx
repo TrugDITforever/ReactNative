@@ -21,6 +21,7 @@ import {
   CollectionProp,
   addRecipeToCollection,
 } from "../../../features/authentication/services/userService/addRecipetoCollection";
+import { setTrue } from "../../../Redux/action";
 interface Props {
   visible?: boolean;
   onClose: any;
@@ -46,6 +47,7 @@ const ModalCollection: React.FC<Props> = ({
       return;
     }
   };
+  const dispatch = useDispatch();
   /// function for user add favorite recipe to selected collection
   const handleSubmitAdd = (collectionID: string) => {
     const newValue: CollectionProp = {
@@ -55,6 +57,7 @@ const ModalCollection: React.FC<Props> = ({
     };
     addRecipeToCollection(newValue).then(() => {
       onClose(false), setsubmitDone(true);
+      dispatch(setTrue());
     });
   };
   React.useEffect(() => {

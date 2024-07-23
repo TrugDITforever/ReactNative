@@ -18,6 +18,7 @@ import {
   collectionData,
   createCollection,
 } from "../../../features/authentication/services/userService/createCollection";
+import { setTrue } from "../../../Redux/action";
 interface Props {
   visible?: boolean;
   onClose: any;
@@ -47,6 +48,7 @@ const ModalAddCollection: React.FC<Props> = ({
         onClose(false), setdonefetching(true), setinputvalue("");
       });
     }
+    dispatch(setTrue());
   };
 
   React.useEffect(() => {

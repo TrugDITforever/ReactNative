@@ -19,6 +19,8 @@ import {
   courseResponse,
   fetchingCourses,
 } from "../../../features/authentication/services/adminServices/fetchCourse";
+import { useDispatch, useSelector } from "react-redux";
+import { setFalse } from "../../../Redux/action";
 const styles = StyleSheet.create({
   container: {
     width: "100%",
@@ -49,8 +51,8 @@ interface Prop {
   navigation: any;
 }
 const Card: React.FC<Prop> = ({ navigation }) => {
+  const boolean = useSelector((state: any) => state.boolean.value);
   const [courseList, setCourseList] = React.useState<courseResponse>();
-  const [isfetching, setisfetching] = React.useState<boolean>(false);
   const fetching = async () => {
     try {
       const res = await fetchingCourses();
@@ -64,7 +66,10 @@ const Card: React.FC<Prop> = ({ navigation }) => {
   React.useEffect(() => {
     fetching();
   }, []);
-  // console.log(courseList?.courses);
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    if (boolean) fetching().then(() => dispatch(setFalse()));
+  }, [boolean]);
 
   return (
     <View style={[styles.container]}>

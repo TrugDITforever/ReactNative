@@ -42,6 +42,7 @@ const PageDetails = () => {
       useSubmitupdateinfo(
         userinfo.id,
         name,
+        profilePicture,
         username,
         email,
         description,

@@ -30,7 +30,13 @@ const PageInvoices: React.FC<Prop> = ({ navigation }) => {
     <View style={{ marginHorizontal: 15 }}>
       <ScrollView>
         {paymentList?.payment.map((invoice, index) => (
-          <View style={styles.card} key={index}>
+          <TouchableOpacity
+            style={styles.card}
+            key={index}
+            onPress={() =>
+              navigation.navigate("CourseDetailPaid", { id: invoice._id })
+            }
+          >
             <Image source={{ uri: invoice.image }} style={styles.image} />
             <View style={styles.info}>
               <Text style={styles.courseName}>{invoice.name}</Text>
@@ -39,14 +45,14 @@ const PageInvoices: React.FC<Prop> = ({ navigation }) => {
               </Text>
               <Text style={styles.amount}> ${invoice.price}</Text>
             </View>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={() =>
                 navigation.navigate("CourseDetailPaid", { id: invoice._id })
               }
             >
               <Text>lets go</Text>
-            </TouchableOpacity>
-          </View>
+            </TouchableOpacity> */}
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </View>

@@ -4,6 +4,7 @@ import { updateUser } from "../../../Redux/user";
 export const useSubmitupdateinfo = async (
   userid: string,
   name: string,
+  profilePicture: string,
   username: string,
   email: string,
   description: string,
@@ -13,6 +14,7 @@ export const useSubmitupdateinfo = async (
     const { dataUser } = await updateinfo(
       userid,
       name,
+      profilePicture,
       username,
       email,
       description

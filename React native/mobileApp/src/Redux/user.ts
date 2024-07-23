@@ -62,6 +62,9 @@ export const userinfo = createSlice({
         username: action.payload.username,
       };
     },
+    updateImage: (state, action) => {
+      return { ...state, userimage: action.payload.image };
+    },
   },
 });
 export const {
@@ -71,5 +74,6 @@ export const {
   updateEmail,
   updateDecription,
   updateUsername,
+  updateImage,
 } = userinfo.actions;
 export default userinfo.reducer;

@@ -56,12 +56,17 @@ const Dashboard = () => {
       <div className={styles.dashboardContainer}>
         <div className={styles.stats}>
           <div className={styles.stat}>
-            <h2>Total Users</h2>
-            <p>1000</p>
+            <h2>Total Users </h2>
+            <p>
+              1000{" "}
+              <i class="fa-regular fa-user" style={{ color: "#f98a4f" }}></i>
+            </p>
           </div>
           <div className={styles.stat}>
             <h2>Total Recipes</h2>
-            <p>500</p>
+            <p>
+              500 <i class="fa-solid fa-book" style={{ color: "#f98a4f" }}></i>
+            </p>
           </div>
           {/* <div>
             <h2>Pie Chart</h2>
@@ -70,11 +75,11 @@ const Dashboard = () => {
         </div>
         <div className={styles.charts}>
           <div className={styles.chart}>
-            <h2>User Growth</h2>
+            <h2 style={{ color: "#f98a4f" }}>User Growth</h2>
             <Bar data={userData} />
           </div>
           <div className={styles.chart}>
-            <h2>Recipe Growth</h2>
+            <h2 style={{ color: "#f98a4f" }}>Recipe Growth</h2>
             <Bar data={recipeData} />
           </div>
         </div>

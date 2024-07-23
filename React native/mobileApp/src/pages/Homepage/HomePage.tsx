@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { StyleSheet, View, SafeAreaView, Text, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  SafeAreaView,
+  Text,
+  ScrollView,
+  Animated,
+} from "react-native";
 import UserContainer from "./components/User/UserContainer";
 import CardRecommend from "./components/Card/CardRecommend";
 import CardCollections from "./components/Card/CardCollection";
@@ -12,16 +19,7 @@ import Statusbar from "../../components/Statusbar/Statusbar";
 import { useFetchFoodData } from "../../features/authentication/hooks/useFetchFoodData";
 import CardExploreMore from "./components/Card/CardExploreMore";
 import CardCourse from "./components/Card/CardCourse";
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#ffff",
-  },
-  scrollContainer: {
-    flex: 1,
-    width: "100%",
-    height: "100%",
-  },
-});
+
 interface Props {
   navigation: any;
 }
@@ -29,18 +27,39 @@ const HomePage: React.FC<Props> = ({ navigation }) => {
   const recommended = "recommended";
   const { foodData, isloading } = useFetchFoodData(recommended);
   const dispatch = useDispatch();
+  const HEADER_HEIGHT = 60;
+  const scrollY = React.useRef(new Animated.Value(0)).current;
+
+  const headerTranslate = scrollY.interpolate({
+    inputRange: [0, HEADER_HEIGHT],
+    outputRange: [0, -HEADER_HEIGHT],
+    extrapolate: "clamp",
+  });
   return (
     <SafeAreaView style={styles.container}>
       <Statusbar />
       <View>
         {/*container for profile */}
+        {/* <Animated.View
+          style={[
+            styles.header,
+            { transform: [{ translateY: headerTranslate }] },
+          ]}
+        ></Animated.View> */}
         <UserContainer navigation={navigation} />
         {/* Place for cardBox */}
         {isloading ? (
           <CardLoading />
         ) : (
           <View style={{ width: "100%", height: "93%" }}>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <Animated.ScrollView
+              showsVerticalScrollIndicator={false}
+              onScroll={Animated.event(
+                [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                { useNativeDriver: true }
+              )}
+              scrollEventThrottle={16}
+            >
               <View style={{ margin: 15, marginBottom: 5 }}>
                 <View>
                   <Text
@@ -75,7 +94,7 @@ const HomePage: React.FC<Props> = ({ navigation }) => {
               />
               <CardCourse navigation={navigation} />
               <CardExploreMore navigation={navigation} dispatch={dispatch} />
-            </ScrollView>
+            </Animated.ScrollView>
           </View>
         )}
       </View>
@@ -83,3 +102,22 @@ const HomePage: React.FC<Props> = ({ navigation }) => {
   );
 };
 export default HomePage;
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#ffff",
+  },
+  scrollContainer: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+  },
+  header: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 1000,
+  },
+});

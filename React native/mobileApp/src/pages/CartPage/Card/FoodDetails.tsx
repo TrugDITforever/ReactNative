@@ -3,7 +3,8 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { addCoursetoCart } from "../../../features/authentication/services/userService/addCoursetoCart";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setTrue } from "../../../Redux/action";
 
 interface Props {
   id: string;
@@ -13,10 +14,12 @@ interface Props {
 }
 const FoodeDetails: React.FC<Props> = ({ name, price, setReload, id }) => {
   const user = useSelector((state: any) => state.userinfo);
+  const dispatch = useDispatch();
   const removeFromCart = (courseID: string) => {
     addCoursetoCart(user.id, courseID).then(() => {
       setReload(true);
     });
+    dispatch(setTrue());
   };
   return (
     <View style={styles.containerForNameofFood}>
@@ -74,7 +77,6 @@ const FoodeDetails: React.FC<Props> = ({ name, price, setReload, id }) => {
             </View>
           </TouchableOpacity>
         </View>
-        {/*  button add to cart */}
       </View>
     </View>
   );

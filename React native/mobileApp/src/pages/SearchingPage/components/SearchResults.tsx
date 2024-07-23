@@ -15,9 +15,11 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { useFetchFoodData } from "../../../features/authentication/hooks/useFetchFoodData";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { usefetchFoodByID } from "../../../features/authentication/hooks/useFetchFoodById";
 import { FoodData } from "../../../features/authentication/commonData/foodData";
+import { likeRecipe } from "../../../features/authentication/services/userService/userLikeRecipe";
+import { setTrue } from "../../../Redux/action";
 
 interface Prop {
   navigation: any;
@@ -25,6 +27,8 @@ interface Prop {
 }
 const SearchResults: React.FC<Prop> = ({ navigation, recipeList }) => {
   const dispatch = useDispatch();
+  const user = useSelector((state: any) => state.userinfo);
+  const food = useSelector((state: any) => state.foodinfo);
   const recommended = "recommended";
   const { foodData, isloading } = useFetchFoodData(recommended);
   const [liked, setlike] = React.useState(
@@ -38,6 +42,10 @@ const SearchResults: React.FC<Prop> = ({ navigation, recipeList }) => {
       return newLikes;
     });
   }, []);
+  const handleLike = async () => {
+    const res = await likeRecipe(user.id, food.foodId);
+    dispatch(setTrue());
+  };
   return (
     <SafeAreaView style={[styles.container]}>
       <View>
@@ -107,7 +115,11 @@ const SearchResults: React.FC<Prop> = ({ navigation, recipeList }) => {
                       </View>
                     </View>
                     <View style={styles.buttonlike}>
-                      <TouchableOpacity onPress={() => handlePress(index)}>
+                      <TouchableOpacity
+                        onPress={() => {
+                          handlePress(index), handleLike();
+                        }}
+                      >
                         {liked[index] ? (
                           <Ionicons name={"heart"} size={25} color={"red"} />
                         ) : (

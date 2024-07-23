@@ -18,6 +18,7 @@ function App() {
           <Routes>
             <Route path="*" element={<h1>404 not found</h1>}></Route>
             <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/drawer/*" element={<SubAppRoute />} />
             {/* <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/users" element={<Users></Users>} />

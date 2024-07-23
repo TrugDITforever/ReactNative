@@ -12,7 +12,8 @@ import {
   collectionResponse,
   fetchUserCollections,
 } from "../../../features/authentication/services/userService/fetchUserCollections";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setFalse } from "../../../Redux/action";
 interface Props {
   donefetching: boolean;
   setdonefetching: (prop: boolean) => void;
@@ -27,6 +28,7 @@ const CollectionsList: React.FC<Props> = ({
   const [usercollection, setusercollection] = React.useState<
     collectionResponse[]
   >([]);
+  const dispatch = useDispatch();
   const fetchingCollections = async () => {
     try {
       const res = await fetchUserCollections(user.id);
@@ -35,9 +37,10 @@ const CollectionsList: React.FC<Props> = ({
       return;
     }
   };
+  const boolean = useSelector((state: any) => state.boolean.value);
   React.useEffect(() => {
-    if (donefetching) fetchingCollections().then(() => setdonefetching(false));
-  }, [donefetching]);
+    if (boolean) fetchingCollections().then(() => dispatch(setFalse()));
+  }, [boolean]);
   React.useEffect(() => {
     fetchingCollections();
   }, []);

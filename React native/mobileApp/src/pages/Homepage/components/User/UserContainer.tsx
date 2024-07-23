@@ -21,7 +21,7 @@ const UserContainer: React.FC<Prop> = ({ navigation }) => {
         paddingLeft: 15,
       }}
     >
-      <View>
+      <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
         <Image
           style={{
             width: 45,
@@ -33,7 +33,7 @@ const UserContainer: React.FC<Prop> = ({ navigation }) => {
           }}
           source={{ uri: userinfo.userimage }}
         />
-      </View>
+      </TouchableOpacity>
       {/* name user */}
       <View style={{ width: "70%" }}>
         <View style={{ paddingLeft: 5 }}>

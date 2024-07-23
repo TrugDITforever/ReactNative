@@ -32,9 +32,11 @@ const images = [
     id: 4,
     uri: "https://www.greenleafservices.com/wp-content/uploads/2017/03/cuisines-live-s.jpg",
   },
-  // Thêm các đối tượng hình ảnh khác nếu cần
+  {
+    id: 5,
+    uri: "https://restaurantclicks.com/wp-content/uploads/2022/05/Most-Popular-American-Foods.jpg",
+  },
 ];
-
 const ModalImage: React.FC<Prop> = ({ ishow, setshowmodalimage, setimage }) => {
   const dispatch = useDispatch();
   const postforfood = useSelector((state: any) => state.postforfood);

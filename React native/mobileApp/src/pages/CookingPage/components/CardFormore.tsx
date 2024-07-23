@@ -36,7 +36,11 @@ const CardforMore: React.FC<Prop> = ({ navigation }) => {
     <View style={[styles.container]}>
       <View style={styles.boxword}>
         <Text style={styles.textbox}>You may like</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Viewall")}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("Viewall", { title: "recommended" })
+          }
+        >
           <Text style={styles.textViewall}>View All</Text>
         </TouchableOpacity>
       </View>

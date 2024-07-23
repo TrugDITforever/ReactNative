@@ -1,8 +1,9 @@
 import React from "react";
 import { View, Image, TouchableOpacity, Text, StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { checkIsaddToCart } from "../../../features/authentication/services/userService/checkisAddtoCart";
 import { addCoursetoCart } from "../../../features/authentication/services/userService/addCoursetoCart";
+import { setFalse, setTrue } from "../../../Redux/action";
 
 interface Props {
   id: string;
@@ -11,11 +12,13 @@ interface Props {
 }
 const FoodeDetails: React.FC<Props> = ({ name, price, id }) => {
   const user = useSelector((state: any) => state.userinfo);
+  const dispatch = useDispatch();
   const [isAdded, setIsAdded] = React.useState(false);
   const [loadAgain, setLoadAgain] = React.useState(false);
   const addtoCart = (courseID: string) => {
     addCoursetoCart(user.id, courseID).then(() => {
       setLoadAgain(true);
+      dispatch(setTrue());
     });
   };
   const checkIsadd = async () => {
@@ -29,9 +32,10 @@ const FoodeDetails: React.FC<Props> = ({ name, price, id }) => {
   React.useEffect(() => {
     checkIsadd();
   }, []);
+  const boolean = useSelector((state: any) => state.boolean.value);
   React.useEffect(() => {
-    if (loadAgain) checkIsadd().then(() => setLoadAgain(false));
-  }, [loadAgain]);
+    if (boolean) checkIsadd().then(() => dispatch(setFalse()));
+  }, [boolean]);
   return (
     <View style={styles.containerForNameofFood}>
       <Text style={styles.textNameFood}>{name}</Text>

@@ -70,7 +70,9 @@ const Login = () => {
 
               <div className={styles.registered}>
                 <p className={styles.txtres}>Not Registered Yet?</p>
-                <p className={styles.txtregister}>Create an account</p>
+                <Link to="/register">
+                  <p className={styles.txtregister}>Create an account</p>
+                </Link>
               </div>
             </div>
           </div>

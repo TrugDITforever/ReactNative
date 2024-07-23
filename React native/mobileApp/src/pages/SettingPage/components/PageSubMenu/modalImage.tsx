@@ -8,6 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import { useDispatch } from "react-redux";
+import { updateImage } from "../../../../Redux/user";
 interface Prop {
   ishow: boolean;
   setshowmodalimage: (value: boolean) => void;
@@ -37,7 +38,9 @@ const ModalImage: React.FC<Prop> = ({ ishow, setshowmodalimage, setimage }) => {
   const handleImagePress = (image: any) => {
     setshowmodalimage(false);
     setimage(image.uri);
+    dispatch(updateImage({ image: image.uri }));
   };
+
   return (
     <View style={styles.container}>
       <Modal visible={ishow} animationType="slide" transparent>
