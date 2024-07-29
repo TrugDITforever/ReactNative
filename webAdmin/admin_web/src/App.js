@@ -9,7 +9,6 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import SubAppRoute from "./subAppRoute";
-
 function App() {
   return (
     <Router>
@@ -27,6 +26,8 @@ function App() {
         </main>
       </div>
     </Router>
+    //<Login/>
+    //<Register/>
   );
 }
 
