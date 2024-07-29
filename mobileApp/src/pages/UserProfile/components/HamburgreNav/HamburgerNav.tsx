@@ -12,6 +12,12 @@ export const HamburgerNav: React.FC<Prop> = ({ navigation }) => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.buttonhambur}
+          onPress={() => navigation.navigate("ChattinggAI")}
+        >
+          <AntDesign name="shoppingcart" size={27} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttonhambur}
           onPress={() => navigation.navigate("CartPage")}
         >
           <AntDesign name="shoppingcart" size={27} />

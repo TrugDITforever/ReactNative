@@ -17,8 +17,6 @@ interface Prop {
 const LikedPostCard: React.FC<Prop> = ({ navigation }) => {
   const userinfo = useSelector((state: any) => state.userinfo);
   const dispatch = useDispatch();
-  // const [fetching, setisfetching] = React.useState<boolean>(false);
-  // const { userpost } = fetchUserLikedPosts(userinfo.id);
   const boolean = useSelector((state: any) => state.boolean.value);
   const [userpost, setuserpost] = React.useState<likedPostResponse[]>([]);
   const fetching = async () => {

@@ -6,6 +6,7 @@ import SettingPage from "../../pages/SettingPage/SettingPage";
 import CookingPage from "../../pages/CookingPage/CookingPage";
 import PageViewall from "../../pages/PageViewall/components/PageViewall";
 import PageSubMenu from "../../pages/SettingPage/components/PageSubMenu/index";
+import ChattingAI from "../../pages/AI_generateChat";
 // import for navigationP
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { TabScreen } from "../Tabnavigate/screens";
@@ -37,6 +38,7 @@ const Stacksreens: React.FC = () => {
       <Stack.Screen name="CartPage" component={CartPage} />
       <Stack.Screen name="CourseDetail" component={CourseDetail} />
       <Stack.Screen name="CourseDetailPaid" component={CourseDetailPaid} />
+      <Stack.Screen name="ChattinggAI" component={ChattingAI} />
     </Stack.Navigator>
   );
 };

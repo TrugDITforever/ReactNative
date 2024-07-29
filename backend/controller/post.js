@@ -28,7 +28,7 @@ exports.fetchuserPostsbyId = (req, res) => {
           },
         },
       },
-      // { $limit: 20 },
+      { $limit: 10 },
     ])
     .then((data) => {
       res.status(200).json({
