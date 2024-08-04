@@ -35,17 +35,19 @@ const SearchPage: React.FC<Prop> = ({ navigation }) => {
   const [recipeList, setrecipeList] = React.useState<FoodData[]>(foodData);
   const [isServerSearch, setIsServerSearch] = React.useState<boolean>(false);
   React.useEffect(() => {
+    if (searchValue) {
+      setTimeout(() => {
+        fetching();
+      }, 2000);
+    } else {
+      setIsServerSearch(false);
+      setrecipeList(foodData);
+    }
     const fetching = async () => {
-      if (searchValue) {
-        const res = await searchingRecipe(searchValue);
-        setrecipeList(res);
-        setIsServerSearch(true);
-      } else {
-        setIsServerSearch(false);
-        setrecipeList(foodData);
-      }
+      const res = await searchingRecipe(searchValue);
+      setrecipeList(res);
+      setIsServerSearch(true);
     };
-    fetching();
   }, [foodData, searchValue]);
   /// searchValue filter
   const filteredRecipes = React.useMemo(() => {
@@ -65,6 +67,7 @@ const SearchPage: React.FC<Prop> = ({ navigation }) => {
           setSearchValue={setSearchValue}
           searchValue={searchValue}
         />
+
         {/*  */}
         <SearchResults navigation={navigation} recipeList={filteredRecipes} />
       </View>

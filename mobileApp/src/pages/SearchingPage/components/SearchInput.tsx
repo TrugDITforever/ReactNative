@@ -28,7 +28,7 @@ const SearchInput: React.FC<Props> = ({ setSearchValue, searchValue }) => {
         backgroundColor: "#EFF0F0",
         borderRadius: 30,
         height: 50,
-        marginTop: 30,
+        marginTop: 15,
         marginRight: 15,
         marginHorizontal: 15,
       }}
@@ -55,7 +55,7 @@ const SearchInput: React.FC<Props> = ({ setSearchValue, searchValue }) => {
             fontFamily: "Nunito-semiBold",
             fontSize: 16,
           }}
-          placeholder="Looking for recipe?"
+          placeholder="Looking for something?"
           autoCapitalize="none"
           value={searchValue}
           onChangeText={handleChange}

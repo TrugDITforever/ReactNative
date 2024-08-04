@@ -32,8 +32,8 @@ export const SubmitSignIn = async (
           email: dataUser.email,
           description: dataUser.description,
         };
-        console.log(token);
-        console.log(dataUser);
+        // console.log(token);
+        // console.log(dataUser);
         saveToken(token);
         saveUserData(dataUser);
         dispatch(updateUser(newValue));

@@ -38,7 +38,7 @@ const Stacksreens: React.FC = () => {
       <Stack.Screen name="CartPage" component={CartPage} />
       <Stack.Screen name="CourseDetail" component={CourseDetail} />
       <Stack.Screen name="CourseDetailPaid" component={CourseDetailPaid} />
-      <Stack.Screen name="ChattinggAI" component={ChattingAI} />
+      {/* <Stack.Screen name="ChattinggAI" component={ChattingAI} /> */}
     </Stack.Navigator>
   );
 };
